@@ -21,7 +21,7 @@ class CreateAnswersTable extends Migration
 
             $table->timestamps();
 
-            $table->foregin('question_id')
+            $table->foreign('question_id')
                 ->references('id')
                 ->on('questions');
         });

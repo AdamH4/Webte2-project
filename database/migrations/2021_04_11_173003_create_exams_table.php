@@ -23,7 +23,7 @@ class CreateExamsTable extends Migration
 
             $table->timestamps();
 
-            $table->foregin('creator_id')
+            $table->foreign('creator_id')
                 ->references('id')
                 ->on('users');
         });
