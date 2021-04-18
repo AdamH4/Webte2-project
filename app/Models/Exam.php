@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Question;
 
 class Exam extends Model
 {
@@ -16,4 +18,14 @@ class Exam extends Model
         'start',
         'end',
     ];
+
+    public function creator()
+    {
+    	return $this->belongsTo(User::class, 'creator_id');
+    }
+
+    public function questions()
+    {
+    	return $this->hasMany(Question::class);
+    }
 }

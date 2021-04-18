@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Question;
 
 class Answer extends Model
 {
@@ -14,4 +15,9 @@ class Answer extends Model
         'question_id',
         'points',
     ];
+
+    public function question()
+    {
+    	return $this->belongsTo(Question::class);
+    }
 }

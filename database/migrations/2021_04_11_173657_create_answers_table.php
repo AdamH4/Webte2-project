@@ -18,7 +18,7 @@ class CreateAnswersTable extends Migration
             $table->text('answer');
             $table->foreignId('question_id');
             $table->double('points')->nullable();
-            $table->morph('authorable');
+            $table->morphs('authorable');
 
             $table->timestamps();
 

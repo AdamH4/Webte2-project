@@ -18,8 +18,8 @@ class CreateExamsTable extends Migration
             $table->string('code');
             $table->string('title');
             $table->foreignId('creator_id');
-            $table->timestamp('start');
-            $table->timestamp('end');
+            $table->datetime('start');
+            $table->datetime('end');
 
             $table->timestamps();
 
