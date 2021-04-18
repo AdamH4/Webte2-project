@@ -16,9 +16,14 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->enum('type', ['short_answer', 'select_answer', 'pair_answer', 'draw_answer', 'math_answer']);
-            $table->text('answer');
+            $table->foreignId('exam_id');
 
             $table->timestamps();
+
+            $table->foreign('exam_id')
+                ->references('id')
+                ->on('exams')
+                ->onDelete('cascade');
         });
     }
 
