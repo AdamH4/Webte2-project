@@ -1,0 +1,38 @@
+.form {
+    &__input {
+        border-radius: 20px;
+        border: 1px solid $formBorder;
+        background: $formInput;
+        color: $formText;
+        margin-top: 15px;
+        padding: 20px;
+
+        ::-webkit-input-placeholder {
+            /* Edge */
+            color: $formText;
+        }
+
+        :-ms-input-placeholder {
+            /* Internet Explorer 10-11 */
+            color: $formText;
+        }
+
+        ::placeholder {
+            color: $formText;
+        }
+
+        &--key {
+            display: inline-block;
+            border-left: 0px;
+            margin: 0;
+        }
+    }
+
+    .input-group-text {
+        border-bottom-left-radius: 15px;
+        border-top-left-radius: 15px;
+        background: $formInput;
+        border-color: $formBorder;
+        border-right: 0px !important;
+    }
+}

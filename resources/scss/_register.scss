@@ -1,0 +1,24 @@
+.register {
+    margin-top: 40px;
+
+    &__panel {
+        border-radius: 20px;
+        background: $white;
+        -webkit-box-shadow: -1px 0px 25px -17px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: -1px 0px 25px -17px rgba(0, 0, 0, 0.75);
+        box-shadow: -1px 0px 25px -17px rgba(0, 0, 0, 0.75);
+
+        &-title {
+            padding: 20px;
+            text-align: center;
+            h1 {
+                font-size: 13px;
+                font-weight: 800;
+                color: $primary;
+                text-align: center;
+                display: inline-block;
+                text-transform: uppercase;
+            }
+        }
+    }
+}

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TeacherAdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +15,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('landing.welcome');
+})->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+//----------------------------------------- Student Routes -----------------------------------------------------------------
 
-require __DIR__.'/auth.php';
+
+
+//----------------------------------------- Admin Teacher Routes -----------------------------------------------------------------
+Route::get('/teacher/dashboard', [TeacherAdminController::class, 'index'])->name('teacher.dashboard')->middleware('auth');
+
+
+//----------------------------------------- Auth Routes -----------------------------------------------------------------
+require __DIR__ . '/auth.php';

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Teacher;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -19,7 +20,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        return view('landing.register');
     }
 
     /**
@@ -34,15 +35,19 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|confirmed|min:8',
+            'password' => 'required|string|min:8',
         ]);
 
-        Auth::login($user = User::create([
+        $user = Teacher::create([
             'name' => $request->name,
+            'surname' => $request->surname,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ]));
+        ]);
+
+        Auth::login($user);
 
         event(new Registered($user));
 
