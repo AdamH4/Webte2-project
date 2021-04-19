@@ -6,7 +6,7 @@
         <div class="row p-3">
             <div class="col-12 col-lg-4 offset-lg-4 register__panel mb-5">
                 <div class="register__panel-title mt-3">
-                    <img src="{{ asset('frontend/teacher.svg') }}" width="20px" class="d-inline mr-3">
+                    <img src="{{ asset('frontend/img/teacher.svg') }}" width="20px" class="d-inline mr-3">
                     <h1>registrácia učiteľa</h1>
                 </div>
                 <div class="form">
