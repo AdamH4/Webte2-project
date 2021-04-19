@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Exam;
+use App\Models\Answer;
 
 class User extends Authenticatable
 {
@@ -45,5 +46,10 @@ class User extends Authenticatable
     public function exams()
     {
         return $this->hasMany(Exam::class, 'creator_id');
+    }
+
+    public function answers()
+    {
+        return $this->morphMany(Answer::class, 'authorable');
     }
 }
