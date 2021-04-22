@@ -1,0 +1,92 @@
+/*!
+ * Start Bootstrap - Landing Page v5.0.9 (https://startbootstrap.com/theme/landing-page)
+ * Copyright 2013-2020 Start Bootstrap
+ * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-landing-page/blob/master/LICENSE)
+ */
+
+body {
+    font-family: "Nunito", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: url("../img/bacground.svg");
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+}
+
+.wrapper-logo {
+    width: 200px;
+    height: 100px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background: $white;
+    -webkit-box-shadow: -1px 0px 25px -17px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -1px 0px 25px -17px rgba(0, 0, 0, 0.75);
+    box-shadow: -1px 0px 25px -17px rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .logo {
+            width: 50%;
+        }
+    }
+}
+
+.navbar {
+    padding: 0;
+    background: transparent !important;
+}
+
+.landing-login {
+    margin-top: 5rem;
+
+    &__title {
+        margin: 20px 0;
+        font-size: 28px;
+        font-weight: 200;
+        color: $primary;
+        text-align: center;
+
+        span {
+            color: $secondary;
+        }
+    }
+
+    &__panel {
+        margin: 40px 0;
+
+        .tab-content {
+            background: $white;
+            padding: 20px;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            z-index: 100;
+        }
+    }
+
+    &__bubble {
+        width: 100px;
+        position: relative;
+        z-index: 1;
+        bottom: 25px;
+        right: 60px;
+    }
+}
+
+footer.footer {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}

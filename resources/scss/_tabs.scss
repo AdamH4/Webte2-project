@@ -1,0 +1,31 @@
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: $border !important;
+    border-radius: 0px;
+    border-top-left-radius: 15px;
+}
+
+.nav-pills .nav-link.second.active,
+.nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: $border !important;
+    border-radius: 0px;
+    border-top-right-radius: 15px;
+}
+
+.nav-pills .nav-link {
+    padding: 20px 0px;
+}
+
+.nav-pills .nav-link {
+    padding: 20px 0px;
+    background: $white;
+    color: $primary;
+    border-top-left-radius: 15px;
+
+    &.second {
+        border-top-left-radius: 0px;
+        border-top-right-radius: 15px;
+    }
+}

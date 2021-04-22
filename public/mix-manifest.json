@@ -1,4 +1,16 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/frontend/js/app.js": "/frontend/js/app.js",
+    "/frontend/css/app.css": "/frontend/css/app.css",
+    "/frontend/img/bacground.svg": "/frontend/img/bacground.svg",
+    "/frontend/img/background.ai": "/frontend/img/background.ai",
+    "/frontend/img/bubble.svg": "/frontend/img/bubble.svg",
+    "/frontend/img/clock.svg": "/frontend/img/clock.svg",
+    "/frontend/img/examio.xd": "/frontend/img/examio.xd",
+    "/frontend/img/graphics.svg": "/frontend/img/graphics.svg",
+    "/frontend/img/key.svg": "/frontend/img/key.svg",
+    "/frontend/img/logo.svg": "/frontend/img/logo.svg",
+    "/frontend/img/student-hover.svg": "/frontend/img/student-hover.svg",
+    "/frontend/img/student.svg": "/frontend/img/student.svg",
+    "/frontend/img/teacher-hover.svg": "/frontend/img/teacher-hover.svg",
+    "/frontend/img/teacher.svg": "/frontend/img/teacher.svg"
 }

@@ -1,3 +1,7 @@
-require('./bootstrap');
+require("./bootstrap");
 
-require('alpinejs');
+//-----------------------Imports----------------------------------------------------------
+import Landing from "./Landing";
+
+//---------------_Class instances ---------------------------------------------------------
+window.pageInit = new Landing();
