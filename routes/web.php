@@ -20,7 +20,9 @@ Route::get('/', function () {
 
 //----------------------------------------- Student Routes -----------------------------------------------------------------
 
-
+Route::get('/questions', function () {
+    return view('teacher.exams.index');
+})->name('questions');
 
 //----------------------------------------- Admin Teacher Routes -----------------------------------------------------------------
 Route::get('/teacher/dashboard', [TeacherAdminController::class, 'index'])->name('teacher.dashboard')->middleware('auth');

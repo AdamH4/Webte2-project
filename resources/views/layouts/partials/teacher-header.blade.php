@@ -29,7 +29,7 @@
           </svg></a></li>
       <li class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
           <div class="c-avatar">
-              {{ auth()->user()->name  }}
+              {{ auth()->user() ? auth()->user()->name : "adam testuje" }}
             </div>
         </a>
         <div class="dropdown-menu dropdown-menu-right pt-0">
@@ -37,7 +37,7 @@
           <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             Odhlásiť sa
         </a>
-        
+
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             {{ csrf_field() }}
         </form>
