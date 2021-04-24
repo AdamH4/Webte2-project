@@ -33,17 +33,16 @@
                 </div>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                     <div class="card-body">
-                        @include('components.questions.pair-answer')
+                        @include('components.questions.select-answer')
                     </div>
                 </div>
             </div>
-            <div class="card mb-0">
+            <div class="card pa-4">
                 <div class="card-header" id="headingThree">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Collapsible Group Item #3
-                        </button>
-                    </h2>
+                    <div class="collapsed row" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <span class="col-sm-10">Question #3 loremimask dnasdk jasndk ajsnd aksjdn askjd naskdnj askdn asjkdn aksjdn askdn asjkdn asjkdfn ajdkansd jaksdn akjsdasjkdcnsdkadjk asnd jasdkasjdnasjkdnsajkdn asdjkasndjkasnd kjasnd asbdakjdnsadiuhfrjekndksajd nasdk ajsdnaskjd askdn sakdj sad kjasndkjsa</span>
+                        <span class="col-sm-2 text-right">points for #3</span>
+                    </div>
                 </div>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                     <div class="card-body">

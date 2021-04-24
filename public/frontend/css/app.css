@@ -10056,6 +10056,17 @@ h3 {
   border-left: 0px;
   margin: 0;
 }
+.form__select {
+  border-radius: 20px;
+  border: 1px solid #efefef;
+  background: #efefef;
+  color: #073b4c;
+  margin-top: 15px;
+}
+.form__select:focus {
+  background: #efefef;
+  color: #073b4c;
+}
 .form .input-group-text {
   border-bottom-left-radius: 15px;
   border-top-left-radius: 15px;
