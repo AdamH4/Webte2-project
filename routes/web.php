@@ -21,7 +21,7 @@ Route::get('/', function () {
 //----------------------------------------- Student Routes -----------------------------------------------------------------
 
 Route::get('/questions', function () {
-    return view('teacher.exams.index');
+    return view('student.exam');
 })->name('questions');
 
 //----------------------------------------- Admin Teacher Routes -----------------------------------------------------------------
