@@ -1,4 +1,8 @@
 
-    <div>
-        Draw Answer Question
-    </div>
+<div>
+    <div id="drawingCanvas"></div>
+</div>
+
+<script>
+
+</script>
