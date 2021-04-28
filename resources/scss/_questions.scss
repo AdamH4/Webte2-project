@@ -13,7 +13,7 @@
     &__section {
         display: grid;
         grid-gap: 30px;
-        grid-template-columns: 1fr 2fr 0.2fr;
+        grid-template-columns: 1.5fr 2fr 0.2fr;
         grid-template-rows: auto;
         grid-template-areas:
             "text answer-title points"
