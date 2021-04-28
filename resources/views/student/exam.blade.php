@@ -54,6 +54,21 @@
                                 (2B)
                             </div>
                         </div>
+                        <hr class="question__delimeter">
+                        <div class="questions__section">
+                            <div class="question__text">
+                                4.Vypocitajme si spolu nieco
+                            </div>
+                            <div class="question__answer-title">
+                                Odpoved:
+                            </div>
+                            <div class="question__answer">
+                                @include("components.questions.math-answer")
+                            </div>
+                            <div class="question__points">
+                                (1B)
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,3 +1,5 @@
 <div>
-    Pair Answer Question
+    <div class="pair__answers">
+
+    </div>
 </div>
