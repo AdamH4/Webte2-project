@@ -10270,6 +10270,14 @@ footer.footer {
   border: 2px solid #c6c6c6;
 }
 
+.drawingCanvasWrapper {
+  width: 100%;
+  height: 25rem;
+  position: relative;
+  border: 7px solid #efefef;
+  border-radius: 10px;
+}
+
 .c-sidebar .c-sidebar-nav-dropdown-toggle:hover,
 .c-sidebar .c-sidebar-nav-link:hover {
   color: #fff;
