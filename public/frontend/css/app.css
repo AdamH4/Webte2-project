@@ -10284,6 +10284,46 @@ footer.footer {
   border-radius: 10px;
 }
 
+.pair__answers {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.pair__answers > label,
+.pair__answers input {
+  display: block;
+}
+.pair__answers > label {
+  padding: 1rem;
+  margin: 0;
+  color: #ef476f;
+}
+.pair__answers > input {
+  margin-top: 0 !important;
+  color: #06d6a0 !important;
+}
+
+.first__group {
+  padding-top: 3rem;
+  list-style-type: upper-alpha;
+  -webkit-padding-start: 35px;
+          padding-inline-start: 35px;
+  color: #ef476f;
+}
+.first__group > li {
+  padding: 5px 1rem;
+}
+
+.second__group {
+  list-style-type: decimal;
+  -webkit-padding-start: 35px;
+          padding-inline-start: 35px;
+  color: #06d6a0;
+}
+.second__group > li {
+  padding: 5px 1rem;
+}
+
 .c-sidebar .c-sidebar-nav-dropdown-toggle:hover,
 .c-sidebar .c-sidebar-nav-link:hover {
   color: #fff;

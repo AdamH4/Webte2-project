@@ -91,3 +91,46 @@
 #mathLive {
     @include border-container();
 }
+
+.pair__answers {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    & > label,
+    input {
+        display: block;
+    }
+
+    & > label {
+        padding: 1rem;
+        margin: 0;
+        color: $secondary;
+    }
+
+    & > input {
+        margin-top: 0 !important;
+        color: $loginBtn !important;
+    }
+}
+
+.first__group {
+    padding-top: 3rem;
+    list-style-type: upper-alpha;
+    padding-inline-start: 35px;
+    color: $secondary;
+
+    & > li {
+        padding: 5px 1rem;
+    }
+}
+
+.second__group {
+    list-style-type: decimal;
+    padding-inline-start: 35px;
+    color: $loginBtn;
+
+    & > li {
+        padding: 5px 1rem;
+    }
+}

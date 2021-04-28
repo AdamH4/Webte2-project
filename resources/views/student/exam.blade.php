@@ -17,11 +17,11 @@
                             <div class="question__answer-title">
                                 Odpoved:
                             </div>
-                            <div class="question__answer">
-                                @include('components.questions.select-answer')
-                            </div>
                             <div class="question__points">
                                 (1B)
+                            </div>
+                            <div class="question__answer">
+                                @include('components.questions.select-answer')
                             </div>
                         </div>
                         <hr class="question__delimeter">
@@ -32,11 +32,11 @@
                             <div class="question__answer-title">
                                 Odpoved:
                             </div>
-                            <div class="question__answer">
-                                @include('components.questions.short-answer')
-                            </div>
                             <div class="question__points">
                                 (4B)
+                            </div>
+                            <div class="question__answer">
+                                @include('components.questions.short-answer')
                             </div>
                         </div>
                         <hr class="question__delimeter">
@@ -47,11 +47,11 @@
                             <div class="question__answer-title">
                                 Odpoved:
                             </div>
-                            <div class="question__answer">
-                                @include("components.questions.draw-answer")
-                            </div>
                             <div class="question__points">
                                 (2B)
+                            </div>
+                            <div class="question__answer">
+                                @include("components.questions.draw-answer")
                             </div>
                         </div>
                         <hr class="question__delimeter">
@@ -62,11 +62,26 @@
                             <div class="question__answer-title">
                                 Odpoved:
                             </div>
+                            <div class="question__points">
+                                (1B)
+                            </div>
                             <div class="question__answer">
                                 @include("components.questions.math-answer")
                             </div>
+                        </div>
+                        <hr class="question__delimeter">
+                        <div class="questions__section">
+                            <div class="question__text">
+                                5. Spojte co sa vam paci a co nie :D
+                            </div>
+                            <div class="question__answer-title">
+                                Odpoved:
+                            </div>
                             <div class="question__points">
                                 (1B)
+                            </div>
+                            <div class="question__answer">
+                                @include("components.questions.pair-answer")
                             </div>
                         </div>
                     </div>
