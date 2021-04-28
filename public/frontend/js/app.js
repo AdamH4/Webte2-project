@@ -1945,7 +1945,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // requir
 
 window.pageInit = new _Landing__WEBPACK_IMPORTED_MODULE_0__.default();
 window.Painterro = (painterro__WEBPACK_IMPORTED_MODULE_1___default());
-window.MathLive = mathlive__WEBPACK_IMPORTED_MODULE_2__.default;
+window.MathLive = mathlive__WEBPACK_IMPORTED_MODULE_2__;
 
 /***/ }),
 

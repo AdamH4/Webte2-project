@@ -75,3 +75,24 @@
         </div>
     </section>
 @endsection
+
+@section("bottom-script")
+
+<script>
+    const painterro = window.Painterro({
+        id: "drawingCanvas",
+        hiddenTools: ['close', 'rotate', 'crop', 'zoomin', 'zoomout', 'resize', 'open'],
+        defaultTool: 'brush'
+    })
+    painterro.show()
+</script>
+
+<script>
+    const mathField = new window.MathLive.MathfieldElement({
+        virtualKeyboardMode: "manual",
+        virtualKeyboardLayout: "dvorak"
+    })
+    document.getElementById("mathLive").appendChild(mathField)
+
+</script>
+@endsection
