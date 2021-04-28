@@ -90,7 +90,7 @@
 <script>
     const mathField = new window.MathLive.MathfieldElement({
         virtualKeyboardMode: "manual",
-        virtualKeyboardLayout: "dvorak"
+        virtualKeyboardLayout: "dvorak",
     })
     document.getElementById("mathLive").appendChild(mathField)
 

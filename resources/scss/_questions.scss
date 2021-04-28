@@ -77,10 +77,17 @@
     }
 }
 
-.drawingCanvasWrapper {
+@mixin border-container() {
     width: 100%;
-    height: 25rem;
-    position: relative;
     border: 7px solid $formBorder;
     border-radius: 10px;
+}
+
+.drawingCanvasWrapper {
+    height: 25rem;
+    position: relative;
+    @include border-container();
+}
+#mathLive {
+    @include border-container();
 }
