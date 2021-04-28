@@ -14,8 +14,5 @@
             defaultTool: 'brush'
         })
         painterro.show()
-        document.getElementById("showCanvasButton").addEventListener("click", () => {
-            painterro.show()
-        })
 </script>
 @endsection
