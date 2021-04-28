@@ -10302,6 +10302,14 @@ footer.footer {
   margin-top: 0 !important;
   color: #06d6a0 !important;
 }
+.pair__answers > input::-webkit-outer-spin-button,
+.pair__answers input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.pair__answers input[type=number] {
+  -moz-appearance: textfield;
+}
 
 .first__group {
   padding-top: 3rem;

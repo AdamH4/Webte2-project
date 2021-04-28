@@ -112,6 +112,16 @@
         margin-top: 0 !important;
         color: $loginBtn !important;
     }
+
+    & > input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    & input[type="number"] {
+        -moz-appearance: textfield;
+    }
 }
 
 .first__group {
