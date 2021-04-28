@@ -7,8 +7,10 @@ export default class Landing {
         this.teacherIcon = document.getElementById("teacher-icon");
         this.teacherIconHover = document.getElementById("teacher-icon-hover");
 
-        this.initHideTabImages();
-        this.bindEvents();
+        if (this.studentTab) {
+            this.initHideTabImages();
+            this.bindEvents();
+        }
     }
 
     initHideTabImages() {

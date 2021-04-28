@@ -1,4 +1,4 @@
-require('./bootstrap');
+require("./bootstrap");
 // require('painterro');
 
 //-----------------------Imports----------------------------------------------------------
@@ -7,4 +7,4 @@ import Painterro from "painterro";
 
 //---------------_Class instances ---------------------------------------------------------
 window.pageInit = new Landing();
-window.Painterro = Painterro()
+window.Painterro = Painterro;
