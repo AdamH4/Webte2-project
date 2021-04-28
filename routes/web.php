@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 //----------------------------------------- Student Routes -----------------------------------------------------------------
 
-Route::get('/questions', function () {
+Route::get('/questions', function () { // ROUTE JUST FOR TESTING PURPOSES
     return view('student.exam');
 })->name('questions');
 

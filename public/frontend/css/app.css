@@ -10251,7 +10251,7 @@ footer.footer {
   top: -2px;
   left: -1px;
   position: relative;
-  background-color: #fafafa;
+  background-color: #c6c6c6;
   content: "";
   display: inline-block;
   visibility: visible;
@@ -10267,7 +10267,7 @@ footer.footer {
   content: "";
   display: inline-block;
   visibility: visible;
-  border: 2px solid #fafafa;
+  border: 2px solid #c6c6c6;
 }
 
 .c-sidebar .c-sidebar-nav-dropdown-toggle:hover,

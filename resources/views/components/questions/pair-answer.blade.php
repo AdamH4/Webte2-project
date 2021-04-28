@@ -1,5 +1,3 @@
-
-
-    <div>
-        Pair Answer Question
-    </div>
+<div>
+    Pair Answer Question
+</div>

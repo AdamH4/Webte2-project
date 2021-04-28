@@ -27,7 +27,7 @@
                         <hr class="question__delimeter">
                         <div class="questions__section">
                             <div class="question__text">
-                                S akym sklonom bude koncit aplitudova funkcia alebo aj moj zivot? :D Ziadne opustaci len nemam lorem ipsum generator package
+                                2. S akym sklonom bude koncit aplitudova funkcia alebo aj moj zivot? :D Ziadne opustaci len nemam lorem ipsum generator package
                             </div>
                             <div class="question__answer-title">
                                 Odpoved:
@@ -42,13 +42,13 @@
                         <hr class="question__delimeter">
                         <div class="questions__section">
                             <div class="question__text">
-                                Third Text
+                                3. Namalujte nam nieco prekrasne nech sa potesime ! <3
                             </div>
                             <div class="question__answer-title">
-                                Answer:
+                                Odpoved:
                             </div>
                             <div class="question__answer">
-                                Third Answer
+                                @include("components.questions.draw-answer")
                             </div>
                             <div class="question__points">
                                 (2B)

@@ -57,7 +57,7 @@
         top: -2px;
         left: -1px;
         position: relative;
-        background-color: $formInput;
+        background-color: $formText;
         content: "";
         display: inline-block;
         visibility: visible;
@@ -73,6 +73,6 @@
         content: "";
         display: inline-block;
         visibility: visible;
-        border: 2px solid $formInput;
+        border: 2px solid $formText;
     }
 }
