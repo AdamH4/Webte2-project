@@ -98,12 +98,18 @@
     const painterro = window.Painterro({
         id: "drawingCanvas",
         hiddenTools: ['close', 'rotate', 'crop', 'zoomin', 'zoomout', 'resize', 'open'],
-        defaultTool: 'brush'
+        defaultTool: 'brush',
+        onChange: (image) => {
+            const input = document.getElementById("painteroInputId")
+            input.value = image.image.asDataURL()
+            console.log(input.value)
+
+        }
+
     })
     painterro.show()
-</script>
 
-<script>
+
     const mathField = new window.MathLive.MathfieldElement({
         virtualKeyboardMode: "manual",
         virtualKeyboardLayout: "dvorak",
