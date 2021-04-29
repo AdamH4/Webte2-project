@@ -4,7 +4,10 @@
 
     & > img {
         width: 4rem;
-        padding: 0.5rem;
-        fill: black !important;
+        padding: 0.7rem;
+
+        & .st0 {
+            fill: black;
+        }
     }
 }

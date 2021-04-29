@@ -10338,8 +10338,10 @@ footer.footer {
 }
 .timer__wrapper > img {
   width: 4rem;
-  padding: 0.5rem;
-  fill: black !important;
+  padding: 0.7rem;
+}
+.timer__wrapper > img .st0 {
+  fill: black;
 }
 
 .c-sidebar .c-sidebar-nav-dropdown-toggle:hover,
