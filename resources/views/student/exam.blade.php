@@ -107,10 +107,14 @@
     })
     painterro.show()
 
-
+    const mathLiveInput = document.getElementById("mathLiveInput")
     const mathField = new window.MathLive.MathfieldElement({
         virtualKeyboardMode: "manual",
         virtualKeyboardLayout: "dvorak",
+    })
+    mathField.addEventListener("input", () => {
+        mathLiveInput.value = mathField.value
+        console.log(mathLiveInput.value)
     })
     document.getElementById("mathLive").appendChild(mathField)
 
