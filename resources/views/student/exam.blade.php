@@ -102,8 +102,6 @@
         onChange: (image) => {
             const input = document.getElementById("painteroInputId")
             input.value = image.image.asDataURL()
-            console.log(input.value)
-
         }
 
     })
