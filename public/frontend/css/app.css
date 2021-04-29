@@ -10332,6 +10332,16 @@ footer.footer {
   padding: 5px 1rem;
 }
 
+.timer__wrapper {
+  display: flex;
+  align-items: center;
+}
+.timer__wrapper > img {
+  width: 4rem;
+  padding: 0.5rem;
+  fill: black !important;
+}
+
 .c-sidebar .c-sidebar-nav-dropdown-toggle:hover,
 .c-sidebar .c-sidebar-nav-link:hover {
   color: #fff;

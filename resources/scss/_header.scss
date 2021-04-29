@@ -1,0 +1,10 @@
+.timer__wrapper {
+    display: flex;
+    align-items: center;
+
+    & > img {
+        width: 4rem;
+        padding: 0.5rem;
+        fill: black !important;
+    }
+}

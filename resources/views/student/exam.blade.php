@@ -10,8 +10,6 @@
             <div class="row">
                 <div class="col-12 col-lg-10 mb-5">
                     <div class="questions__card">
-                        <form action="{{route('questions.submit')}}" method="POST">
-                            @csrf
                             <div class="questions__section">
                                 <div class="question__text">
                                     1. Vyberte na akej hodnote sa ustali prechodova charakteristika systemu
@@ -74,7 +72,7 @@
                             <hr class="question__delimeter">
                             <div class="questions__section">
                                 <div class="question__text">
-                                    5. Spojte co sa vam paci a co nie :D
+                                    5. Spojte co sa vam paci a co nie :)
                                 </div>
                                 <div class="question__answer-title">
                                     Odpoved:
@@ -85,10 +83,6 @@
                                 <div class="question__answer">
                                     @include("components.questions.pair-answer")
                                 </div>
-                            </div>
-                            <hr class="question__delimeter">
-                            <div class="questions__section">
-                                <button type="submit" class="button btn-block">Submit</button>
                             </div>
                         </form>
                     </div>
