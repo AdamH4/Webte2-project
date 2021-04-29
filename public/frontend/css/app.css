@@ -10339,9 +10339,10 @@ footer.footer {
 .timer__wrapper > img {
   width: 4rem;
   padding: 0.7rem;
+  fill: black !important;
 }
 .timer__wrapper > img .st0 {
-  fill: black;
+  fill: black !important;
 }
 
 .c-sidebar .c-sidebar-nav-dropdown-toggle:hover,
