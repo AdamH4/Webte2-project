@@ -19,6 +19,11 @@ class Exam extends Model
         'end',
     ];
 
+    protected $casts = [
+        'start' => 'datetime:j.n.Y H:i',
+        'end' => 'datetime:j.n.Y H:i',
+    ];
+
     public function creator()
     {
     	return $this->belongsTo(User::class, 'creator_id');

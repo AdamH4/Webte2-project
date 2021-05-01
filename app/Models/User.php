@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     public function exams()
     {
-        return $this->hasMany(Exam::class, 'creator_id');
+        return $this->hasMany(Exam::class, 'creator_id')->orderByDesc('start');
     }
 
     public function answers()
