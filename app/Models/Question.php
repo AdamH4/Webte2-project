@@ -29,11 +29,12 @@ class Question extends Model
 
     public function correctAnswers()
     {
-    	return $this->hasMany(Answer::class)->where('author_type' == 'App\User');
+        return $this->morphMany(Answer::class, 'authorable');
+    	// return $this->morphMany(Answer::class, 'authorable')->where('authorable_type' == 'App\User');
     }
 
     public function submittedAnswers()
     {
-    	return $this->hasMany(Answer::class)->where('author_type' == 'App\Student');
+    	return $this->morphMany(Answer::class, 'authorable')->where('authorable_type' == 'App\Student');
     }
 }
