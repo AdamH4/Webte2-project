@@ -17,6 +17,7 @@ class CreateQuestionsTable extends Migration
             $table->id();
             $table->enum('type', ['short_answer', 'select_answer', 'pair_answer', 'draw_answer', 'math_answer']);
             $table->foreignId('exam_id');
+            $table->text('question');
 
             $table->timestamps();
 

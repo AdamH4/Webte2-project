@@ -9,7 +9,7 @@
  <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css" crossorigin="anonymous">
  <link href="{{ asset('frontend/css/app.css') }}" rel="stylesheet">
 
- <title>Administrácia učiteľa</title>
+ {{-- <title>Administrácia učiteľa</title> --}}
  @yield('head')
  </head>
  <body class="c-app">
@@ -20,6 +20,7 @@
       <ul class="c-sidebar-nav">
         <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="index.html">
         {{-- <li class="c-sidebar-nav-title">Theme</li> --}}
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('teacher.exams') }}">Testy</a></li>
         <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="colors.html"> Colors</a></li>
         <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="typography.html">Typography</a></li>
       </ul>
