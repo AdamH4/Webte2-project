@@ -1,0 +1,14 @@
+.timer__wrapper {
+    display: flex;
+    align-items: center;
+
+    & > img {
+        width: 4rem;
+        padding: 0.7rem;
+        fill: black !important;
+
+        & .st0 {
+            fill: black !important;
+        }
+    }
+}

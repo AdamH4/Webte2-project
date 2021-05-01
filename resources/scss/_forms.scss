@@ -28,6 +28,19 @@
         }
     }
 
+    &__select {
+        border-radius: 20px;
+        border: 1px solid $formBorder;
+        background: $formBorder;
+        color: $primary;
+        margin-top: 15px;
+
+        &:focus {
+            background: $formBorder;
+            color: $primary;
+        }
+    }
+
     .input-group-text {
         border-bottom-left-radius: 15px;
         border-top-left-radius: 15px;
