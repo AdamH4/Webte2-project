@@ -3,6 +3,7 @@
 use App\Http\Controllers\TeacherAdminController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,8 +23,11 @@ Route::get('/', function () {
 
 //----------------------------------------- Student Routes -----------------------------------------------------------------
 
+Route::get('/questions', function () { // ROUTE JUST FOR TESTING PURPOSES
+    return view('student.exam');
+})->name('questions');
 
-
+Route::post('/questions', [StudentController::class, 'index'])->name('questions.submit');
 //----------------------------------------- Admin Teacher Routes -----------------------------------------------------------------
 Route::get('/teacher/dashboard', [TeacherAdminController::class, 'index'])->name('teacher.dashboard')->middleware('auth');
 

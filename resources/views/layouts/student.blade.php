@@ -25,21 +25,24 @@
   </head>
   <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-light bg-light static-top">
-    <div class="container">
-        <div class="wrapper-logo">
-            <a href="{{ route('home') }}"><img src="{{ asset('frontend/img/logo.svg') }}" alt="Examio" class="logo"></a>
-        </div>
-        @auth
-        <a class="btn btn-register" href="{{ route('teacher.dashboard') }}">Administrácia</a>
-        @else 
-        <a class="btn btn-register" href="{{ route('register') }}">Registrácia</a>
-        @endauth
-    </div>
-    </nav>
+    <form action="{{route('questions.submit')}}" method="POST">
+        @csrf
+        <nav class="navbar navbar-light bg-light static-top">
+            <div class="container">
+                <div class="wrapper-logo">
+                    <a href="{{ route('home') }}"><img src="{{ asset('frontend/img/logo.svg') }}" alt="Examio" class="logo"></a>
+                </div>
+                <div class="timer__wrapper">
+                    <img src="{{ asset('frontend/img/clock.svg')}}" alt="Clock">
+                    <b>00:00:00</b>
+                </div>
+                <button type="submit" class="btn btn-login" href="{{ route('questions.submit') }}">Odoslat test</button>
+            </div>
+        </nav>
 
     @yield('content')
 
+    </form>
 
     <!-- Footer -->
     <footer class="footer bg-light">

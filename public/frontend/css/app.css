@@ -10056,6 +10056,17 @@ h3 {
   border-left: 0px;
   margin: 0;
 }
+.form__select {
+  border-radius: 20px;
+  border: 1px solid #efefef;
+  background: #efefef;
+  color: #073b4c;
+  margin-top: 15px;
+}
+.form__select:focus {
+  background: #efefef;
+  color: #073b4c;
+}
 .form .input-group-text {
   border-bottom-left-radius: 15px;
   border-top-left-radius: 15px;
@@ -10188,6 +10199,150 @@ footer.footer {
   text-align: center;
   display: inline-block;
   text-transform: uppercase;
+}
+
+.questions {
+  margin-top: 40px;
+}
+.questions__card {
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: -1px 0px 25px -17px rgba(0, 0, 0, 0.75);
+  padding: 20px;
+}
+.questions__section {
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: 1.5fr 2fr 0.2fr;
+  grid-template-rows: auto;
+  grid-template-areas: "text answer-title points" "text answer answer" "text answer answer";
+  padding: 2rem 0;
+}
+
+.question__text {
+  grid-area: text;
+}
+.question__answer-title {
+  grid-area: answer-title;
+}
+.question__points {
+  grid-area: points;
+  text-align: center;
+}
+.question__answer {
+  grid-area: answer;
+  padding-right: 1rem;
+}
+.question__delimeter {
+  background-color: #eee;
+}
+.question__select > label {
+  padding: 0 20px 0 0;
+  cursor: pointer;
+}
+
+.radio__button {
+  cursor: pointer;
+}
+.radio__button::after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #c6c6c6;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+}
+.radio__button:checked:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #ef476f;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid #c6c6c6;
+}
+
+.drawingCanvasWrapper {
+  height: 25rem;
+  position: relative;
+  width: 100%;
+  border: 7px solid #efefef;
+  border-radius: 10px;
+}
+
+#mathLive {
+  width: 100%;
+  border: 7px solid #efefef;
+  border-radius: 10px;
+}
+
+.pair__answers {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.pair__answers > label,
+.pair__answers input {
+  display: block;
+}
+.pair__answers > label {
+  padding: 1rem;
+  margin: 0;
+  color: #ef476f;
+}
+.pair__answers > input {
+  margin-top: 0 !important;
+  color: #06d6a0 !important;
+}
+.pair__answers > input::-webkit-outer-spin-button,
+.pair__answers input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.pair__answers input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.first__group {
+  padding-top: 3rem;
+  list-style-type: upper-alpha;
+  -webkit-padding-start: 35px;
+          padding-inline-start: 35px;
+  color: #ef476f;
+}
+.first__group > li {
+  padding: 5px 1rem;
+}
+
+.second__group {
+  list-style-type: decimal;
+  -webkit-padding-start: 35px;
+          padding-inline-start: 35px;
+  color: #06d6a0;
+}
+.second__group > li {
+  padding: 5px 1rem;
+}
+
+.timer__wrapper {
+  display: flex;
+  align-items: center;
+}
+.timer__wrapper > img {
+  width: 4rem;
+  padding: 0.7rem;
+  fill: black !important;
+}
+.timer__wrapper > img .st0 {
+  fill: black !important;
 }
 
 .c-sidebar .c-sidebar-nav-dropdown-toggle:hover,

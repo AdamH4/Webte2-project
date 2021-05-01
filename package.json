@@ -26,6 +26,8 @@
     "dependencies": {
         "bootstrap": "^4.6.0",
         "jquery": "^3.6.0",
+        "mathlive": "^0.63.0",
+        "painterro": "^1.2.51",
         "popper.js": "^1.16.1"
     }
 }

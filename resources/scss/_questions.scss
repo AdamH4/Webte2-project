@@ -1,0 +1,146 @@
+.questions {
+    margin-top: 40px;
+
+    &__card {
+        border-radius: 5px;
+        background: $white;
+        -webkit-box-shadow: -1px 0px 25px -17px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: -1px 0px 25px -17px rgba(0, 0, 0, 0.75);
+        box-shadow: -1px 0px 25px -17px rgba(0, 0, 0, 0.75);
+        padding: 20px;
+    }
+
+    &__section {
+        display: grid;
+        grid-gap: 30px;
+        grid-template-columns: 1.5fr 2fr 0.2fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "text answer-title points"
+            "text answer answer"
+            "text answer answer";
+        padding: 2rem 0;
+    }
+}
+
+.question {
+    &__text {
+        grid-area: text;
+    }
+    &__answer-title {
+        grid-area: answer-title;
+    }
+    &__points {
+        grid-area: points;
+        text-align: center;
+    }
+    &__answer {
+        grid-area: answer;
+        padding-right: 1rem;
+    }
+    &__delimeter {
+        background-color: #eee;
+    }
+    &__select > label {
+        padding: 0 20px 0 0;
+        cursor: pointer;
+    }
+}
+
+.radio__button {
+    cursor: pointer;
+
+    &::after {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        top: -2px;
+        left: -1px;
+        position: relative;
+        background-color: $formText;
+        content: "";
+        display: inline-block;
+        visibility: visible;
+    }
+    &:checked:after {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        top: -2px;
+        left: -1px;
+        position: relative;
+        background-color: $secondary;
+        content: "";
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid $formText;
+    }
+}
+
+@mixin border-container() {
+    width: 100%;
+    border: 7px solid $formBorder;
+    border-radius: 10px;
+}
+
+.drawingCanvasWrapper {
+    height: 25rem;
+    position: relative;
+    @include border-container();
+}
+#mathLive {
+    @include border-container();
+}
+
+.pair__answers {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    & > label,
+    input {
+        display: block;
+    }
+
+    & > label {
+        padding: 1rem;
+        margin: 0;
+        color: $secondary;
+    }
+
+    & > input {
+        margin-top: 0 !important;
+        color: $loginBtn !important;
+    }
+
+    & > input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    & input[type="number"] {
+        -moz-appearance: textfield;
+    }
+}
+
+.first__group {
+    padding-top: 3rem;
+    list-style-type: upper-alpha;
+    padding-inline-start: 35px;
+    color: $secondary;
+
+    & > li {
+        padding: 5px 1rem;
+    }
+}
+
+.second__group {
+    list-style-type: decimal;
+    padding-inline-start: 35px;
+    color: $loginBtn;
+
+    & > li {
+        padding: 5px 1rem;
+    }
+}
