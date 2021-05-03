@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Exam;
+use App\Models\Question;
 
 class ExamController extends Controller
 {
@@ -20,10 +21,10 @@ class ExamController extends Controller
 
     public function show(Exam $exam)
     {
-
+        
     	return view('teacher.exams.show', [
     		'exam' => $exam,
-            'qtTypes' => $this->getQuestionTypes()
+            'qtTypes' => Question::types,
     	]);
     }
 
@@ -45,14 +46,16 @@ class ExamController extends Controller
 
     	$exam = Exam::make($val);
 
-    	while (true) {
-    		$code = strtoupper(Str::random(4));
-    		$entry = Exam::firstWhere('code', $code);
+        $exams = Exam::all();
+        
+        $code = strtoupper(Str::random(4));
+        $entry = $exams->firstWhere('code', $code);
 
-    		if ($entry == null) {
-    			break;
-    		}
+    	while ($entry != null) {
+    		$code = strtoupper(Str::random(4));
+    		$entry = $exams->firstWhere('code', $code);
     	}
+
     	$exam->code = $code;
     	$exam->creator()->associate(auth()->user());
 
@@ -93,16 +96,5 @@ class ExamController extends Controller
     	}
 
     	return redirect()->route('teacher.exams');
-    }
-
-    private function getQuestionTypes()
-    {
-        return collect([
-            'short_answer' => 'Krátka odpoveď',
-            'select_answer' => 'Výberová odpoveď',
-            'pair_answer' => 'Párovacia odpoveď',
-            'draw_answer' => 'Kreslená odpoveď',
-            'math_answer' => 'Matematická odpoveď'
-        ]);
     }
 }

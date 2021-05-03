@@ -9,9 +9,11 @@
 	<div class="container">
 
     <h4>Vytváranie otázky k testu {{ $exam->title }}</h4>
+
+    @livewire ('create-question', ['exam' => $exam])
 		
-		<form action="{{ route('teacher.questions.create', $exam) }}" method="POST">
-			@csrf
+    	{{-- <form action="{{ route('teacher.questions.create', $exam) }}" method="POST">
+    		@csrf
 
             <div class="form-group">
                 <label for="type">Typ otázky</label>
@@ -22,13 +24,13 @@
                 </select>
             </div>
 
-			<div class="form-group">
+    		<div class="form-group">
                 <label for="question">Otázka</label>
                 <textarea class="form-control" name="question" rows="3" required></textarea>
             </div>
 
-  			<button type="submit" class="btn btn-primary">Uložiť</button>
-		</form>
+    			<button type="submit" class="btn btn-primary">Uložiť</button>
+    	</form> --}}
 
 	</div>
 

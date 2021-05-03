@@ -17,6 +17,14 @@ class Question extends Model
         'question',
     ];
 
+    public const types = [
+        'short_answer' => 'Krátka odpoveď',
+        'select_answer' => 'Výberová odpoveď',
+        'pair_answer' => 'Párovacia odpoveď',
+        'draw_answer' => 'Kreslená odpoveď',
+        'math_answer' => 'Matematická odpoveď'
+    ];
+
     public function exam()
     {
     	return $this->belongsTo(Exam::class);
@@ -29,12 +37,11 @@ class Question extends Model
 
     public function correctAnswers()
     {
-        return $this->morphMany(Answer::class, 'authorable');
-    	// return $this->morphMany(Answer::class, 'authorable')->where('authorable_type' == 'App\User');
+    	return $this->hasMany(Answer::class)->where('authorable_type', 'App\User');
     }
 
     public function submittedAnswers()
     {
-    	return $this->morphMany(Answer::class, 'authorable')->where('authorable_type' == 'App\Student');
+    	return $this->hasMany(Answer::class)->where('authorable_type', 'App\Student');
     }
 }

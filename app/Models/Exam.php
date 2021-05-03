@@ -31,6 +31,11 @@ class Exam extends Model
 
     public function questions()
     {
-    	return $this->hasMany(Question::class);
+        return $this->hasMany(Question::class);
+    }
+
+    public function questionsWithCorrectAnswers()
+    {
+    	return $this->hasMany(Question::class)->with('correctAnswers');
     }
 }

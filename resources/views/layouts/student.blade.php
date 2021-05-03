@@ -6,6 +6,7 @@
         <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        @livewireStyles
         @yield ('title')
         {{-- <link rel="icon" href="{{ asset('kobera_logo.jpg') }}" type="image/gif" sizes="16x16"> --}}
         {{-- <script>
@@ -62,6 +63,7 @@
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('frontend/js/app.js') }}"></script>
+    @livewireScripts
     @yield ('bottom-script')
 </body>
 </html>

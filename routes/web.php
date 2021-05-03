@@ -3,6 +3,7 @@
 use App\Http\Controllers\TeacherAdminController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +47,10 @@ Route::get('/teacher/exams/{exam}/questions/{qt}/edit', [QuestionController::cla
 	->name('teacher.questions.edit')->middleware('auth');
 Route::put('/teacher/exams/{exam}/questions/{qt}/edit', [QuestionController::class, 'update'])->middleware('auth');
 Route::delete('/teacher/exams/{exam}/questions/{qt}/edit', [QuestionController::class, 'destroy'])->middleware('auth');
+
+Route::get('/teacher/exams/{exam}/questions/{qt}/answers/create', [AnswerController::class, 'create'])
+	->name('teacher.questions.answers.create')->middleware('auth');
+Route::post('/teacher/exams/{exam}/questions/{qt}/answers/create', [AnswerController::class, 'store'])->middleware('auth');
 
 
 //----------------------------------------- Auth Routes -----------------------------------------------------------------

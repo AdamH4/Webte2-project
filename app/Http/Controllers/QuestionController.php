@@ -9,19 +9,6 @@ use App\Models\Exam;
 class QuestionController extends Controller
 {
 
-	var $types;
-
-	public function __construct()
-	{
-		$this->types = collect([
-			'short_answer' => 'Krátka odpoveď',
-			'select_answer' => 'Výberová odpoveď',
-			'pair_answer' => 'Párovacia odpoveď',
-			'draw_answer' => 'Kreslená odpoveď',
-			'math_answer' => 'Matematická odpoveď'
-		]);
-	}
-
     public function show(Question $qt)
     {
 
@@ -35,7 +22,7 @@ class QuestionController extends Controller
 
     	return view('teacher.questions.create', [
     		'exam' => $exam,
-    		'types' => $this->types,
+    		'types' => Question::types,
     	]);
     }
 
@@ -61,7 +48,7 @@ class QuestionController extends Controller
     	return view('teacher.questions.edit', [
     		'exam' => $exam,
     		'qt' => $qt,
-    		'types' => $this->types,
+    		'types' => Question::types,
     	]);
     }
 

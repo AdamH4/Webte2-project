@@ -8,6 +8,8 @@
 
 	<div class="container">
 
+		<h4>Test {{ $exam->title }}</h4>
+
 		<div class="row m-3">
 			<div class="col">
 				<a href="{{ route('teacher.questions.create', $exam) }}" class="btn btn-outline-primary col">Pridať otázku</a>
@@ -24,23 +26,28 @@
 			</div>
 		</div>
 		
-		<div class="row">
+		{{-- <div class="row">
+			<div class="col-sm-6"> --}}
+				<h5>Otázky</h5>				
+			{{-- </div>
 			<div class="col-sm-6">
-				<h4>Otázky</h4>				
-			</div>
-			{{-- <div class="col-sm-6">
 				<h5>Správne odpovede</h5>
-			</div> --}}
-		</div>
+			</div>
+		</div> --}}
 
 		<div class="row">
-			@foreach ($exam->questions as $qt)
-				<div class="col">
+			@foreach ($exam->questionsWithCorrectAnswers as $qt)
+				<div class="col-sm-12">
 					<div class="card">
 						<div class="card-body">
 							<h5 class="card-title">{{ $qtTypes[$qt->type] }}</h5>
 							<p class="card-text">{{ $qt->question }}</p>
-							<a href="{{ route('teacher.questions.edit', [$exam, $qt]) }}" class="btn btn-primary mx-1">Upraviť</a>
+							@if ($qt->type != 'draw_answer' && $qt->type != 'math_answer')
+								<a href="{{ route('teacher.questions.answers.create', [$exam, $qt]) }}" class="btn btn-primary mx-1">
+									Pridať odpoveď
+								</a>
+							@endif
+							<a href="{{ route('teacher.questions.edit', [$exam, $qt]) }}" class="btn btn-secondary mx-1">Upraviť</a>
 							<form action="{{ route('teacher.questions.edit', [$exam, $qt]) }}" method="POST" class="d-inline-block mx-1">
 								@csrf
 								@method('DELETE')
@@ -53,7 +60,7 @@
 					<div class="col-sm-6">
 						<div class="card">
 							<div class="card-body">
-								<h5 class="card-title">{{ $ans->points }}</h5>
+								<h5 class="card-title">Počet bodov: {{ $ans->points }}</h5>
 								<p class="card-text">{{ $ans->answer }}</p>
 								{{-- <a href="{{ route('teacher.questions.edit', [$exam, $qt]) }}" class="btn btn-primary mx-1">Upraviť</a>
 								<form action="{{ route('teacher.questions.edit', [$exam, $qt]) }}" method="POST" class="d-inline-block mx-1">
