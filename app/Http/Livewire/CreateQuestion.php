@@ -10,7 +10,8 @@ class CreateQuestion extends Component
 	public $exam;
 	public $qtTypes;
 	public $qtType = 'short_answer';
-	public $shortAnsOpts = ['', ''];
+	public $shortAnsOpts = [];
+	public $pairAnsOpts = ['left' => [], 'right' => []];
 
     public function mount($exam)
     {
@@ -29,6 +30,11 @@ class CreateQuestion extends Component
 
     public function addShortAnsOpt()
     {
-    	$shortAnsOpts[] = '';
+    	$this->shortAnsOpts[] = '';
+    }
+
+    public function addPairAnsOpt(String $side)
+    {
+    	$this->pairAnsOpts[$side][] = '';
     }
 }

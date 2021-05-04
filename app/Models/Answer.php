@@ -23,6 +23,6 @@ class Answer extends Model
 
     public function author()
     {
-        return $this->morphTo();
+        return $this->morphTo('authorable');
     }
 }

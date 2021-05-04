@@ -31,11 +31,34 @@ class QuestionController extends Controller
     	$vali = $request->validate([
     		'type' => 'required',
     		'question' => 'required',
+            'short_ans_opts' => 'array|nullable',
+            'pair_right' => 'array|nullable',
+            'pair_left' => 'array|nullable'
     	]);
 
     	$qt = Question::make($vali);
 
     	$qt->exam()->associate($exam);
+
+        // case - short answer question
+        if ($request->short_ans_opts) {
+            $question = collect(['question' => $vali['question']]);
+            $question->put('options', $request->short_ans_opts);
+            $qt->question = $question->toJson();
+        }
+        // end case - short answer question
+
+        // case - pair answer question
+        if ($request->pair_right && $request->pair_left) {
+            $question = collect(['question' => $vali['question']]);
+            // $pairAnsOpts = collect();
+            // $pairAnsOpts->put('left', $request->pair_left);
+            // $pairAnsOpts->put('right', $request->pair_right);
+            // $question->put('options', $pairAnsOpts->whereNotNull()->toArray());
+            $question->put('options', ['left' => $request->pair_left, 'right' => $request->pair_right]);
+            $qt->question = $question->toJson();
+        }
+        // end case - pair answer question
 
     	$qt->save();
 
