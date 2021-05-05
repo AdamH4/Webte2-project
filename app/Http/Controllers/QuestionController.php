@@ -28,12 +28,15 @@ class QuestionController extends Controller
 
     public function store(Request $request, Exam $exam)
     {
+        //treba zakazat po zacati testu
     	$vali = $request->validate([
     		'type' => 'required',
     		'question' => 'required',
             'short_ans_opts' => 'array|nullable',
             'pair_right' => 'array|nullable',
-            'pair_left' => 'array|nullable'
+            'pair_left' => 'array|nullable',
+            'pair_right_ind' => 'array|nullable',
+            'pair_left_ind' => 'array|nullable',
     	]);
 
     	$qt = Question::make($vali);
@@ -51,11 +54,18 @@ class QuestionController extends Controller
         // case - pair answer question
         if ($request->pair_right && $request->pair_left) {
             $question = collect(['question' => $vali['question']]);
-            // $pairAnsOpts = collect();
-            // $pairAnsOpts->put('left', $request->pair_left);
-            // $pairAnsOpts->put('right', $request->pair_right);
-            // $question->put('options', $pairAnsOpts->whereNotNull()->toArray());
-            $question->put('options', ['left' => $request->pair_left, 'right' => $request->pair_right]);
+
+            $lefts = [];
+            foreach ($request->pair_left_ind as $key => $pri) {
+                $lefts[$pri] = $request->pair_left[$key];
+            }
+
+            $rights = [];
+            foreach ($request->pair_right_ind as $key => $pri) {
+                $rights[$pri] = $request->pair_right[$key];
+            }
+
+            $question->put('options', ['left' => $lefts, 'right' => $rights]);
             $qt->question = $question->toJson();
         }
         // end case - pair answer question
@@ -77,6 +87,7 @@ class QuestionController extends Controller
 
     public function update(Request $request, Exam $exam, Question $qt)
     {
+        //treba zakazat po zacati testu
     	$vali = $request->validate([
     		'type' => 'required',
     		'question' => 'required',

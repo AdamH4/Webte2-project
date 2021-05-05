@@ -16,6 +16,16 @@ class Answer extends Model
         'points',
     ];
 
+    public function getAnswerHumanAttribute()
+    {
+        $ans = json_decode($this->answer);
+        if (gettype($ans) == 'array') {
+            return implode(', ', json_decode($this->answer));
+        }
+
+        return $this->answer;
+    }
+
     public function question()
     {
     	return $this->belongsTo(Question::class);

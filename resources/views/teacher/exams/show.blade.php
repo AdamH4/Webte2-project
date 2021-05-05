@@ -47,8 +47,8 @@
 							@elseif ($qt->type == 'pair_answer')
 								<h5 class="card-title">{{ $qt->questionDecoded->question }}</h5>
 								<p class="card-text">{{ $qtTypes[$qt->type] }}</p>
-								<p class="card-text">Ľavá strana: {{ implode(', ', $qt->questionDecoded->options->left) }}</p>
-								<p class="card-text">Pravá strana: {{ implode(', ', $qt->questionDecoded->options->right) }}</p>
+								<p class="card-text">Ľavá strana: {{ implode(', ', (array) $qt->questionDecoded->options->left) }}</p>
+								<p class="card-text">Pravá strana: {{ implode(', ', (array) $qt->questionDecoded->options->right) }}</p>
 							@else
 								<h5 class="card-title">{{ $qt->question }}</h5>
 								<p class="card-text">{{ $qtTypes[$qt->type] }}</p>
@@ -72,7 +72,7 @@
 					<div class="col-sm-6">
 						<div class="card">
 							<div class="card-body">
-								<h5 class="card-title">{{ $ans->answer }}</h5>
+								<h5 class="card-title">{{ $ans->answerHuman }}</h5>
 								<p class="card-text">Počet bodov: {{ $ans->points }}</p>
 								{{-- <a href="{{ route('teacher.questions.edit', [$exam, $qt]) }}" class="btn btn-primary mx-1">Upraviť</a>
 								<form action="{{ route('teacher.questions.edit', [$exam, $qt]) }}" method="POST" class="d-inline-block mx-1">

@@ -22,9 +22,9 @@ class AnswerController extends Controller
     public function store(Request $request, Exam $exam, Question $qt)
     {
     	$vali = $request->validate([
-    		'answer' => 'required',
+    		'answer' => 'string|nullable',
     		'points' => 'required',
-            'short_ans_opts' => 'array|nullable',
+            'select_answers' => 'array|nullable',
             'pair_right' => 'array|nullable',
             'pair_left' => 'array|nullable'
     	]);
@@ -35,10 +35,8 @@ class AnswerController extends Controller
     	$ans->author()->associate(auth()->user());
 
         // case - short answer question
-        if ($request->short_ans_opts) {
-            $question = collect(['question' => $vali['question']]);
-            $question->put('options', $request->short_ans_opts);
-            $ans->question = $question->toJson();
+        if ($request->select_answers) {
+            $ans->answer = json_encode($request->select_answers);
         }
         // end case - short answer question
 
@@ -54,8 +52,28 @@ class AnswerController extends Controller
         }
         // end case - pair answer question
 
+        // dd($ans);
+
     	$ans->save();
 
     	return redirect()->route('teacher.exams.show', $exam);
     }
 }
+
+/*
+11
+
+"64" : 62.4,
+
+12
+
+"64" : 93.6,
+
+13
+
+"64" : 106.08,
+
+14
+
+"64" : 112.32,
+*/

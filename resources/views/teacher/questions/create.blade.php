@@ -10,7 +10,7 @@
 
     <h4>Vytváranie otázky k testu {{ $exam->title }}</h4>
 
-    @livewire ('create-question', ['exam' => $exam])
+    @livewire ('teacher.create-question', ['exam' => $exam])
 
 	</div>
 

@@ -32,6 +32,14 @@ class Question extends Model
         return json_decode($this->question);
     }
 
+    public function getQuestionHumanAttribute()
+    {
+        if ($this->type == 'select_answer' || $this->type == 'pair_answer') {
+            return $this->questionDecoded->question;
+        }
+        return $this->question;
+    }
+
     public function exam()
     {
     	return $this->belongsTo(Exam::class);

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Teacher;
 
 use Livewire\Component;
 use App\Models\Question;
@@ -22,7 +22,7 @@ class CreateQuestion extends Component
     public function render()
     {
 
-        return view('livewire.create-question', [
+        return view('livewire.teacher.create-question', [
         	'qtTypes' => $this->qtTypes,
         	'shortAnsOpts' => $this->shortAnsOpts,
         ]);
