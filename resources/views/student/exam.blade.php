@@ -4,6 +4,14 @@
     <title>Test</title>
 @endsection
 
+@section('header')
+<div class="timer__wrapper">
+    <img src="{{ asset('frontend/img/clock.svg')}}" alt="Clock">
+    <b>00:00:00</b>
+</div>
+<button type="submit" class="btn btn-login" href="{{ route('questions.submit') }}">Odoslat test</button>
+@endsection
+
 @section('content')
     <section class="questions">
         <div class="container">

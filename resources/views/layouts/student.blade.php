@@ -33,11 +33,7 @@
                 <div class="wrapper-logo">
                     <a href="{{ route('home') }}"><img src="{{ asset('frontend/img/logo.svg') }}" alt="Examio" class="logo"></a>
                 </div>
-                <div class="timer__wrapper">
-                    <img src="{{ asset('frontend/img/clock.svg')}}" alt="Clock">
-                    <b>00:00:00</b>
-                </div>
-                <button type="submit" class="btn btn-login" href="{{ route('questions.submit') }}">Odoslat test</button>
+                @yield('header')
             </div>
         </nav>
 
@@ -63,7 +59,7 @@
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('frontend/js/app.js') }}"></script>
-    @livewireScripts
+     @livewireScripts
     @yield ('bottom-script')
 </body>
 </html>
