@@ -10237,17 +10237,17 @@ footer.footer {
   background-color: #eee;
 }
 .question__select > label {
-  padding: 0 20px 0 0;
+  padding: 0 20px 0 15px;
   cursor: pointer;
 }
 
-.radio__button {
+.checkbox__question {
   cursor: pointer;
 }
-.radio__button::after {
-  width: 15px;
-  height: 15px;
-  border-radius: 15px;
+.checkbox__question::after {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
   top: -2px;
   left: -1px;
   position: relative;
@@ -10255,11 +10255,12 @@ footer.footer {
   content: "";
   display: inline-block;
   visibility: visible;
+  margin-right: 0.5rem;
 }
-.radio__button:checked:after {
-  width: 15px;
-  height: 15px;
-  border-radius: 15px;
+.checkbox__question:checked:after {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
   top: -2px;
   left: -1px;
   position: relative;
@@ -10267,6 +10268,7 @@ footer.footer {
   content: "";
   display: inline-block;
   visibility: visible;
+  margin-right: 0.5rem;
   border: 2px solid #c6c6c6;
 }
 
