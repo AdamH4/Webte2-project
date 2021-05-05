@@ -10,7 +10,7 @@ class CreateAnswer extends Component
 {
 	public $exam;
 	public $qt;
-	public $shortAnsOpts = [];
+	public $shortAnsOpts = [''];
 	public $pairAnsOpts = ['left' => [], 'right' => []];
 
 	public function mount($exam, $qt)
@@ -25,16 +25,12 @@ class CreateAnswer extends Component
         return view('livewire.teacher.create-answer', [
         	'exam' => $this->exam,
         	'qt' => $this->qt,
+            'shortAnsOpts' => $this->shortAnsOpts,
         ]);
     }
 
     public function addShortAnsOpt()
     {
     	$this->shortAnsOpts[] = '';
-    }
-
-    public function addPairAnsOpt(String $side)
-    {
-    	$this->pairAnsOpts[$side][] = '';
     }
 }

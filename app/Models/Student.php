@@ -14,6 +14,7 @@ class Student extends Model
         'name',
         'surname',
         'school_id',
+        'is_active',
     ];
 
     protected $appends = ['full_name'];

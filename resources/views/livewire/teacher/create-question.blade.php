@@ -14,9 +14,14 @@
         </div>
 
         <div class="form-group">
-	            <label for="question">Otázka</label>
-	            <textarea class="form-control" name="question" rows="3" required></textarea>
-	        </div>
+            <label for="question">Otázka</label>
+            <textarea class="form-control" name="question" rows="3" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="points">Maximálny počet bodov</label>
+            <input type="number" step="0.01" class="form-control" name="points" required>
+        </div>
 
         @if ($qtType == 'select_answer')
 

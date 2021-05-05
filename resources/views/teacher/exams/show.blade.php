@@ -42,16 +42,16 @@
 						<div class="card-body">
 							@if ($qt->type == 'select_answer')
 								<h5 class="card-title">{{ $qt->questionDecoded->question }}</h5>
-								<p class="card-text">{{ $qtTypes[$qt->type] }}</p>
-								<p class="card-text">Možnosti: {{ implode(', ', $qt->questionDecoded->options) }}</p>
+								<p class="card-text">{{ $qtTypes[$qt->type] . ' za ' . $qt->points . ' b.' }}</p>
+								<p class="card-text">Možnosti: {{ $qt->getSelectOptionsStr() }}</p>
 							@elseif ($qt->type == 'pair_answer')
 								<h5 class="card-title">{{ $qt->questionDecoded->question }}</h5>
-								<p class="card-text">{{ $qtTypes[$qt->type] }}</p>
-								<p class="card-text">Ľavá strana: {{ implode(', ', (array) $qt->questionDecoded->options->left) }}</p>
-								<p class="card-text">Pravá strana: {{ implode(', ', (array) $qt->questionDecoded->options->right) }}</p>
+								<p class="card-text">{{ $qtTypes[$qt->type] . ' za ' . $qt->points . ' b.' }}</p>
+								<p class="card-text">Ľavá strana: {{ $qt->getLeftsideOptionsStr() }}</p>
+								<p class="card-text">Pravá strana: {{ $qt->getRightsideOptionsStr() }}</p>
 							@else
-								<h5 class="card-title">{{ $qt->question }}</h5>
-								<p class="card-text">{{ $qtTypes[$qt->type] }}</p>
+								<h5 class="card-title">{{ $qt->questionDecoded->question }}</h5>
+								<p class="card-text">{{ $qtTypes[$qt->type] . ' za ' . $qt->points . ' b.' }}</p>
 							@endif
 							@if ($qt->type != 'draw_answer' && $qt->type != 'math_answer')
 								<a href="{{ route('teacher.questions.answers.create', [$exam, $qt]) }}" class="btn btn-primary mx-1">

@@ -15,6 +15,7 @@ class Question extends Model
         'type',
         'exam_id',
         'question',
+        'points',
     ];
 
     public const types = [
@@ -34,10 +35,22 @@ class Question extends Model
 
     public function getQuestionHumanAttribute()
     {
-        if ($this->type == 'select_answer' || $this->type == 'pair_answer') {
-            return $this->questionDecoded->question;
-        }
-        return $this->question;
+        return $this->questionDecoded->question;
+    }
+
+    public function getLeftsideOptionsStr()
+    {
+        return implode(', ', (array) $this->questionDecoded->options->left);
+    }
+
+    public function getRightsideOptionsStr()
+    {
+        return implode(', ', (array) $this->questionDecoded->options->right);
+    }
+
+    public function getSelectOptionsStr()
+    {
+        return implode(', ', (array) $this->questionDecoded->options);
     }
 
     public function exam()

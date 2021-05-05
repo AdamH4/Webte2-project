@@ -11,7 +11,9 @@
 		<h4>Pridávanie správnej odpovede k otázke</h4>
 		<h4>{{ $qt->questionHuman }}</h4>
 
-		<form action="{{ route('teacher.questions.answers.create', [$exam, $qt]) }}" method="POST">
+		@livewire ('teacher.create-answer', ['exam' => $exam, 'qt' => $qt])
+
+		{{-- <form action="{{ route('teacher.questions.answers.create', [$exam, $qt]) }}" method="POST">
 			@csrf
 
 			<div class="form-group">
@@ -64,7 +66,7 @@
 
 			<button type="submit" class="btn btn-primary">Uložiť</button>
 
-		</form>
+		</form> --}}
 
 	</div>
 
