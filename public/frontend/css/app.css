@@ -10332,16 +10332,20 @@ footer.footer {
   padding: 5px 1rem;
 }
 
-.timer__wrapper {
+.timer-form {
+  display: contents;
+}
+
+.timer-form__wrapper {
   display: flex;
   align-items: center;
 }
-.timer__wrapper > img {
+.timer-form__wrapper > img {
   width: 4rem;
   padding: 0.7rem;
   fill: black !important;
 }
-.timer__wrapper > img .st0 {
+.timer-form__wrapper > img .st0 {
   fill: black !important;
 }
 

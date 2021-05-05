@@ -5,11 +5,14 @@
 @endsection
 
 @section('header')
-<div class="timer__wrapper">
-    <img src="{{ asset('frontend/img/clock.svg')}}" alt="Clock">
-    <b>00:00:00</b>
-</div>
-<button type="submit" class="btn btn-login" href="{{ route('questions.submit') }}">Odoslat test</button>
+<form action="{{ route('exam.done') }}" method="POST" class="timer-form">
+    @csrf
+    <div class="timer-form__wrapper">
+        <img src="{{ asset('frontend/img/clock.svg')}}" alt="Clock">
+        <b>00:00:00</b>
+    </div>
+    <button type="submit" class="btn btn-login"">Odoslať test</button>
+</form>
 @endsection
 
 @section('content')
