@@ -9,7 +9,7 @@
     @csrf
     <div class="timer-form__wrapper">
         <img src="{{ asset('frontend/img/clock.svg')}}" alt="Clock">
-        <b>00:00:00</b>
+        <b id="timer">00:00:00</b>
     </div>
     <button type="submit" class="btn btn-login"">Odoslať test</button>
 </form>
