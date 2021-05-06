@@ -72,21 +72,3 @@ class AnswerController extends Controller
     	return redirect()->route('teacher.exams.show', $exam);
     }
 }
-
-/*
-11
-
-"64" : 62.4,
-
-12
-
-"64" : 93.6,
-
-13
-
-"64" : 106.08,
-
-14
-
-"64" : 112.32,
-*/
