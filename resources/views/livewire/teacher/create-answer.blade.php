@@ -13,8 +13,8 @@
 
 			@foreach ($shortAnsOpts as $key => $sao)
 				<div class="form-group">
-	                <label for="answer">Odpoveď {{ $key + 1 }}</label>
-	                <input class="form-control" name="answer" required>
+	                <label for="answers">Odpoveď {{ $key + 1 }}</label>
+	                <input class="form-control" name="answers[]" required>
 	            </div>
 	        @endforeach
 
@@ -22,12 +22,12 @@
 
 		@elseif ($qt->type == 'select_answer')
 
-			@foreach ($qt->questionDecoded->options as $option)
+			@foreach ($qt->questionDecoded->options as $key => $option)
 	            <div class="custom-control custom-checkbox my-3">
 					<input type="checkbox"
-						class="custom-control-input" id="{{ $option }}" name="select_answers[]" value="{{ $option }}"
+						class="custom-control-input" id="{{ $key }}" name="select_answers[]" value="{{ $key }}"
 					>
-					<label class="custom-control-label" for="{{ $option }}">{{ $option }}</label>
+					<label class="custom-control-label" for="{{ $key }}">{{ $option }}</label>
 				</div>
 			@endforeach
 
@@ -35,26 +35,29 @@
 
 			<div class="row">
 				<div class="col">
-					@foreach ($qt->questionDecoded->options->left as $option)
-			            <div class="custom-control custom-checkbox my-3">
-							<input type="checkbox"
-								class="custom-control-input" id="{{ $option }}" name="select_answers[]" value="{{ $option }}"
-							>
-							<label class="custom-control-label" for="{{ $option }}">{{ $option }}</label>
-						</div>
-					@endforeach
+					@foreach ($qt->questionDecoded->options->left as $key => $option)
+						<div class="form-group">
+			                <label for="pair_left">{{ $option }}</label>
+			                <input class="form-control" name="pair_left[{{ $key }}]" required>
+			            </div>
+			        @endforeach
 				</div>
 				<div class="col">
-					@foreach ($qt->questionDecoded->options->right as $option)
-			            <div class="custom-control custom-checkbox my-3">
-							<input type="checkbox"
-								class="custom-control-input" id="{{ $option }}" name="select_answers[]" value="{{ $option }}"
-							>
-							<label class="custom-control-label" for="{{ $option }}">{{ $option }}</label>
-						</div>
+					@foreach ($qt->questionDecoded->options->right as $key => $option)
+						<p><strong>{{ $key }})</strong> {{ $option }}</p>
 					@endforeach
 				</div>
 			</div>
+
+			{{-- @foreach ($qt->questionDecoded->options->left as $key => $option)
+				<h6>{{ $option }}</h6>
+				@foreach ($freePairs as $fokey => $fo)
+			            <div class="custom-control custom-checkbox my-2">
+							<input type="checkbox" id="{{ $key . $fokey }}" name="{{ 'pair_answers[' . $key . ']' }}" class="custom-control-input" value="{{ $fo }}" wire:model="usedPairs">
+							<label class="custom-control-label" for="{{ $key . $fokey }}">{{ $fo }}</label>
+						</div>
+					@endforeach
+			@endforeach --}}
 
 		@endif
 

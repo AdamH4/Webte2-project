@@ -22,10 +22,9 @@ class AnswerController extends Controller
     public function store(Request $request, Exam $exam, Question $qt)
     {
     	$vali = $request->validate([
-    		'answer' => 'string|nullable',
+    		'answers' => 'array|nullable',
     		'points' => 'required',
             'select_answers' => 'array|nullable',
-            'pair_right' => 'array|nullable',
             'pair_left' => 'array|nullable'
     	]);
 
@@ -34,24 +33,38 @@ class AnswerController extends Controller
     	$ans->question()->associate($qt);
     	$ans->author()->associate(auth()->user());
 
+        if ($request->answers) {
+            $ans->answer = json_encode($request->answers);
+        }
         // case - short answer question
-        if ($request->select_answers) {
-            $ans->answer = json_encode($request->select_answers);
+        else if ($request->select_answers) {
+            $allOpts = (array) $qt->questionDecoded->options;
+
+            foreach ($request->select_answers as $sa) {
+                $selected[$sa] = $allOpts[$sa];
+            }
+
+            $ans->answer = json_encode($selected);
         }
         // end case - short answer question
 
         // case - pair answer question
-        if ($request->pair_right && $request->pair_left) {
-            $question = collect(['question' => $vali['question']]);
-            // $pairAnsOpts = collect();
-            // $pairAnsOpts->put('left', $request->pair_left);
-            // $pairAnsOpts->put('right', $request->pair_right);
-            // $question->put('options', $pairAnsOpts->whereNotNull()->toArray());
-            $question->put('options', ['left' => $request->pair_left, 'right' => $request->pair_right]);
-            $ans->question = $question->toJson();
+        else if ($request->pair_left) {
+
+            $allOpts = (array) $qt->questionDecoded->options;
+            $answer = [];
+            
+            foreach ($request->pair_left as $left => $right) {
+
+                $answer[$left]['left'] = $allOpts['left']->$left;
+                $answer[$left]['right'] = $allOpts['right']->$right;
+                $answer[$left]['rightKey'] = $right;
+            }
+
+            $ans->answer = json_encode($answer);
+
         }
         // end case - pair answer question
-
         // dd($ans);
 
     	$ans->save();
@@ -59,21 +72,3 @@ class AnswerController extends Controller
     	return redirect()->route('teacher.exams.show', $exam);
     }
 }
-
-/*
-11
-
-"64" : 62.4,
-
-12
-
-"64" : 93.6,
-
-13
-
-"64" : 106.08,
-
-14
-
-"64" : 112.32,
-*/
