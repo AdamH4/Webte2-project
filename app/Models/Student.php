@@ -83,7 +83,7 @@ class Student extends Authenticatable
 
     public function isWritingExam()
     {
-        return $this->is_active == self::WRITING;
+        return ($this->is_active == self::WRITING || $this->is_active == self::LEFT);
     }
 
     //------------------------------------------- Relationships -------------------------

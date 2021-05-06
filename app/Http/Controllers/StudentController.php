@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Events\ExamEvent;
 use App\Models\Student;
 use App\Models\Exam;
 use App\Http\Requests\LoginTestRequest;
@@ -34,6 +34,8 @@ class StudentController extends Controller
         // prihlasujem studenta na guard in-exam
         auth()->guard('in-exam')->login($studentInExam);
 
+        $this->changeExamStatus(Student::WRITING);
+
         return redirect()->route('exam.show', $exam->code);
     }
 
@@ -42,41 +44,55 @@ class StudentController extends Controller
         $exam = Exam::byExamCode($code)->firstOrFail();
 
         //Zistime ci moze pristupit k testu - StudentPolicy.php
-        if (!auth('in-exam')->user()->can('show-exam', $exam)) return redirect()->route('home');
+        if (!auth('in-exam')->user()->can('show-exam', $exam)) {
+            alert()->error('Nemáš oprávnenie vidieť test!', 'Zakázaný prístup!');
+            return redirect()->route('home');
+        }
+
+        $this->changeExamStatus(Student::WRITING);
 
         $questions = $exam->questions;
-        $student = auth('in-exam')->user();
 
         return view('student.exam', [
             'exam' => $exam,
             'questions' => $questions,
-            'student' => $student
+            'student' => auth('in-exam')->user()
         ]);
     }
 
-    public function leftExam(Request $request)
+    public function leftExam(Request $request, Exam $exam)
     {
-        auth('in-exam')->user()->update([
-            'is_active' => Student::LEFT
-        ]);
+        $this->changeExamStatus(Student::LEFT);
 
-        $this->logoutFromExam($request);
+        // Ak leavne tak ho  to hned odhlasi z testu
+        //$this->logoutFromExam($request);
 
         return redirect()->route('home');
     }
 
-    public function doneExam(Request $request)
+    public function doneExam(Request $request, Exam $exam)
     {
-        auth('in-exam')->user()->update([
-            'is_active' => Student::DONE
-        ]);
 
-        $this->logoutFromExam($request);
+        $this->changeExamStatus(Student::DONE);
 
         //TODO: Tu spravit service na odoslanie testu z pohladu studenta
 
+        $this->logoutFromExam($request);
+
         alert()->success('Test bol úspešne odoslaný!', 'Úspešne!');
         return redirect()->route('home');
+    }
+
+    public function changeExamStatus($status)
+    {
+        $student = auth('in-exam')->user();
+        $student->update([
+            'is_active' => $status
+        ]);
+
+        $exam = Exam::byExamCode($student->exam_code)->firstOrFail();
+
+        ExamEvent::dispatch($exam, $student);
     }
 
     private function logoutFromExam($request)
