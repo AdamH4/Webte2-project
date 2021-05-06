@@ -12,12 +12,15 @@ class CreateAnswer extends Component
 	public $qt;
 	public $shortAnsOpts = [''];
 	public $pairAnsOpts = ['left' => [], 'right' => []];
+    // public $freePairs = [];
+    // public $usedPairs = [];
 
 	public function mount($exam, $qt)
     {
         $this->exam = $exam;
         $this->qt = $qt;
         // $this->qtTypes = Question::types;
+        // $this->freePairs = (array) $qt->questionDecoded->options->right;
     }
 
     public function render()
@@ -26,6 +29,8 @@ class CreateAnswer extends Component
         	'exam' => $this->exam,
         	'qt' => $this->qt,
             'shortAnsOpts' => $this->shortAnsOpts,
+            // 'freePairs' => $this->freePairs,
+            // 'usedPairs' => $this->usedPairs,
         ]);
     }
 

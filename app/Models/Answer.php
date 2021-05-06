@@ -19,8 +19,24 @@ class Answer extends Model
     public function getAnswerHumanAttribute()
     {
         $ans = json_decode($this->answer);
+
         if (gettype($ans) == 'array') {
-            return implode(', ', json_decode($this->answer));
+            return implode(', ', $ans);
+        }
+
+        if (gettype($ans) == 'object') {
+
+            $fo = (array) $ans;
+
+            if (gettype($fo[array_key_first($fo)]) == 'object') {
+                foreach ($fo as $key => $f) {
+                    $paired[$f->left] = $f->right;
+                }
+                return urldecode(http_build_query($paired, '', ', '));
+                // return http_build_query($paired, '', ', ');
+            }
+
+            return implode(', ', $fo);
         }
 
         return $this->answer;
