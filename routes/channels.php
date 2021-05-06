@@ -16,3 +16,12 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+
+Broadcast::channel('Exam.{ais}.{exam}', function (
+    $user,
+    $ais,
+    $exam
+) {
+    return true;
+    // return $user->ais_id == $ais && $exam == $user->exam_code;
+}, ['guards' => ['web', 'in-exam']]);

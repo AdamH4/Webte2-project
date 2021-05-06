@@ -29,9 +29,10 @@ Route::get('/questions', function () { // ROUTE JUST FOR TESTING PURPOSES
 })->name('questions');
 
 Route::post('/exam/login', [StudentController::class, 'loginToExam'])->name('exam.login');
-Route::post('/exam/left', [StudentController::class, 'leftExam'])->name('exam.left');
-Route::post('/exam/done', [StudentController::class, 'doneExam'])->name('exam.done');
-Route::get('/exam/{exam}', [StudentController::class, 'exam'])->name('exam.show');
+Route::post('/exam/left/{exam}', [StudentController::class, 'leftExam'])->name('exam.left');
+Route::post('/exam/done/{exam}', [StudentController::class, 'doneExam'])->name('exam.done');
+Route::get('/exam/{exam}', [StudentController::class, 'exam'])->name('exam.show')->middleware('in-exam');
+Route::get('/exam/change/{status}', [StudentController::class, 'changeExamStatus'])->name('exam.status')->middleware('in-exam');
 
 //----------------------------------------- Admin Teacher Routes -----------------------------------------------------------------
 Route::get('/teacher/dashboard', [TeacherAdminController::class, 'index'])->name('teacher.dashboard')->middleware('auth');

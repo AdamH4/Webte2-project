@@ -1,5 +1,13 @@
 @extends('layouts.student')
 
+@section('header')
+        @auth
+        <a class="btn btn-register" href="{{ route('teacher.dashboard') }}">Administrácia</a>
+        @else 
+        <a class="btn btn-register" href="{{ route('register') }}">Registrácia</a>
+        @endauth
+@endsection
+
 @section('content')
 <section class="landing-login">
     <div class="container">
