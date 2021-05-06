@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Student;
+
 return [
 
     /*
@@ -41,6 +43,11 @@ return [
             'provider' => 'users',
         ],
 
+        'in-exam' => [
+            'driver' => 'session',
+            'provider' => 'students',
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -69,6 +76,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'students' => [
+            'driver' => 'eloquent',
+            'model' => Student::class,
         ],
 
         // 'users' => [

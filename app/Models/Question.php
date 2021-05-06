@@ -26,6 +26,12 @@ class Question extends Model
         'math_answer' => 'Matematická odpoveď'
     ];
 
+    public const SHORT_ANSWER = 'short_answer';
+    public const SELECT_ANSWER = 'select_answer';
+    public const PAIR_ANSWER = 'pair_answer';
+    public const DRAW_ANSWER = 'draw_answer';
+    public const MATH_ANSWER = 'math_answer';
+
     // protected $appends = ['question_decoded'];
 
     public function getQuestionDecodedAttribute()
@@ -55,21 +61,21 @@ class Question extends Model
 
     public function exam()
     {
-    	return $this->belongsTo(Exam::class);
+        return $this->belongsTo(Exam::class);
     }
 
     public function answers()
     {
-    	return $this->hasMany(Answer::class);
+        return $this->hasMany(Answer::class);
     }
 
     public function correctAnswers()
     {
-    	return $this->hasMany(Answer::class)->where('authorable_type', 'App\Models\User');
+        return $this->hasMany(Answer::class)->where('authorable_type', 'App\Models\User');
     }
 
     public function submittedAnswers()
     {
-    	return $this->hasMany(Answer::class)->where('authorable_type', 'App\Models\Student');
+        return $this->hasMany(Answer::class)->where('authorable_type', 'App\Models\Student');
     }
 }

@@ -19,16 +19,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('landing.welcome');
+	return view('landing.welcome');
 })->name('home');
 
 //----------------------------------------- Student Routes -----------------------------------------------------------------
 
 Route::get('/questions', function () { // ROUTE JUST FOR TESTING PURPOSES
-    return view('student.exam');
+	return view('student.exam');
 })->name('questions');
 
-Route::post('/questions', [StudentController::class, 'index'])->name('questions.submit');
+Route::post('/exam/login', [StudentController::class, 'loginToExam'])->name('exam.login');
+Route::post('/exam/left', [StudentController::class, 'leftExam'])->name('exam.left');
+Route::post('/exam/done', [StudentController::class, 'doneExam'])->name('exam.done');
+Route::get('/exam/{exam}', [StudentController::class, 'exam'])->name('exam.show');
+
 //----------------------------------------- Admin Teacher Routes -----------------------------------------------------------------
 Route::get('/teacher/dashboard', [TeacherAdminController::class, 'index'])->name('teacher.dashboard')->middleware('auth');
 
