@@ -18,6 +18,7 @@ class CreateStudentsTable extends Migration
             $table->string('name');
             $table->string('surname');
             $table->string('school_id');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

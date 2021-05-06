@@ -9,19 +9,6 @@ use App\Models\Exam;
 class QuestionController extends Controller
 {
 
-	var $types;
-
-	public function __construct()
-	{
-		$this->types = collect([
-			'short_answer' => 'Krátka odpoveď',
-			'select_answer' => 'Výberová odpoveď',
-			'pair_answer' => 'Párovacia odpoveď',
-			'draw_answer' => 'Kreslená odpoveď',
-			'math_answer' => 'Matematická odpoveď'
-		]);
-	}
-
     public function show(Question $qt)
     {
 
@@ -35,20 +22,63 @@ class QuestionController extends Controller
 
     	return view('teacher.questions.create', [
     		'exam' => $exam,
-    		'types' => $this->types,
+    		'types' => Question::types,
     	]);
     }
 
     public function store(Request $request, Exam $exam)
     {
+        //treba zakazat po zacati testu
     	$vali = $request->validate([
     		'type' => 'required',
     		'question' => 'required',
+            'points' => 'required',
+            'short_ans_opts' => 'array|nullable',
+            'pair_right' => 'array|nullable',
+            'pair_left' => 'array|nullable',
+            'pair_right_ind' => 'array|nullable',
+            'pair_left_ind' => 'array|nullable',
     	]);
 
     	$qt = Question::make($vali);
 
     	$qt->exam()->associate($exam);
+        $question = collect(['question' => $vali['question']]);
+
+        // case - short answer question
+        if ($request->short_ans_opts) {
+
+            foreach ($request->short_ans_opts as $key => $opt) {
+                $sao[$key + 1] = $opt;
+            }
+            
+            $question->put('options', $sao);
+            $qt->question = $question->toJson();
+        }
+        // end case - short answer question
+
+        // case - pair answer question
+        else if ($request->pair_right && $request->pair_left) {
+            $question = collect(['question' => $vali['question']]);
+
+            $lefts = [];
+            foreach ($request->pair_left_ind as $key => $pli) {
+                $lefts[$pli] = $request->pair_left[$key];
+            }
+
+            $rights = [];
+            foreach ($request->pair_right_ind as $key => $pri) {
+                $rights[$pri] = $request->pair_right[$key];
+            }
+
+            $question->put('options', ['left' => $lefts, 'right' => $rights]);
+            $qt->question = $question->toJson();
+        }
+        // end case - pair answer question
+
+        else {
+            $qt->question = $question->toJson();
+        }
 
     	$qt->save();
 
@@ -61,12 +91,13 @@ class QuestionController extends Controller
     	return view('teacher.questions.edit', [
     		'exam' => $exam,
     		'qt' => $qt,
-    		'types' => $this->types,
+    		'types' => Question::types,
     	]);
     }
 
     public function update(Request $request, Exam $exam, Question $qt)
     {
+        //treba zakazat po zacati testu
     	$vali = $request->validate([
     		'type' => 'required',
     		'question' => 'required',

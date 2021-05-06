@@ -8,6 +8,8 @@
 
 	<div class="container">
 
+		<h4>Test {{ $exam->title }}</h4>
+
 		<div class="row m-3">
 			<div class="col">
 				<a href="{{ route('teacher.questions.create', $exam) }}" class="btn btn-outline-primary col">Pridať otázku</a>
@@ -24,23 +26,39 @@
 			</div>
 		</div>
 		
-		<div class="row">
+		{{-- <div class="row">
+			<div class="col-sm-6"> --}}
+				<h5>Otázky</h5>				
+			{{-- </div>
 			<div class="col-sm-6">
-				<h4>Otázky</h4>				
-			</div>
-			{{-- <div class="col-sm-6">
 				<h5>Správne odpovede</h5>
-			</div> --}}
-		</div>
+			</div>
+		</div> --}}
 
 		<div class="row">
-			@foreach ($exam->questions as $qt)
-				<div class="col">
+			@foreach ($exam->questionsWithCorrectAnswers as $qt)
+				<div class="col-sm-12">
 					<div class="card">
 						<div class="card-body">
-							<h5 class="card-title">{{ $qtTypes[$qt->type] }}</h5>
-							<p class="card-text">{{ $qt->question }}</p>
-							<a href="{{ route('teacher.questions.edit', [$exam, $qt]) }}" class="btn btn-primary mx-1">Upraviť</a>
+							@if ($qt->type == 'select_answer')
+								<h5 class="card-title">{{ $qt->questionDecoded->question }}</h5>
+								<p class="card-text">{{ $qtTypes[$qt->type] . ' za ' . $qt->points . ' b.' }}</p>
+								<p class="card-text">Možnosti: {{ $qt->getSelectOptionsStr() }}</p>
+							@elseif ($qt->type == 'pair_answer')
+								<h5 class="card-title">{{ $qt->questionDecoded->question }}</h5>
+								<p class="card-text">{{ $qtTypes[$qt->type] . ' za ' . $qt->points . ' b.' }}</p>
+								<p class="card-text">Ľavá strana: {{ $qt->getLeftsideOptionsStr() }}</p>
+								<p class="card-text">Pravá strana: {{ $qt->getRightsideOptionsStr() }}</p>
+							@else
+								<h5 class="card-title">{{ $qt->questionDecoded->question }}</h5>
+								<p class="card-text">{{ $qtTypes[$qt->type] . ' za ' . $qt->points . ' b.' }}</p>
+							@endif
+							@if ($qt->type != 'draw_answer' && $qt->type != 'math_answer')
+								<a href="{{ route('teacher.questions.answers.create', [$exam, $qt]) }}" class="btn btn-primary mx-1">
+									Pridať odpoveď
+								</a>
+							@endif
+							<a href="{{ route('teacher.questions.edit', [$exam, $qt]) }}" class="btn btn-secondary mx-1">Upraviť</a>
 							<form action="{{ route('teacher.questions.edit', [$exam, $qt]) }}" method="POST" class="d-inline-block mx-1">
 								@csrf
 								@method('DELETE')
@@ -49,12 +67,13 @@
 						</div>
 					</div>
 				</div>
+				
 				@foreach ($qt->correctAnswers as $ans)
 					<div class="col-sm-6">
 						<div class="card">
 							<div class="card-body">
-								<h5 class="card-title">{{ $ans->points }}</h5>
-								<p class="card-text">{{ $ans->answer }}</p>
+								<h5 class="card-title">{{ $ans->answerHuman }}</h5>
+								<p class="card-text">Počet bodov: {{ $ans->points }}</p>
 								{{-- <a href="{{ route('teacher.questions.edit', [$exam, $qt]) }}" class="btn btn-primary mx-1">Upraviť</a>
 								<form action="{{ route('teacher.questions.edit', [$exam, $qt]) }}" method="POST" class="d-inline-block mx-1">
 									@csrf

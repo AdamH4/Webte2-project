@@ -10,6 +10,7 @@
  <link href="{{ asset('frontend/css/app.css') }}" rel="stylesheet">
 
  {{-- <title>Administrácia učiteľa</title> --}}
+@livewireStyles
  @yield('head')
  </head>
  <body class="c-app">
@@ -46,6 +47,7 @@
  <!-- Popper.js first, then CoreUI JS -->
  <script src="https://unpkg.com/@popperjs/core@2"></script>
  <script src="https://unpkg.com/@coreui/coreui/dist/js/coreui.min.js"></script>
+@livewireScripts
  @yield('bottom-scripts')
  </body>
 </html>

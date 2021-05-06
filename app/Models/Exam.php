@@ -24,13 +24,31 @@ class Exam extends Model
         'end' => 'datetime:j.n.Y H:i',
     ];
 
+    //------------------------------------------- Scopes --------------------------------------------
+
+    /**
+     * Scope a query to only include Exam Code.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeByExamCode($query, $examCode)
+    {
+        return $query->where('code', $examCode);
+    }
+
     public function creator()
     {
-    	return $this->belongsTo(User::class, 'creator_id');
+        return $this->belongsTo(User::class, 'creator_id');
     }
 
     public function questions()
     {
-    	return $this->hasMany(Question::class);
+        return $this->hasMany(Question::class);
+    }
+
+    public function questionsWithCorrectAnswers()
+    {
+        return $this->hasMany(Question::class)->with('correctAnswers');
     }
 }

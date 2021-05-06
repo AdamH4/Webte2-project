@@ -6,6 +6,7 @@
         <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        @livewireStyles
         @yield ('title')
         {{-- <link rel="icon" href="{{ asset('kobera_logo.jpg') }}" type="image/gif" sizes="16x16"> --}}
         {{-- <script>
@@ -18,31 +19,26 @@
         <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
         <link href="{{ asset('vendor/simple-line-icons/css/simple-line-icons.css') }}" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <!-- Custom styles for this template -->
         <link href="{{ asset('frontend/css/app.css') }}" rel="stylesheet">
         @yield ('head')
   </head>
   <body>
+    @include('sweet::alert')
     <!-- Navigation -->
-    <form action="{{route('questions.submit')}}" method="POST">
-        @csrf
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <div class="wrapper-logo">
                     <a href="{{ route('home') }}"><img src="{{ asset('frontend/img/logo.svg') }}" alt="Examio" class="logo"></a>
                 </div>
-                <div class="timer__wrapper">
-                    <img src="{{ asset('frontend/img/clock.svg')}}" alt="Clock">
-                    <b>00:00:00</b>
-                </div>
-                <button type="submit" class="btn btn-login" href="{{ route('questions.submit') }}">Odoslat test</button>
+                @yield('header')
             </div>
         </nav>
 
+      </form>
     @yield('content')
 
-    </form>
 
     <!-- Footer -->
     <footer class="footer bg-light">
@@ -62,6 +58,7 @@
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('frontend/js/app.js') }}"></script>
+    @livewireScripts
     @yield ('bottom-script')
 </body>
 </html>
