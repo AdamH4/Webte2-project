@@ -1,4 +1,5 @@
 require("./bootstrap");
+require("../../node_modules/sweetalert");
 // require('painterro');
 
 //-----------------------Imports----------------------------------------------------------

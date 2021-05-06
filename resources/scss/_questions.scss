@@ -42,37 +42,33 @@
         background-color: #eee;
     }
     &__select > label {
-        padding: 0 20px 0 0;
+        padding: 0 20px 0 15px;
         cursor: pointer;
     }
 }
 
-.radio__button {
+@mixin checkbox-layout($color) {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: $color;
+    content: "";
+    display: inline-block;
+    visibility: visible;
+    margin-right: 0.5rem;
+}
+
+.checkbox__question {
     cursor: pointer;
 
     &::after {
-        width: 15px;
-        height: 15px;
-        border-radius: 15px;
-        top: -2px;
-        left: -1px;
-        position: relative;
-        background-color: $formText;
-        content: "";
-        display: inline-block;
-        visibility: visible;
+        @include checkbox-layout($formText);
     }
     &:checked:after {
-        width: 15px;
-        height: 15px;
-        border-radius: 15px;
-        top: -2px;
-        left: -1px;
-        position: relative;
-        background-color: $secondary;
-        content: "";
-        display: inline-block;
-        visibility: visible;
+        @include checkbox-layout($secondary);
         border: 2px solid $formText;
     }
 }
