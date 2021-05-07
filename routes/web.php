@@ -45,6 +45,8 @@ Route::get('/teacher/exams/{exam}/edit', [ExamController::class, 'edit'])->name(
 Route::put('/teacher/exams/{exam}/edit', [ExamController::class, 'update'])->middleware('auth');
 Route::delete('/teacher/exams/{exam}', [ExamController::class, 'destroy'])->middleware('auth');
 
+Route::get('/teacher/exams-finished', [ExamController::class, 'indexFinished'])->name('teacher.examsFinished')->middleware('auth');
+
 Route::get('/teacher/exams/{exam}/questions/create', [QuestionController::class, 'create'])
 	->name('teacher.questions.create')->middleware('auth');
 Route::post('/teacher/exams/{exam}/questions/create', [QuestionController::class, 'store'])->middleware('auth');
