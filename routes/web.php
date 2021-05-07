@@ -5,6 +5,7 @@ use App\Http\Controllers\ExamController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,7 +46,11 @@ Route::get('/teacher/exams/{exam}/edit', [ExamController::class, 'edit'])->name(
 Route::put('/teacher/exams/{exam}/edit', [ExamController::class, 'update'])->middleware('auth');
 Route::delete('/teacher/exams/{exam}', [ExamController::class, 'destroy'])->middleware('auth');
 
-Route::get('/teacher/exams-finished', [ExamController::class, 'indexFinished'])->name('teacher.examsFinished')->middleware('auth');
+Route::get('/teacher/exams-reviews', [ReviewController::class, 'index'])->name('teacher.exams_reviews')->middleware('auth');
+Route::get('/teacher/exams-reviews/{exam}', [ReviewController::class, 'showExam'])->name('teacher.exams_reviews.show_exam')
+	->middleware('auth');
+Route::get('/teacher/exams-reviews/{exam}/{student}', [ReviewController::class, 'showStudent'])->name('teacher.exams_reviews.show_student')
+	->middleware('auth');
 
 Route::get('/teacher/exams/{exam}/questions/create', [QuestionController::class, 'create'])
 	->name('teacher.questions.create')->middleware('auth');

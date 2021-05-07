@@ -96,14 +96,4 @@ class ExamController extends Controller
 
 		return redirect()->route('teacher.exams');
 	}
-
-	public function indexFinished()
-	{
-		$exams = auth()->user()->examsFinished;
-		//set status? ci netreba?
-
-		return view('teacher.exams.index-finished', [
-			'exams' => $exams
-		]);
-	}
 }
