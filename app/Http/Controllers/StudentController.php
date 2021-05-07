@@ -6,6 +6,7 @@ use App\Events\ExamEvent;
 use App\Models\Student;
 use App\Models\Exam;
 use App\Http\Requests\LoginTestRequest;
+use App\Services\ExamSubmissionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -30,7 +31,7 @@ class StudentController extends Controller
             return redirect()->route('home');
         }
 
-        // [Best practise] vzdy pouzit helper metody ked sa da, 
+        // [Best practise] vzdy pouzit helper metody ked sa da,
         // prihlasujem studenta na guard in-exam
         auth()->guard('in-exam')->login($studentInExam);
 
@@ -76,6 +77,9 @@ class StudentController extends Controller
         $this->changeExamStatus(Student::DONE);
 
         //TODO: Tu spravit service na odoslanie testu z pohladu studenta
+        $submittedAnswers = $request->request->all()['answers'];
+
+        (new ExamSubmissionService())->storeAnswers($submittedAnswers);
 
         $this->logoutFromExam($request);
 
@@ -100,5 +104,17 @@ class StudentController extends Controller
         auth('in-exam')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+    }
+
+    public function submitExam(Request $request) {
+        $examCode = '3769170905450';
+        $submittedAnswers = $request->request->all();
+
+//        $studentInExam = Student::byExamCode($examCode)->byAis($request['ais_id'])->first();
+
+//        dd(auth()->guard('in-exam'));
+
+//        $ans->question()->associate($qt);
+//        $ans->author()->associate();
     }
 }
