@@ -12,7 +12,7 @@
 
 			<p>{{ $question }}</p>
 
-			<p>{{ $answers->where('question_id', $question->id) }}</p>
+			<p>{{ $answers->firsrWhere('question_id', $question->id) }}</p>
 
 		@endforeach
 
