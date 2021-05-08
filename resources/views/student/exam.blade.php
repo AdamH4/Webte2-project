@@ -41,9 +41,9 @@
                                             @case("math_answer")
                                                 @include("components.questions.math-answer")
                                                 @break
-                                            {{-- @case("pair_answer")
+                                            @case("pair_answer")
                                                 @include("components.questions.pair-answer")
-                                                @break --}}
+                                                @break
                                             @case("select_answer")
                                                 @include("components.questions.select-answer")
                                                 @break

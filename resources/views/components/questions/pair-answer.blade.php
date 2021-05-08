@@ -13,12 +13,12 @@
             <li> jsand jasnd ajsnd</li>
             <li> jsand jasnd ajsnd</li>
         </ul>
-    <div>
+    </div>
     <div>
         <ul class="second__group">
             <li> jsand jasnd ajsnd</li>
             <li> jsand jasnd ajsnd</li>
             <li> jsand jasnd ajsnd</li>
         </ul>
-    <div>
+    </div>
 </div>
