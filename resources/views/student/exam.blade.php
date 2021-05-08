@@ -130,15 +130,33 @@
     const timerElement = document.getElementById("timer")
     const examFormElement = document.getElementById("examForm")
     const examFormButton = document.getElementById("examFormButton")
-    const testDuration = 10 // tu pride z PHP dlzka testu v [sec]
+    const exam = @json($exam);
+    console.log(exam)
+    let testDuration = Math.round(Math.abs(((new Date(exam.end)).getTime() / 1e3) - ((new Date()).getTime() / 1e3)))
 
     const numberToStringWithTwoChars= (number) => {
         return ("0" + number).slice(-2)
     }
 
+    //filter specified type of questions
+    const filterQuestionsByType = (questions, types) => {
+        let filter = {}
+        questions.forEach(question => {
+            if(types.includes(question.type)){
+                if(Array.isArray(filter[question.type])){
+                    filter[question.type].push(question)
+                }else{
+                    filter[question.type] = [question]
+                }
+            }
+        })
+        return filter
+    }
+    const filteredQuestions = filterQuestionsByType(exam.questions, ["draw_answer", "math_answer"])
+    console.log(filteredQuestions)
 
     // make nice time string from seconds
-    const parseTime = (seconds) => {
+    const timeToHourString = (seconds) => {
         var hours = Math.floor((seconds % (60 * 60 * 24)) / (60 * 60))
         var minutes = Math.floor((seconds % (60 * 60)) / (60))
         var seconds = Math.floor(seconds % 60)
@@ -146,10 +164,10 @@
     }
 
     let durationLeft = testDuration
-    timerElement.innerHTML = parseTime(testDuration)
+    timerElement.innerHTML = timeToHourString(testDuration)
     const interval = setInterval(function() {
       durationLeft--
-      timerElement.innerHTML = parseTime(durationLeft)
+      timerElement.innerHTML = timeToHourString(durationLeft)
       if((durationLeft === testDuration * 0.1 || durationLeft <= 60)
         && timerElement.style.color !== "rgb(239, 71, 96)"){
           timerElement.style.color = "#ef4760"
@@ -162,27 +180,33 @@
       }
     }, 1000);
 
-    const painterro = window.Painterro({
-        id: "drawingCanvas",
-        hiddenTools: ['close', 'rotate', 'crop', 'zoomin', 'zoomout', 'resize', 'open'],
-        defaultTool: 'brush',
-        onChange: (image) => {
-            const input = document.getElementById("painteroInputId")
-            input.value = image.image.asDataURL()
-        }
+    filteredQuestions.draw_answer.forEach(question => {
+        const painterro = window.Painterro({
+            id: `drawingCanvas${question.id}`,
+            hiddenTools: ['close', 'rotate', 'crop', 'zoomin', 'zoomout', 'resize', 'open'],
+            defaultTool: 'brush',
+            onChange: (image) => {
+                const input = document.getElementById(`painteroInput${question.id}`)
+                input.value = image.image.asDataURL()
+            }
 
+        })
+        painterro.show()
     })
-    painterro.show()
 
-    const mathLiveInput = document.getElementById("mathLiveInput")
-    const mathField = new window.MathLive.MathfieldElement({
-        virtualKeyboardMode: "manual",
-        virtualKeyboardLayout: "dvorak",
+
+    filteredQuestions.math_answer.forEach(question => {
+        const mathLiveInput = document.getElementById(`mathLiveInput${question.id}`)
+        const mathField = new window.MathLive.MathfieldElement({
+            virtualKeyboardMode: "manual",
+            virtualKeyboardLayout: "dvorak",
+        })
+        mathField.addEventListener("input", () => {
+            mathLiveInput.value = mathField.value
+        })
+        document.getElementById(`mathLive${question.id}`).appendChild(mathField)
     })
-    mathField.addEventListener("input", () => {
-        mathLiveInput.value = mathField.value
-    })
-    document.getElementById("mathLive").appendChild(mathField)
+
 
 
      // -------------------------- Listeners -----------------------------------------
