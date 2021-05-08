@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Student;
+use function GuzzleHttp\Promise\all;
 use function Symfony\Component\Translation\t;
 
 class ExamSubmissionService
@@ -14,7 +15,7 @@ class ExamSubmissionService
     public function storeAnswers($submittedAnswers)
     {
         // TODO : replace with dynamic questions id's
-        $tmpQuestionIds = array(81, 2, 1, 17, 19);
+        $tmpQuestionIds = array(81, 2, 83, 17, 19);
 
         foreach ($submittedAnswers as $questionType => $submittedAnswer) {
             switch ($questionType) {
@@ -44,18 +45,17 @@ class ExamSubmissionService
         $answer = $this->createAnswer($questionId);
 
         $questionObject = Question::where('id', $answer->question_id)->first();
+        $allOptions = json_decode($questionObject->question, true)['options'];
 
         if (is_null($questionObject)) {
             return;
         }
 
-        $allOptions = json_decode($questionObject->question, true)['options'];
-
         foreach ($submittedAnswer['id'] as $position => $selectedOption) {
             // find option key by value of selected option
             $isFoundKey = array_search($selectedOption, $allOptions);
 
-            // array search returns false if not successful, if false
+            // array search returns false if not successful
             if (! $isFoundKey) {
                 continue;
             }
@@ -65,40 +65,12 @@ class ExamSubmissionService
 
         $answer->answer = json_encode($selectedOptions);
 
-        $this->autoGradeAnswerForQuestionTypeSelect($answer, $questionId);
+        (new AutoGradeService())->autoGradeAnswerForQuestionTypeSelect($answer, $questionId, count($allOptions));
 
         $answer->save();
-//        dd($answer);
     }
 
-    private function autoGradeAnswerForQuestionTypeSelect($answer, $questionId)
-    {
-        $correctAnswer = Answer::where('question_id', $questionId)->where('authorable_type', 'App\Models\User')->first();
 
-        if (is_null($correctAnswer)) {
-            return;
-        }
-
-        $correctOptions = json_decode($correctAnswer->answer, true);
-
-        $submittedOptions = json_decode($answer->answer, true);
-
-        $maxPoints = $correctAnswer->points;
-        $partialPointsPerQuestion = $maxPoints / count($correctOptions);
-
-        for ($index = 0; $index < count($submittedOptions); $index++) {
-            foreach ($submittedOptions[$index] as $answerKey => $option) {
-                if (key_exists($answerKey, $correctOptions) && $this->valuesMatch($option, $correctOptions[$answerKey])) {
-                    $answer->points += $partialPointsPerQuestion;
-                }
-            }
-        }
-    }
-
-    private function valuesMatch($selected, $correct)
-    {
-        return $selected == $correct;
-    }
 
     private function storeAnswerForQuestionTypeMath($questionId, $submittedAnswer)
     {
@@ -107,7 +79,7 @@ class ExamSubmissionService
         $answer->answer = $submittedAnswer['id'];
 
         $answer->save();
-//        dd($answer);
+
     }
 
     private function storeAnswerForQuestionTypeDraw($questionId, $submittedAnswer)
@@ -117,7 +89,6 @@ class ExamSubmissionService
         $answer->answer = $submittedAnswer['id'];
 
         $answer->save();
-//        dd($answer);
     }
 
     private function storeAnswerForQuestionTypeShort($questionId, $submittedAnswer)
@@ -125,36 +96,39 @@ class ExamSubmissionService
         $answer = $this->createAnswer($questionId);
         $answer->answer = $submittedAnswer['id'];
 
-        $this->autoGradeAnswerForQuestionTypeShort($answer, $questionId);
+        (new AutoGradeService())->autoGradeAnswerForQuestionTypeShort($answer, $questionId);
 
         $answer->save();
     }
 
     private function storeAnswerForQuestionTypePair($questionId, $submittedAnswer)
     {
-//        $answer = $this->createAnswer($questionId);
-//
-//        foreach ($submittedAnswer['id'] as $option => $value) {
-//
-//        }
-//        dd($submittedAnswer);
-    }
+        $answer = $this->createAnswer($questionId);
 
-    private function autoGradeAnswerForQuestionTypeShort($answer, $questionId)
-    {
-        $correctAnswers = Answer::where('question_id', $questionId)->where('authorable_type', 'App\Models\User')->first();
+        $question = Question::find($questionId);
+        $allOptions = json_decode($question->question, true)['options'];
 
-        if (is_null($correctAnswers)) {
-            return;
-        }
+        $allNumberOptions = $allOptions['left'];
+        $allLetterOptions = $allOptions['right'];
 
-        $allCorrectAlternatives = json_decode($correctAnswers->answer, true);
+        foreach ($submittedAnswer['id'] as $letterKey => $numberKey) {
+            if (key_exists($numberKey, $allNumberOptions) and  key_exists($letterKey, $allLetterOptions)) {
+                // get value by key from all number|letter options
+                $numberValue = $allNumberOptions[$numberKey];
+                $letterValue = $allLetterOptions[$letterKey];
 
-        foreach ($allCorrectAlternatives as $index => $correctAnswer) {
-            if ($answer->answer == $correctAnswer) {
-                $answer->points = $correctAnswers->points;
+                $selectedOptions[$numberKey] = array();
+
+                $selectedOptions[$numberKey]["left"] = $numberValue;
+                $selectedOptions[$numberKey]["right"] = $letterValue;
+                $selectedOptions[$numberKey]["rightKey"] = $letterKey;
             }
         }
+        $answer->answer = json_encode($selectedOptions);
+
+        (new AutoGradeService())->autoGradeAnswerForQuestionTypePair($answer, $questionId);
+
+        $answer->save();
     }
 
     private function createAnswer($questionId)

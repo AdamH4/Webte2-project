@@ -76,7 +76,6 @@ class StudentController extends Controller
 
         $this->changeExamStatus(Student::DONE);
 
-        //TODO: Tu spravit service na odoslanie testu z pohladu studenta
         $submittedAnswers = $request->request->all()['answers'];
 
         (new ExamSubmissionService())->storeAnswers($submittedAnswers);
