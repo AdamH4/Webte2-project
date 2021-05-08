@@ -6,14 +6,6 @@
                 <input class=" form__input" name="answers[pair][{{$question->id}}][{{$rightKey}}]" type="number">
             </div>
         @endforeach
-        {{-- <div class="answer">
-            <label>B</label>
-            <input class="form__input" name="answers[pair][{{$question->id}}][B]" type="number">
-        </div>
-        <div class="answer">
-            <label>C</label>
-            <input class="form__input" name="answers[pair][{{$question->id}}][C]" type="number">
-        </div> --}}
     </div>
     <div class="pair__options">
         <ul class="first__group">
