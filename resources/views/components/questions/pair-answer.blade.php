@@ -2,8 +2,9 @@
     <div class="pair__answers">
         @foreach ($question->question->options->right as $rightKey => $right)
             <div class="answer">
-                <label>{{$rightKey}}</label>
-                <input class=" form__input" name="answers[pair][{{$question->id}}][{{$rightKey}}]" type="number">
+                <span>{{$rightKey}}</span>
+                <input class="form-control form__input" name="answers[pair][{{$question->id}}][{{$rightKey}}]" type="number">
+                <div>sadk masd maskd</div>
             </div>
         @endforeach
     </div>

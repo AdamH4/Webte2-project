@@ -10298,12 +10298,15 @@ footer.footer {
 }
 .pair__answers > .answer {
   padding: 0.5rem 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
-.pair__answers > .answer > label,
+.pair__answers > .answer > span,
 .pair__answers > .answer input {
   display: inline-block;
 }
-.pair__answers > .answer > label {
+.pair__answers > .answer > span {
   padding: 1rem;
   margin: 0;
   color: #ef476f;
@@ -10325,10 +10328,11 @@ footer.footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .first__group {
-  padding-top: 3rem;
+  padding-top: 1rem;
   list-style-type: upper-alpha;
   -webkit-padding-start: 35px;
           padding-inline-start: 35px;
@@ -10339,7 +10343,7 @@ footer.footer {
 }
 
 .second__group {
-  padding-top: 3rem;
+  padding-top: 1rem;
   list-style-type: decimal;
   -webkit-padding-start: 35px;
           padding-inline-start: 35px;
