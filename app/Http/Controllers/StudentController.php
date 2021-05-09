@@ -54,6 +54,11 @@ class StudentController extends Controller
 
         $questions = $exam->questions;
 
+        // decode all questions before passing to FE
+        foreach($questions as $question) {
+            $question->question = json_decode($question->question);
+        }
+
         return view('student.exam', [
             'exam' => $exam,
             'questions' => $questions,

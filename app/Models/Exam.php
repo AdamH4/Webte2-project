@@ -19,10 +19,11 @@ class Exam extends Model
         'end',
     ];
 
-    protected $casts = [
-        'start' => 'datetime:j.n.Y H:i',
-        'end' => 'datetime:j.n.Y H:i',
-    ];
+    // commended for now
+    // protected $casts = [
+    //     'start' => 'datetime:j.n.Y H:i',
+    //     'end' => 'datetime:j.n.Y H:i',
+    // ];
 
     //------------------------------------------- Scopes --------------------------------------------
 
