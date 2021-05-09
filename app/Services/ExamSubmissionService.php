@@ -8,34 +8,40 @@ use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Student;
 use function GuzzleHttp\Promise\all;
+use function PHPUnit\Framework\isEmpty;
 use function Symfony\Component\Translation\t;
 
 class ExamSubmissionService
 {
     public function storeAnswers($submittedAnswers)
     {
-        // TODO : replace with dynamic questions id's
-        $tmpQuestionIds = array(81, 2, 83, 17, 19);
-
-        foreach ($submittedAnswers as $questionType => $submittedAnswer) {
+        foreach ($submittedAnswers as $questionType => $questions) {
             switch ($questionType) {
                 case "select":
-                   $this->storeAnswerForQuestionTypeSelect($tmpQuestionIds[0], $submittedAnswer);
+                    foreach ($questions as $questionId => $submittedAnswer) {
+                        $this->storeAnswerForQuestionTypeSelect($questionId, $submittedAnswer);
+                    }
                     break;
                 case "short":
-                    $this->storeAnswerForQuestionTypeShort($tmpQuestionIds[1], $submittedAnswer);
+                    foreach ($questions as $questionId => $submittedAnswer) {
+                        $this->storeAnswerForQuestionTypeShort($questionId, $submittedAnswer);
+                    }
                     break;
                 case "pair":
-                    $this->storeAnswerForQuestionTypePair($tmpQuestionIds[2], $submittedAnswer);
+                    foreach ($questions as $questionId => $submittedAnswer) {
+                        $this->storeAnswerForQuestionTypePair($questionId, $submittedAnswer);
+                    }
                     break;
                 case "draw":
-                    $this->storeAnswerForQuestionTypeDraw($tmpQuestionIds[3], $submittedAnswer);
+                    foreach ($questions as $questionId => $submittedAnswer) {
+                        $this->storeAnswerForQuestionTypeDraw($questionId, $submittedAnswer);
+                    }
                     break;
                 case "math":
-                    $this->storeAnswerForQuestionTypeMath($tmpQuestionIds[4], $submittedAnswer);
+                    foreach ($questions as $questionId => $submittedAnswer) {
+                        $this->storeAnswerForQuestionTypeMath($questionId, $submittedAnswer);
+                    }
                     break;
-                default:
-                    // empty test
            }
         }
     }
@@ -44,6 +50,10 @@ class ExamSubmissionService
     {
         $answer = $this->createAnswer($questionId);
 
+        if ($this->handlesEmptyAnswer($answer, $submittedAnswer)) {
+            return;
+        }
+
         $questionObject = Question::where('id', $answer->question_id)->first();
         $allOptions = json_decode($questionObject->question, true)['options'];
 
@@ -51,7 +61,9 @@ class ExamSubmissionService
             return;
         }
 
-        foreach ($submittedAnswer['id'] as $position => $selectedOption) {
+        $selectedOptions = array();
+
+        foreach ($submittedAnswer as $position => $selectedOption) {
             // find option key by value of selected option
             $isFoundKey = array_search($selectedOption, $allOptions);
 
@@ -60,41 +72,49 @@ class ExamSubmissionService
                 continue;
             }
 
-            $selectedOptions[$position] = array($isFoundKey => $selectedOption);
+            $selectedOptions[$isFoundKey] = $selectedOption;
         }
 
         $answer->answer = json_encode($selectedOptions);
 
-        (new AutoGradeService())->autoGradeAnswerForQuestionTypeSelect($answer, $questionId, count($allOptions));
+        (new AutoGradeService())->autoGradeAnswerForQuestionTypeSelect($answer, $questionId);
 
         $answer->save();
     }
-
-
 
     private function storeAnswerForQuestionTypeMath($questionId, $submittedAnswer)
     {
         $answer = $this->createAnswer($questionId);
 
-        $answer->answer = $submittedAnswer['id'];
+        if ($this->handlesEmptyAnswer($answer, $submittedAnswer)) {
+            return;
+        }
 
+        $answer->answer = $submittedAnswer;
         $answer->save();
-
     }
 
     private function storeAnswerForQuestionTypeDraw($questionId, $submittedAnswer)
     {
         $answer = $this->createAnswer($questionId);
 
-        $answer->answer = $submittedAnswer['id'];
+        if ($this->handlesEmptyAnswer($answer, $submittedAnswer)) {
+            return;
+        }
 
+        $answer->answer = $submittedAnswer;
         $answer->save();
     }
 
     private function storeAnswerForQuestionTypeShort($questionId, $submittedAnswer)
     {
         $answer = $this->createAnswer($questionId);
-        $answer->answer = $submittedAnswer['id'];
+
+        if ($this->handlesEmptyAnswer($answer, $submittedAnswer)) {
+            return;
+        }
+
+        $answer->answer = $submittedAnswer;
 
         (new AutoGradeService())->autoGradeAnswerForQuestionTypeShort($answer, $questionId);
 
@@ -111,7 +131,13 @@ class ExamSubmissionService
         $allNumberOptions = $allOptions['left'];
         $allLetterOptions = $allOptions['right'];
 
-        foreach ($submittedAnswer['id'] as $letterKey => $numberKey) {
+        if ($this->handlesEmptyAnswerPair($answer, $submittedAnswer, count($allLetterOptions))) {
+            return;
+        }
+
+        $selectedOptions = array();
+
+        foreach ($submittedAnswer as $letterKey => $numberKey) {
             if (key_exists($numberKey, $allNumberOptions) and  key_exists($letterKey, $allLetterOptions)) {
                 // get value by key from all number|letter options
                 $numberValue = $allNumberOptions[$numberKey];
@@ -124,7 +150,8 @@ class ExamSubmissionService
                 $selectedOptions[$numberKey]["rightKey"] = $letterKey;
             }
         }
-        $answer->answer = json_encode($selectedOptions);
+
+        $answer->answer = isEmpty($selectedOptions) ? json_encode($selectedOptions) : "";
 
         (new AutoGradeService())->autoGradeAnswerForQuestionTypePair($answer, $questionId);
 
@@ -139,6 +166,44 @@ class ExamSubmissionService
         $answer->points = 0;
 
         return $answer;
+    }
+
+    private function handlesEmptyAnswer($answer, $submittedAnswer)
+    {
+        if (is_null($submittedAnswer)) {
+            $answer->answer = "";
+            $answer->save();
+
+            return true;
+        }
+        return false;
+    }
+
+    private function handlesEmptyAnswerPair($answer, $submittedAnswer, $countAllOptions)
+    {
+        $countOfNullOptions = $this->getCountOfNullOptions($submittedAnswer);
+
+        // all options have null value -> create empty answer
+        if ($countOfNullOptions == $countAllOptions) {
+            $answer->answer = "";
+            $answer->save();
+
+            return true;
+        }
+        return false;
+    }
+
+    private function getCountOfNullOptions($submittedAnswer)
+    {
+        $countOfNullOptions = 0;
+
+        foreach ($submittedAnswer as $letterKey => $numberKey) {
+            if(is_null($numberKey)) {
+                $countOfNullOptions++;
+            }
+        }
+
+        return $countOfNullOptions;
     }
 
 }
