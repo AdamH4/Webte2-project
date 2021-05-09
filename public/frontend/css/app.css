@@ -10356,3 +10356,16 @@ footer.footer {
   color: #fff;
   background: #ef476f !important;
 }
+
+.badge-left {
+  background: #b10000;
+  color: #fff;
+}
+.badge-writing {
+  background: #ff9900;
+  color: #fff;
+}
+.badge-done {
+  background: #00b309;
+  color: #fff;
+}

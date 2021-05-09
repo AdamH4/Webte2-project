@@ -37,9 +37,16 @@ class Exam extends Model
         return $query->where('code', $examCode);
     }
 
+    //------------------------------------------- Realtionships --------------------------------------------
+
     public function creator()
     {
         return $this->belongsTo(User::class, 'creator_id');
+    }
+
+    public function students()
+    {
+        return $this->hasMany(Student::class, 'exam_code', 'code');
     }
 
     public function questions()

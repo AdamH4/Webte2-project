@@ -49,6 +49,7 @@
  <!-- Popper.js first, then CoreUI JS -->
  <script src="https://unpkg.com/@popperjs/core@2"></script>
  <script src="https://unpkg.com/@coreui/coreui/dist/js/coreui.min.js"></script>
+ <script src="{{ asset('frontend/js/app.js') }}"></script>
 @livewireScripts
  @yield('bottom-scripts')
  </body>

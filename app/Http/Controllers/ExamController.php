@@ -108,6 +108,7 @@ class ExamController extends Controller
 
 	public function showActive(Exam $exam)
 	{
+		$exam->load('students');
 
 		return view('teacher.exams.active.show', [
 			'exam' => $exam,
