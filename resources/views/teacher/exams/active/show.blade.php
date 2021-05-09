@@ -51,9 +51,8 @@ window.Echo.private(`Exam.${exam.code}`).listen(".Exam", (data) => {
 
 //----------------------------Functions---------------------------------------------
 function renderStudents(students) {
-	console.log(students)
-	studentTableElement.innerHTML = '';
 	let content = '';
+	studentTableElement.innerHTML = '';
 	students.forEach((student) => {
 		content += `
 		<tr>
