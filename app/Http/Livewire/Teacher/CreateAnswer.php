@@ -8,16 +8,17 @@ use App\Models\Question;
 
 class CreateAnswer extends Component
 {
-	public $exam;
-	public $qt;
-	public $shortAnsOpts = [''];
-	public $pairAnsOpts = ['left' => [], 'right' => []];
+    public $exam;
+    public $qt;
+    public $shortAnsOpts = [''];
+    public $pairAnsOpts = ['left' => [], 'right' => []];
     public $freeRights = [];
     public $allRights = [];
     public $allLefts = [];
     public $formLefts = [];
+    protected $listeners = ['checkFrees'];
 
-	public function mount($exam, $qt)
+    public function mount($exam, $qt)
     {
         $this->exam = $exam;
         $this->qt = $qt;
@@ -32,12 +33,21 @@ class CreateAnswer extends Component
         }
     }
 
+    public function updated($name, $value)
+    {
+        $this->emitSelf('checkFrees');
+    }
+
+    public function reload()
+    {
+    }
+
     public function render()
     {
         // dd($this->allLefts);
         return view('livewire.teacher.create-answer', [
-        	'exam' => $this->exam,
-        	'qt' => $this->qt,
+            'exam' => $this->exam,
+            'qt' => $this->qt,
             'shortAnsOpts' => $this->shortAnsOpts,
             'freeRights' => $this->freeRights,
             'allRights' => $this->allRights,
@@ -48,7 +58,7 @@ class CreateAnswer extends Component
 
     public function addShortAnsOpt()
     {
-    	$this->shortAnsOpts[] = '';
+        $this->shortAnsOpts[] = '';
     }
 
     public function checkFrees()
@@ -60,6 +70,6 @@ class CreateAnswer extends Component
             }
         }
 
-        // dd($this->freeRights, $this->formLefts, $this->allRights, $this->allLefts);
+        //dd($this->freeRights, $this->formLefts, $this->allRights, $this->allLefts);
     }
 }

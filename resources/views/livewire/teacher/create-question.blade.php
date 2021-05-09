@@ -57,7 +57,8 @@
 				            <label for="pair_left">
 				            	Možnosť <strong>{{ $key }}</strong>
 				            </label>
-				            <input class="form-control" name="pair_left[]" type="text" wire:model="pairAnsOpts.left.{{ $key }}">
+							<input class="form-control" name="pair_left[]" type="text" wire:model="pairAnsOpts.left.{{ $key }}">
+							<input name="pair_left_ind[]" type="hidden" value="{{ $key }}">
 				        </div>
 			        @endforeach
 	    		</div>
@@ -68,7 +69,8 @@
 				            <label for="pair_right">
 				            	Možnosť <strong>{{ $key }}</strong>
 				            </label>
-				            <input class="form-control" name="pair_right[]" type="text" wire:model="pairAnsOpts.right.{{ $key }}">
+							<input class="form-control" name="pair_right[]" type="text" wire:model="pairAnsOpts.right.{{ $key }}">
+							<input name="pair_right_ind[]" type="hidden" value="{{ $key }}">
 				        </div>
 			        @endforeach
 	    		</div>

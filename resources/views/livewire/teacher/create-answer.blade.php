@@ -32,7 +32,6 @@
 			@endforeach
 
 		@elseif ($qt->type == 'pair_answer')
-
 			<div class="row">
 				<div class="col">
 					@foreach ($allLefts as $key => $left)
@@ -44,15 +43,15 @@
 								<div class="form-group">
 									<select class="form-control"
 										wire:model="formLefts.{{ $key }}"
-										wire:change="checkFrees"
+										{{-- wire:change="checkFrees" --}}
 										name="pair_left[{{ $key }}]"
 									>
 										<option value="">-</option>
 										@if (isset($formLefts[$key]) && $formLefts[$key] != null)
-											<option value="{{ $formLefts[$key] }}">{{ $formLefts[$key] }}</option>
+											<option value="{{ $formLefts[$key] }}" selected>{{ $formLefts[$key] }}</option>
 										@endif
 										@foreach ($freeRights as $frKey => $fr)
-											<option>{{ $frKey }}</option>
+											<option value="{{ $frKey }}">{{ $frKey }}</option>
 										@endforeach
 									</select>
 								</div>
