@@ -16,6 +16,7 @@ class CreateAnswer extends Component
     public $allRights = [];
     public $allLefts = [];
     public $formLefts = [];
+
     protected $listeners = ['checkFrees'];
 
     public function mount($exam, $qt)
@@ -36,10 +37,6 @@ class CreateAnswer extends Component
     public function updated($name, $value)
     {
         $this->emitSelf('checkFrees');
-    }
-
-    public function reload()
-    {
     }
 
     public function render()
