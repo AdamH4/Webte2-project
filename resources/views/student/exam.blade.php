@@ -22,81 +22,40 @@
                 <div class="row">
                     <div class="col-12 col-lg-10 mb-5">
                         <div class="questions__card">
+                            @foreach ($questions as $question)
                                 <div class="questions__section">
                                     <div class="question__text">
-                                        1. Vyberte na akej hodnote sa ustali prechodova charakteristika systemu
+                                        {{$question->question->question}}
                                     </div>
                                     <div class="question__answer-title">
                                         Odpoved:
                                     </div>
                                     <div class="question__points">
-                                        (1B)
+                                        ({{$question->points}}B)
                                     </div>
                                     <div class="question__answer">
-                                        @include('components.questions.select-answer')
+                                        @switch($question->type)
+                                            @case("draw_answer")
+                                                @include("components.questions.draw-answer")
+                                                @break
+                                            @case("math_answer")
+                                                @include("components.questions.math-answer")
+                                                @break
+                                            @case("pair_answer")
+                                                @include("components.questions.pair-answer")
+                                                @break
+                                            @case("select_answer")
+                                                @include("components.questions.select-answer")
+                                                @break
+                                            @case("short_answer")
+                                                @include("components.questions.short-answer")
+                                                @break
+                                            @default
+                                        @endswitch
                                     </div>
                                 </div>
                                 <hr class="question__delimeter">
-                                <div class="questions__section">
-                                    <div class="question__text">
-                                        2. S akym sklonom bude koncit aplitudova funkcia alebo aj moj zivot? :D Ziadne opustaci len nemam lorem ipsum generator package
-                                    </div>
-                                    <div class="question__answer-title">
-                                        Odpoved:
-                                    </div>
-                                    <div class="question__points">
-                                        (4B)
-                                    </div>
-                                    <div class="question__answer">
-                                        @include('components.questions.short-answer')
-                                    </div>
-                                </div>
-                                <hr class="question__delimeter">
-                                <div class="questions__section">
-                                    <div class="question__text">
-                                        3. Namalujte nam nieco prekrasne nech sa potesime ! <3
-                                    </div>
-                                    <div class="question__answer-title">
-                                        Odpoved:
-                                    </div>
-                                    <div class="question__points">
-                                        (2B)
-                                    </div>
-                                    <div class="question__answer">
-                                        @include("components.questions.draw-answer")
-                                    </div>
-                                </div>
-                                <hr class="question__delimeter">
-                                <div class="questions__section">
-                                    <div class="question__text">
-                                        4.Vypocitajme si spolu nieco
-                                    </div>
-                                    <div class="question__answer-title">
-                                        Odpoved:
-                                    </div>
-                                    <div class="question__points">
-                                        (1B)
-                                    </div>
-                                    <div class="question__answer">
-                                        @include("components.questions.math-answer")
-                                    </div>
-                                </div>
-                                <hr class="question__delimeter">
-                                <div class="questions__section">
-                                    <div class="question__text">
-                                        5. Spojte co sa vam paci a co nie :)
-                                    </div>
-                                    <div class="question__answer-title">
-                                        Odpoved:
-                                    </div>
-                                    <div class="question__points">
-                                        (1B)
-                                    </div>
-                                    <div class="question__answer">
-                                        @include("components.questions.pair-answer")
-                                    </div>
-                                </div>
-                            </form>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -111,14 +70,31 @@
     const timerElement = document.getElementById("timer")
     const examFormElement = document.getElementById("examForm")
     const examFormButton = document.getElementById("examFormButton")
-    const testDuration = 10 // tu pride z PHP dlzka testu v [sec]
+    const exam = @json($exam);
+    let testDuration = Math.round(Math.abs(((new Date(exam.end)).getTime() / 1e3) - ((new Date()).getTime() / 1e3)))
 
     const numberToStringWithTwoChars= (number) => {
         return ("0" + number).slice(-2)
     }
 
+    //filter specified type of questions
+    const filterQuestionsByType = (questions, types) => {
+        let filter = {}
+        questions.forEach(question => {
+            if(types.includes(question.type)){
+                if(Array.isArray(filter[question.type])){
+                    filter[question.type].push(question)
+                }else{
+                    filter[question.type] = [question]
+                }
+            }
+        })
+        return filter
+    }
+    const filteredQuestions = filterQuestionsByType(exam.questions, ["draw_answer", "math_answer"])
+
     // make nice time string from seconds
-    const parseTime = (seconds) => {
+    const timeToHourString = (seconds) => {
         var hours = Math.floor((seconds % (60 * 60 * 24)) / (60 * 60))
         var minutes = Math.floor((seconds % (60 * 60)) / (60))
         var seconds = Math.floor(seconds % 60)
@@ -126,10 +102,10 @@
     }
 
     let durationLeft = testDuration
-    timerElement.innerHTML = parseTime(testDuration)
+    timerElement.innerHTML = timeToHourString(testDuration)
     const interval = setInterval(function() {
       durationLeft--
-      timerElement.innerHTML = parseTime(durationLeft)
+      timerElement.innerHTML = timeToHourString(durationLeft)
       if((durationLeft === testDuration * 0.1 || durationLeft <= 60)
         && timerElement.style.color !== "rgb(239, 71, 96)"){
           timerElement.style.color = "#ef4760"
@@ -142,28 +118,33 @@
       }
     }, 1000);
 
-    const painterro = window.Painterro({
-        id: "drawingCanvas",
-        hiddenTools: ['close', 'rotate', 'crop', 'zoomin', 'zoomout', 'resize', 'open'],
-        defaultTool: 'brush',
-        onChange: (image) => {
-            const input = document.getElementById("painteroInputId")
-            input.value = image.image.asDataURL()
-        }
+    filteredQuestions.draw_answer.forEach(question => {
+        const painterro = window.Painterro({
+            id: `drawingCanvas${question.id}`,
+            hiddenTools: ['close', 'rotate', 'crop', 'zoomin', 'zoomout', 'resize', 'open'],
+            defaultTool: 'brush',
+            onChange: (image) => {
+                const input = document.getElementById(`painteroInput${question.id}`)
+                input.value = image.image.asDataURL()
+            }
 
+        })
+        painterro.show()
     })
-    painterro.show()
 
-    const mathLiveInput = document.getElementById("mathLiveInput")
-    const mathField = new window.MathLive.MathfieldElement({
-        virtualKeyboardMode: "manual",
-        virtualKeyboardLayout: "dvorak",
+
+    filteredQuestions.math_answer.forEach(question => {
+        const mathLiveInput = document.getElementById(`mathLiveInput${question.id}`)
+        const mathField = new window.MathLive.MathfieldElement({
+            virtualKeyboardMode: "manual",
+            virtualKeyboardLayout: "dvorak",
+        })
+        mathField.addEventListener("input", () => {
+            mathLiveInput.value = mathField.value
+        })
+        document.getElementById(`mathLive${question.id}`).appendChild(mathField)
     })
-    mathField.addEventListener("input", () => {
-        mathLiveInput.value = mathField.value
-        console.log(mathLiveInput.value)
-    })
-    document.getElementById("mathLive").appendChild(mathField)
+
 
 
      // -------------------------- Listeners -----------------------------------------
