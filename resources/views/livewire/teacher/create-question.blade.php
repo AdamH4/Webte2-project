@@ -55,8 +55,7 @@
 	    			@foreach ($pairAnsOpts['left'] as $key => $plao)
 				    	<div class="form-group">
 				            <label for="pair_left">
-				            	Možnosť
-				            	<input type="number" name="pair_left_ind[]" value="{{ $key + 1 }}" class="mx-1" style="width: 60px;">
+				            	Možnosť <strong>{{ $key }}</strong>
 				            </label>
 				            <input class="form-control" name="pair_left[]" type="text" wire:model="pairAnsOpts.left.{{ $key }}">
 				        </div>
@@ -67,8 +66,7 @@
 	    			@foreach ($pairAnsOpts['right'] as $key => $plao)
 				    	<div class="form-group">
 				            <label for="pair_right">
-				            	Možnosť
-				            	<input name="pair_right_ind[]" value="{{ chr(833 + $key) }}" class="mx-1" style="width: 60px;">
+				            	Možnosť <strong>{{ $key }}</strong>
 				            </label>
 				            <input class="form-control" name="pair_right[]" type="text" wire:model="pairAnsOpts.right.{{ $key }}">
 				        </div>

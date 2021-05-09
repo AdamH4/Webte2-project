@@ -12,7 +12,7 @@ class ExamController extends Controller
 
 	public function index()
 	{
-		$exams = auth()->user()->exams;
+		$exams = auth()->user()->examsPlanned;
 		//set status? ci netreba?
 
 		return view('teacher.exams.index', [
@@ -95,5 +95,22 @@ class ExamController extends Controller
 		}
 
 		return redirect()->route('teacher.exams');
+	}
+
+	public function indexActive()
+	{
+		$exams = auth()->user()->examsActive;
+
+		return view('teacher.exams.active.index', [
+			'exams' => $exams
+		]);
+	}
+
+	public function showActive(Exam $exam)
+	{
+
+		return view('teacher.exams.active.show', [
+			'exam' => $exam,
+		]);
 	}
 }
