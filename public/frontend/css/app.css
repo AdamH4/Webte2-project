@@ -10285,10 +10285,10 @@ footer.footer {
   border-radius: 10px;
 }
 
-#mathLive {
-  width: 100%;
-  border: 7px solid #efefef;
-  border-radius: 10px;
+.math__container {
+  border: 1px solid #cfd4da;
+  border-radius: 5px;
+  background-color: #fafafa;
 }
 
 .pair__answers {

@@ -1,7 +1,7 @@
 @extends ('layouts.teacher')
 
 @section ('head')
-<title>Zoznam testov - Examio</title>
+<title>Zoznam odpovedí - Examio</title>
 @endsection
 
 @section ('content')
@@ -22,7 +22,9 @@
                         <img src="https://www.example.com/images/dinosaur.jpg" alt="student's image">
                     @endif
                     @if($question->type == "math_answer")
-                        <div>Math</div>
+                        <div class="math__container">
+                            <div id="{{"mathLive" . $question->id}}"></div>
+                        </div>
                     @endif
                     @if($question->type == "select_answer")
                         {{-- {{dd(json_decode($question->question))}} --}}
@@ -54,6 +56,38 @@
 
 @endsection
 
-@section ('bottom-script')
+@section ('bottom-scripts')
+<script>
+    const exam = @json($exam);
+    const answers = @json($answers);
+
+    //filter specified type of questions
+    const filterQuestionsByType = (questions, types) => {
+        let filter = {}
+        questions.forEach(question => {
+            if(types.includes(question.type)){
+                if(Array.isArray(filter[question.type])){
+                    filter[question.type].push(question)
+                }else{
+                    filter[question.type] = [question]
+                }
+            }
+        })
+        return filter
+    }
+    const filteredQuestions = filterQuestionsByType(exam.questions, ["draw_answer", "math_answer"])
+    console.log(answers)
+
+    // render all math answers
+    filteredQuestions.math_answer.forEach(question => {
+        const mathLiveInput = document.getElementById(`mathLiveInput${question.id}`)
+        const mathField = new window.MathLive.MathfieldElement({
+            readOnly: true
+        })
+        mathField.value = "f(x) = y^2"
+        document.getElementById(`mathLive${question.id}`).appendChild(mathField)
+    })
+
+</script>
 
 @endsection

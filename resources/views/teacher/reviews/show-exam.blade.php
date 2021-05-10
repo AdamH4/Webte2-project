@@ -26,13 +26,9 @@
                                 <tr>
                                     <td>{{ $student->full_name }}</td>
                                     <td><code>{{ $student->ais_id }}</code></td>
-                                    @if($student->is_active == "writing")
-                                        <td><span class="badge badge-warning">Píše</span></td>
-                                    @endif
                                     @if($student->is_active == "left")
                                         <td><span class="badge badge-danger">Odišiel</span></td>
-                                    @endif
-                                    @if($student->is_active == "done")
+                                    @else
                                         <td><span class="badge badge-success">Odovzdal</span></td>
                                     @endif
                                     <td><a href="{{ route('teacher.exams_reviews.show_student', [$exam, $student]) }}">Odpovede</a></td>

@@ -89,8 +89,10 @@
     position: relative;
     @include border-container();
 }
-#mathLive {
-    @include border-container();
+.math__container {
+    border: 1px solid #cfd4da;
+    border-radius: 5px;
+    background-color: $formInput;
 }
 
 .pair__answers {
