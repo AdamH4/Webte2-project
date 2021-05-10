@@ -1955,17 +1955,13 @@ window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/d
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_3__.default({
   broadcaster: "pusher",
   key: "059867058",
-  wsHost: window.location.hostname,
+  wsHost: "0.0.0.0",
   wsPort: 6001,
+  disableStats: true,
   forceTLS: false,
-  disableStats: true
-}); //Test
-
-var aisID = 9210356;
-var examCode = 6345799445125;
-window.Echo["private"]("Exam.".concat(aisID, ".").concat(examCode)).listen(".Exam", function (e) {
-  console.log(e);
+  enabledTransports: ["ws", "wss"]
 });
+console.log(window.Echo);
 
 /***/ }),
 
@@ -61164,7 +61160,7 @@ runtime.setup(pusher_Pusher);
 /******/ 					__webpack_require__.m[moduleId] = moreModules[moduleId];
 /******/ 				}
 /******/ 			}
-/******/ 			if(runtime) var result = runtime(__webpack_require__);
+/******/ 			if(runtime) runtime(__webpack_require__);
 /******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
 /******/ 			for(;i < chunkIds.length; i++) {
 /******/ 				chunkId = chunkIds[i];
@@ -61173,7 +61169,7 @@ runtime.setup(pusher_Pusher);
 /******/ 				}
 /******/ 				installedChunks[chunkIds[i]] = 0;
 /******/ 			}
-/******/ 			return __webpack_require__.O(result);
+/******/ 			__webpack_require__.O();
 /******/ 		}
 /******/ 		
 /******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];

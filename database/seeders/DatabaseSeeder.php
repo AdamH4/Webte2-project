@@ -13,9 +13,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(5)->create();
-        \App\Models\Exam::factory(5)->create();
-        \App\Models\Question::factory(40)->create();
-        \App\Models\Student::factory(40)->create();
+        //TODO: Uncomment in production
+        $this->seedProductionData();
+
+        // //TODO:Comment in production
+        // \App\Models\User::factory(5)->create();
+        // \App\Models\Exam::factory(5)->create();
+        // \App\Models\Question::factory(40)->create();
+        // \App\Models\Student::factory(40)->create();
+    }
+
+    public function seedProductionData()
+    {
+        $this->call(ProductionSeeder::class);
     }
 }

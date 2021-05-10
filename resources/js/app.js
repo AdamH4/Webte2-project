@@ -18,15 +18,11 @@ window.Pusher = require("pusher-js");
 window.Echo = new Echo({
     broadcaster: "pusher",
     key: "059867058",
-    wsHost: window.location.hostname,
+    wsHost: "0.0.0.0",
     wsPort: 6001,
-    forceTLS: false,
     disableStats: true,
+    forceTLS: false,
+    enabledTransports: ["ws", "wss"],
 });
 
-//Test
-let aisID = 9210356;
-let examCode = 6345799445125;
-window.Echo.private(`Exam.${aisID}.${examCode}`).listen(".Exam", (e) => {
-    console.log(e);
-});
+console.log(window.Echo);

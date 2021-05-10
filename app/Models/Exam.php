@@ -25,6 +25,11 @@ class Exam extends Model
     //     'end' => 'datetime:j.n.Y H:i',
     // ];
 
+    protected $dates = [
+        'start',
+        'end'
+    ];
+
     //------------------------------------------- Scopes --------------------------------------------
 
     /**

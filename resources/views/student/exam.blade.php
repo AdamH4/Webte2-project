@@ -118,6 +118,7 @@
       }
     }, 1000);
 
+    if(filteredQuestions.draw_answer != undefined) {
     filteredQuestions.draw_answer.forEach(question => {
         const painterro = window.Painterro({
             id: `drawingCanvas${question.id}`,
@@ -131,8 +132,9 @@
         })
         painterro.show()
     })
+}
 
-
+if(filteredQuestions.draw_answer != undefined) {
     filteredQuestions.math_answer.forEach(question => {
         const mathLiveInput = document.getElementById(`mathLiveInput${question.id}`)
         const mathField = new window.MathLive.MathfieldElement({
@@ -144,11 +146,14 @@
         })
         document.getElementById(`mathLive${question.id}`).appendChild(mathField)
     })
+}
 
 
 
      // -------------------------- Listeners -----------------------------------------
-     examFormButton.addEventListener('click', () => { examFormElement.submit() });
+     examFormButton.addEventListener('click', () => { 
+        examFormElement.submit() 
+        console.log('lol') });
 
     //-------------------------------- Leave tab, page is not visible -------------------------
     document.addEventListener('visibilitychange', onVisibilityChange);
