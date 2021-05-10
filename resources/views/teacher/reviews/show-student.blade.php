@@ -19,25 +19,30 @@
                     <p><b>Zadana odpoved:</b></p>
                     @if($question->type == "draw_answer")
                         <div>Draw</div>
+                        <img src="https://www.example.com/images/dinosaur.jpg" alt="student's image">
                     @endif
                     @if($question->type == "math_answer")
                         <div>Math</div>
                     @endif
                     @if($question->type == "select_answer")
-                        <div>Select</div>
+                        {{-- {{dd(json_decode($question->question))}} --}}
+                        {{-- @foreach (json_decode($question->question)->question->options as $option )
+                            <input disabled type="checkbox" id="{{"select" . $question->id}}" name="answers[select][{{$question->id}}][]">
+                            <label for="{{"select" . $question->id}}">{{$option}}</label>
+                        @endforeach --}}
                     @endif
                     @if($question->type == "pair_answer")
                         <div>Pair</div>
                     @endif
                     @if($question->type == "short_answer")
-                        <div>Short</div>
+                        <textarea class="form-control" value="Short answer"></textarea>
                     @endif
                     <p>{{ $answers->firstWhere('question_id', $question->id) }}</p>
 
                 </div>
-                <div>
-                    <input class="form-control" max="2" min="0" type="number" value="2">
-                    <span>{{"/" . $question->points}}</span>
+                <div class="points__section">
+                    <input id="{{"points-" . $question->id}}" class="form-control" max="2" min="0" type="number" value="2">
+                    <label for="{{"points-" . $question->id}}">{{"/" . $question->points}}</label>
                 </div>
             </div>
 

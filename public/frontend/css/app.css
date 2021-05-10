@@ -10360,4 +10360,19 @@ footer.footer {
 .answer__review {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
+  grid-gap: 2rem;
+}
+.answer__review > * {
+  padding: 2rem 0;
+}
+
+.points__section {
+  display: flex;
+  align-items: stretch;
+}
+.points__section > input {
+  width: 4rem;
+}
+.points__section > label {
+  font-size: 1.7rem;
 }
