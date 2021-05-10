@@ -6,7 +6,7 @@
 
 @section ('content')
 
-	<div class="container">
+	{{-- <div class="container">
 
 		@foreach ($questions as $question)
             <div class="answer__review">
@@ -27,11 +27,20 @@
                         </div>
                     @endif
                     @if($question->type == "select_answer")
-                        {{-- {{dd(json_decode($question->question))}} --}}
-                        {{-- @foreach (json_decode($question->question)->question->options as $option )
-                            <input disabled type="checkbox" id="{{"select" . $question->id}}" name="answers[select][{{$question->id}}][]">
-                            <label for="{{"select" . $question->id}}">{{$option}}</label>
-                        @endforeach --}}
+                        <p>Select</p>
+                        <div class="text-center question__select">
+                            @foreach ($question->question->options as $optionKey => $option)
+                                <input type="hidden" name="answers[select][{{$question->id}}][{{$optionKey}}]" value="">
+                                <input
+                                    class="checkbox__question"
+                                    type="checkbox"
+                                    id="{{"select" . $question->id . "-" . $optionKey}}"
+                                    name="answers[select][{{$question->id}}][{{$optionKey}}]"
+                                    value="{{$option}}"
+                                >
+                                <label for="{{"select" . $question->id . "-" . $optionKey}}">{{$option}}</label>
+                            @endforeach
+                        </div>
                     @endif
                     @if($question->type == "pair_answer")
                         <div>Pair</div>
@@ -39,8 +48,6 @@
                     @if($question->type == "short_answer")
                         <textarea class="form-control" value="Short answer"></textarea>
                     @endif
-                    <p>{{ $answers->firstWhere('question_id', $question->id) }}</p>
-
                 </div>
                 <div class="points__section">
                     <input id="{{"points-" . $question->id}}" class="form-control" max="{{$question->points}}" min="0" type="number" value="2">
@@ -52,14 +59,97 @@
 
 		@endforeach
 
-	</div>
+	</div> --}}
 
+    <section class="questions">
+        <div class="container">
+            <form action="" method="POST" id="examForm">
+                @csrf
+                <div class="row">
+                    <div class="col-12 col-lg-10 mb-5">
+                        <div class="questions__card">
+                            @foreach ($questions as $question)
+                                <div class="questions__section">
+                                    <div class="question__text">
+                                        {{$question->question}}
+                                    </div>
+                                    <div class="question__answer-title">
+                                        Odpoved:
+                                    </div>
+                                    <div class="points__section">
+                                        <input id="{{"points-" . $question->id}}" class="form-control" max="{{$question->points}}" min="0" type="number" value="2">
+                                        <label for="{{"points-" . $question->id}}">{{"/" . $question->points}}</label>
+                                    </div>
+                                    <div class="question__answer">
+                                        @switch($question->type)
+                                            @case("draw_answer")
+                                                <div>Draw</div>
+                                                <img src="http://www.how-to-draw-funny-cartoons.com/image-files/sketching-people-4.jpg" alt="student's image">
+                                                @break
+                                            @case("math_answer")
+                                                <div class="math__container">
+                                                    <div id="{{"mathLive" . $question->id}}"></div>
+                                                </div>
+                                                @break
+                                            @case("pair_answer")
+                                                <p>Pair</p>
+                                                <div class="pair__answers">
+                                                    @foreach ($question->question->options->right as $rightKey => $right)
+                                                        <div class="answer">
+                                                            <span>{{$rightKey}}</span>
+                                                            <input class="form-control form__input" placeholder="Hnuuj" type="number">
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                                <div class="pair__options">
+                                                    <ul class="first__group">
+                                                        @foreach ($question->question->options->right as $rightOption )
+                                                            <li>{{$rightOption}}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                    <ul class="second__group">
+                                                        @foreach ($question->question->options->left as $left)
+                                                            <li>{{$left}}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                                @break
+                                            @case("select_answer")
+                                                <p>Select</p>
+                                                <div class="text-center question__select">
+                                                    @foreach ($question->question->options as $optionKey => $option)
+                                                        <input type="hidden" name="answers[select][{{$question->id}}][{{$optionKey}}]" value="">
+                                                        <input
+                                                            class="checkbox__question"
+                                                            type="checkbox"
+                                                            id="{{"select" . $question->id . "-" . $optionKey}}"
+                                                            name="answers[select][{{$question->id}}][{{$optionKey}}]"
+                                                            value="{{$option}}"
+                                                        >
+                                                        <label for="{{"select" . $question->id . "-" . $optionKey}}">{{$option}}</label>
+                                                    @endforeach
+                                                </div>
+                                                @break
+                                            @case("short_answer")
+                                                <textarea class="form-control form__input" placeholder="Necoooo" disabled ></textarea>
+                                                @break
+                                            @default
+                                        @endswitch
+                                    </div>
+                                </div>
+                                <hr class="question__delimeter">
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
 @endsection
 
 @section ('bottom-scripts')
 <script>
     const exam = @json($exam);
-    const answers = @json($answers);
 
     //filter specified type of questions
     const filterQuestionsByType = (questions, types) => {
@@ -76,7 +166,6 @@
         return filter
     }
     const filteredQuestions = filterQuestionsByType(exam.questions, ["draw_answer", "math_answer"])
-    console.log(answers)
 
     // render all math answers
     filteredQuestions.math_answer.forEach(question => {

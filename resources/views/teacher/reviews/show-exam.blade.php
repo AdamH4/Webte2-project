@@ -19,6 +19,7 @@
                                     <th>ID</th>
                                     <th>Status</th>
                                     <th>Odpovede</th>
+                                    <th>Export</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -32,6 +33,11 @@
                                         <td><span class="badge badge-success">Odovzdal</span></td>
                                     @endif
                                     <td><a href="{{ route('teacher.exams_reviews.show_student', [$exam, $student]) }}">Odpovede</a></td>
+                                    <td>
+                                        <a href="#">
+                                            <span class="badge badge-info">PDF</span>
+                                        </a>
+                                    </td>
                                 </tr>
                                 @empty
                                     <td colspan="5">Ešte nemáme žiadne záznamy o tomto teste</td>
