@@ -53,4 +53,21 @@ class User extends Authenticatable
     {
         return $this->morphMany(Answer::class, 'authorable');
     }
+
+    public function examsFinished()
+    {
+        return $this->hasMany(Exam::class, 'creator_id')->where('end', '<=', now()->format('Y-m-d H:i'))->orderByDesc('start')->with('questions');
+    }
+
+    public function examsActive()
+    {
+        return $this->hasMany(Exam::class, 'creator_id')->where('end', '>=', now()->format('Y-m-d H:i'))
+            ->where('start', '<=', now()->format('Y-m-d H:i'))->orderByDesc('start')->with('questions');
+    }
+
+    public function examsPlanned()
+    {
+        return $this->hasMany(Exam::class, 'creator_id')
+            ->where('start', '>=', now()->format('Y-m-d H:i'))->orderByDesc('start')->with('questions');
+    }
 }

@@ -7,12 +7,6 @@
 @section ('content')
 
 	<div class="container">
-		
-		<div class="row m-3">
-			<div class="col">
-				<a href="{{ route('teacher.exams.create') }}" class="btn btn-outline-primary col">Vytvoriť test</a>
-			</div>
-		</div>
 
 		<div class="row m-3">
 			<div class="col-lg-12">
@@ -31,7 +25,7 @@
 							<tbody>
 								@forelse ($exams as $exam)
 								<tr>
-									<td><a href="{{ route('teacher.exams.show', $exam) }}">{{ $exam->title }}</a></td>
+									<td><a href="{{ route('teacher.exams_reviews.show_exam', $exam) }}">{{ $exam->title }}</a></td>
 									<td><code>{{ $exam->code }}</code></td>
 									<td>{{ $exam->start->format('j.n.Y H:i') }}</td>
 									<td>{{ $exam->end->format('j.n.Y H:i') }}</td>
