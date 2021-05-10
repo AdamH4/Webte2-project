@@ -50,12 +50,12 @@ class ExamSubmissionService
     {
         $answer = $this->createAnswer($questionId);
 
-        if ($this->handlesEmptyAnswer($answer, $submittedAnswer)) {
-            return;
-        }
-
         $questionObject = Question::where('id', $answer->question_id)->first();
         $allOptions = json_decode($questionObject->question, true)['options'];
+
+        if ($this->handlesEmptyManyOptionsAnswer($answer, $submittedAnswer, count($allOptions))) {
+            return;
+        }
 
         if (is_null($questionObject)) {
             return;
@@ -131,7 +131,7 @@ class ExamSubmissionService
         $allNumberOptions = $allOptions['left'];
         $allLetterOptions = $allOptions['right'];
 
-        if ($this->handlesEmptyAnswerPair($answer, $submittedAnswer, count($allLetterOptions))) {
+        if ($this->handlesEmptyManyOptionsAnswer($answer, $submittedAnswer, count($allLetterOptions))) {
             return;
         }
 
@@ -179,7 +179,7 @@ class ExamSubmissionService
         return false;
     }
 
-    private function handlesEmptyAnswerPair($answer, $submittedAnswer, $countAllOptions)
+    private function handlesEmptyManyOptionsAnswer($answer, $submittedAnswer, $countAllOptions)
     {
         $countOfNullOptions = $this->getCountOfNullOptions($submittedAnswer);
 
