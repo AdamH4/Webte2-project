@@ -65,7 +65,7 @@ class AnswerController extends Controller
 
         }
         // end case - pair answer question
-        // dd($ans);
+        dd($ans);
 
     	$ans->save();
 

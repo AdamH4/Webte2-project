@@ -95,9 +95,9 @@ class StudentController extends Controller
             'is_active' => $status
         ]);
 
-        $exam = Exam::byExamCode($student->exam_code)->firstOrFail();
+        $exam = Exam::with('students')->byExamCode($student->exam_code)->firstOrFail();
 
-        ExamEvent::dispatch($exam, $student);
+        ExamEvent::dispatch($exam);
     }
 
     private function logoutFromExam($request)

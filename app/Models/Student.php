@@ -32,11 +32,16 @@ class Student extends Authenticatable
         self::DONE,
     ];
 
-    protected $appends = ['full_name'];
+    protected $appends = ['full_name', 'status'];
 
     public function getFullNameAttribute()
     {
         return $this->name . ' ' . $this->surname;
+    }
+
+    public function getStatusAttribute()
+    {
+        return __('students.constants.' . $this->is_active . '');
     }
 
     //------------------------------------------ Scopes ------------------------------------
@@ -91,5 +96,10 @@ class Student extends Authenticatable
     public function answers()
     {
         return $this->morphMany(Answer::class, 'authorable');
+    }
+
+    public function exam()
+    {
+        $this->belongsTo(Exam::class, 'code', 'exam_code');
     }
 }

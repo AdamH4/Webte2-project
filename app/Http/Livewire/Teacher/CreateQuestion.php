@@ -12,6 +12,8 @@ class CreateQuestion extends Component
 	public $qtType = 'short_answer';
 	public $shortAnsOpts = [];
 	public $pairAnsOpts = ['left' => [], 'right' => []];
+    public $nextLeft = 1;
+    public $nextRight = 833;
 
     public function mount($exam)
     {
@@ -35,6 +37,10 @@ class CreateQuestion extends Component
 
     public function addPairAnsOpt(String $side)
     {
-    	$this->pairAnsOpts[$side][] = '';
+        if ($side == 'left' && $this->nextLeft < 27) {
+            $this->pairAnsOpts[$side][$this->nextLeft++] = '';
+        } else if ($side == 'right' && $this->nextRight < 859) {
+            $this->pairAnsOpts[$side][chr($this->nextRight++)] = '';
+        }
     }
 }
