@@ -43,7 +43,7 @@
 
                 </div>
                 <div class="points__section">
-                    <input id="{{"points-" . $question->id}}" class="form-control" max="2" min="0" type="number" value="2">
+                    <input id="{{"points-" . $question->id}}" class="form-control" max="{{$question->points}}" min="0" type="number" value="2">
                     <label for="{{"points-" . $question->id}}">{{"/" . $question->points}}</label>
                 </div>
             </div>
