@@ -10221,6 +10221,11 @@ footer.footer {
 
 .question__text {
   grid-area: text;
+  font-size: larger;
+  font-weight: bold;
+}
+.question__text::first-letter {
+  text-transform: capitalize;
 }
 .question__answer-title {
   grid-area: answer-title;
@@ -10288,33 +10293,46 @@ footer.footer {
 
 .pair__answers {
   display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.pair__answers > .answer {
+  padding: 0.5rem 0;
+  display: flex;
   flex-direction: row;
   align-items: center;
 }
-.pair__answers > label,
-.pair__answers input {
-  display: block;
+.pair__answers > .answer > span,
+.pair__answers > .answer input {
+  display: inline-block;
 }
-.pair__answers > label {
+.pair__answers > .answer > span {
   padding: 1rem;
   margin: 0;
   color: #ef476f;
 }
-.pair__answers > input {
+.pair__answers > .answer > input {
   margin-top: 0 !important;
   color: #06d6a0 !important;
 }
-.pair__answers > input::-webkit-outer-spin-button,
-.pair__answers input::-webkit-inner-spin-button {
+.pair__answers > .answer > input::-webkit-outer-spin-button,
+.pair__answers > .answer input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-.pair__answers input[type=number] {
+.pair__answers > .answer input[type=number] {
   -moz-appearance: textfield;
 }
 
+.pair__options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
 .first__group {
-  padding-top: 3rem;
+  padding-top: 1rem;
   list-style-type: upper-alpha;
   -webkit-padding-start: 35px;
           padding-inline-start: 35px;
@@ -10325,6 +10343,7 @@ footer.footer {
 }
 
 .second__group {
+  padding-top: 1rem;
   list-style-type: decimal;
   -webkit-padding-start: 35px;
           padding-inline-start: 35px;
@@ -10375,4 +10394,17 @@ footer.footer {
 }
 .points__section > label {
   font-size: 1.7rem;
+}
+
+.badge-left {
+  background: #b10000;
+  color: #fff;
+}
+.badge-writing {
+  background: #ff9900;
+  color: #fff;
+}
+.badge-done {
+  background: #00b309;
+  color: #fff;
 }

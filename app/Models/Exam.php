@@ -19,10 +19,11 @@ class Exam extends Model
         'end',
     ];
 
-    protected $casts = [
-        'start' => 'datetime:j.n.Y H:i',
-        'end' => 'datetime:j.n.Y H:i',
-    ];
+    // commended for now
+    // protected $casts = [
+    //     'start' => 'datetime:j.n.Y H:i',
+    //     'end' => 'datetime:j.n.Y H:i',
+    // ];
 
     //------------------------------------------- Scopes --------------------------------------------
 
@@ -37,9 +38,16 @@ class Exam extends Model
         return $query->where('code', $examCode);
     }
 
+    //------------------------------------------- Realtionships --------------------------------------------
+
     public function creator()
     {
         return $this->belongsTo(User::class, 'creator_id');
+    }
+
+    public function students()
+    {
+        return $this->hasMany(Student::class, 'exam_code', 'code');
     }
 
     public function questions()

@@ -26,3 +26,19 @@
         font-size: 1.7rem;
     }
 }
+.badge {
+    &-left {
+        background: rgb(177, 0, 0);
+        color: #fff;
+    }
+
+    &-writing {
+        background: rgb(255, 153, 0);
+        color: #fff;
+    }
+
+    &-done {
+        background: rgb(0, 179, 9);
+        color: #fff;
+    }
+}

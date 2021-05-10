@@ -17,16 +17,14 @@ class ExamEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     protected $exam;
-    protected $student;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Exam $exam, Student $student)
+    public function __construct(Exam $exam)
     {
         $this->exam = $exam;
-        $this->student = $student;
     }
 
     /**
@@ -46,14 +44,14 @@ class ExamEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('Exam.' . $this->student->ais_id . '.' . $this->exam->code);
+        return new PrivateChannel('Exam.' . $this->exam->code);
     }
 
     public function broadcastWith()
     {
+
         return [
-            'student' => $this->student,
-            'exam' => $this->exam
+            'exam' => $this->exam,
         ];
     }
 }

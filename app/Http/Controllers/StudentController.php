@@ -30,7 +30,7 @@ class StudentController extends Controller
             return redirect()->route('home');
         }
 
-        // [Best practise] vzdy pouzit helper metody ked sa da, 
+        // [Best practise] vzdy pouzit helper metody ked sa da,
         // prihlasujem studenta na guard in-exam
         auth()->guard('in-exam')->login($studentInExam);
 
@@ -52,6 +52,11 @@ class StudentController extends Controller
         $this->changeExamStatus(Student::WRITING);
 
         $questions = $exam->questions;
+
+        // decode all questions before passing to FE
+        foreach($questions as $question) {
+            $question->question = json_decode($question->question);
+        }
 
         return view('student.exam', [
             'exam' => $exam,
@@ -90,9 +95,9 @@ class StudentController extends Controller
             'is_active' => $status
         ]);
 
-        $exam = Exam::byExamCode($student->exam_code)->firstOrFail();
+        $exam = Exam::with('students')->byExamCode($student->exam_code)->firstOrFail();
 
-        ExamEvent::dispatch($exam, $student);
+        ExamEvent::dispatch($exam);
     }
 
     private function logoutFromExam($request)

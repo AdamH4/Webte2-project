@@ -21,7 +21,8 @@
       <ul class="c-sidebar-nav">
         <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="index.html">
         {{-- <li class="c-sidebar-nav-title">Theme</li> --}}
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('teacher.exams') }}">Testy</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('teacher.exams') }}">Testy plánované</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('teacher.exams_active') }}">Testy aktívne</a></li>
         <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('teacher.exams_reviews') }}">Testy ukončené</a></li>
         <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="colors.html"> Colors</a></li>
         <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="typography.html">Typography</a></li>
@@ -48,6 +49,7 @@
  <!-- Popper.js first, then CoreUI JS -->
  <script src="https://unpkg.com/@popperjs/core@2"></script>
  <script src="https://unpkg.com/@coreui/coreui/dist/js/coreui.min.js"></script>
+ <script src="{{ asset('frontend/js/app.js') }}"></script>
 @livewireScripts
  @yield('bottom-scripts')
  </body>

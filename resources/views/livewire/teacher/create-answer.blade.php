@@ -32,8 +32,44 @@
 			@endforeach
 
 		@elseif ($qt->type == 'pair_answer')
-
 			<div class="row">
+				<div class="col">
+					@foreach ($allLefts as $key => $left)
+						<div class="row">
+							<div class="col">
+								<strong>{{ $key }})</strong> {{ $left }}
+							</div>
+							<div class="col">
+								<div class="form-group">
+									<select class="form-control"
+										wire:model="formLefts.{{ $key }}"
+										{{-- wire:change="checkFrees" --}}
+										name="pair_left[{{ $key }}]"
+									>
+										<option value="">-</option>
+										@if (isset($formLefts[$key]) && $formLefts[$key] != null)
+											<option value="{{ $formLefts[$key] }}" selected>{{ $formLefts[$key] }}</option>
+										@endif
+										@foreach ($freeRights as $frKey => $fr)
+											<option value="{{ $frKey }}">{{ $frKey }}</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+							<div class="col" wire:model="formLefts.{{ $key }}">
+								{{ isset($formLefts[$key]) ? $allRights[$formLefts[$key]] : '' }}
+							</div>
+						</div>
+			        @endforeach
+				</div>
+				<div class="col">
+					@foreach ($freeRights as $key => $option)
+						<p><strong>{{ $key }})</strong> {{ $option }}</p>
+					@endforeach
+				</div>
+			</div>
+
+			{{-- <div class="row">
 				<div class="col">
 					@foreach ($qt->questionDecoded->options->left as $key => $option)
 						<div class="form-group">
@@ -47,7 +83,7 @@
 						<p><strong>{{ $key }})</strong> {{ $option }}</p>
 					@endforeach
 				</div>
-			</div>
+			</div> --}}
 
 			{{-- @foreach ($qt->questionDecoded->options->left as $key => $option)
 				<h6>{{ $option }}</h6>
