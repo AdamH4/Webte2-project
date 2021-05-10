@@ -45,10 +45,14 @@
 										wire:model="formLefts.{{ $key }}"
 										{{-- wire:change="checkFrees" --}}
 										name="pair_left[{{ $key }}]"
+										@if (isset($formLefts[$key]) && $formLefts[$key] != null)
+											disabled
+										@endif
 									>
-										<option value="">-</option>
 										@if (isset($formLefts[$key]) && $formLefts[$key] != null)
 											<option value="{{ $formLefts[$key] }}" selected>{{ $formLefts[$key] }}</option>
+										@else
+											<option value="">-</option>
 										@endif
 										@foreach ($freeRights as $frKey => $fr)
 											<option value="{{ $frKey }}">{{ $frKey }}</option>
@@ -57,7 +61,11 @@
 								</div>
 							</div>
 							<div class="col" wire:model="formLefts.{{ $key }}">
-								{{ isset($formLefts[$key]) ? $allRights[$formLefts[$key]] : '' }}
+								@if (isset($formLefts[$key]))
+									{{ $allRights[$formLefts[$key]] }}
+									<button class="btn btn-danger ml-2" type="button" wire:click="removeFormLeft({{ $key }})">X</button>
+								{{-- {{ isset($formLefts[$key]) ? $allRights[$formLefts[$key]] : '' }} --}}
+								@endif
 							</div>
 						</div>
 			        @endforeach
