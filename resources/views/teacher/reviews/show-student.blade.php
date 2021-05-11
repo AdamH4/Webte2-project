@@ -10,7 +10,7 @@
         <div class="container">
             <form action="" method="POST" id="examForm">
                 @csrf
-                <div class="row">
+                <div class="row justify-content-center">
                     <div class="col-12 col-lg-10 mb-5">
                         <div class="questions__card">
                             @foreach ($questions as $question)
