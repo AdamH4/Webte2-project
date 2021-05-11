@@ -46,7 +46,7 @@
 										{{-- wire:change="checkFrees" --}}
 										name="pair_left[{{ $key }}]"
 										@if (isset($formLefts[$key]) && $formLefts[$key] != null)
-											disabled
+											readonly
 										@endif
 									>
 										@if (isset($formLefts[$key]) && $formLefts[$key] != null)
