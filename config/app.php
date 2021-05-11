@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'Europe\Bratislava',
+    'timezone' => 'Europe/Bratislava',
 
     /*
     |--------------------------------------------------------------------------
