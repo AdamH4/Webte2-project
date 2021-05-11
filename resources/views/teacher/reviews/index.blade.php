@@ -31,7 +31,7 @@
 									<td>{{ $exam->start }}</td>
 									<td>{{ $exam->end }}</td>
                                     <td>
-                                        <a href="#">
+                                        <a href="{{ route('teacher.exams_reviews.export_exam_results', $exam) }}">
                                             <span class="badge badge-info">CSV</span>
                                         </a>
                                     </td>
