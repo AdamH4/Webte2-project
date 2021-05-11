@@ -51,4 +51,8 @@ class ReviewController extends Controller
 			// 'answers' => $answers,
 		]);
 	}
+
+    public function updatePoints(Request $request) {
+        dd($request);
+    }
 }

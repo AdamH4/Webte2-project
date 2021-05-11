@@ -54,6 +54,8 @@ Route::get('/teacher/exams-reviews/{exam}', [ReviewController::class, 'showExam'
 	->middleware('auth');
 Route::get('/teacher/exams-reviews/{exam}/{student}', [ReviewController::class, 'showStudent'])->name('teacher.exams_reviews.show_student')
 	->middleware('auth');
+Route::post('/teacher/exams-reviews/{exam}/{student}', [ReviewController::class, 'updatePoints'])->name('teacher.exams_reviews.update_points')
+	->middleware('auth');
 
 Route::get('/teacher/exams/{exam}/questions/create', [QuestionController::class, 'create'])
 	->name('teacher.questions.create')->middleware('auth');

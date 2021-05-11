@@ -8,7 +8,7 @@
 
     <section class="questions">
         <div class="container">
-            <form action="" method="POST" id="examForm">
+            <form action="{{ route("teacher.exams_reviews.update_points", [$exam->id, $student->id])}}" method="POST" id="examForm">
                 @csrf
                 <div class="row justify-content-center">
                     <div class="col-12 col-lg-10 mb-5">
@@ -22,7 +22,7 @@
                                         Odpoved:
                                     </div>
                                     <div class="points__section">
-                                        <input id="{{"points-" . $question->id}}" class="form-control" max="{{$question->points}}" min="0" type="number" value="{{$question->answer->points}}">
+                                        <input id="{{"points-" . $question->id}}" name="points[{{$question->answer->id}}]" class="form-control" max="{{$question->points}}" min="0" type="number" value="{{$question->answer->points}}">
                                         <label for="{{"points-" . $question->id}}">{{"/" . $question->points}}</label>
                                     </div>
                                     <div class="question__answer">
@@ -87,7 +87,7 @@
                             @endforeach
                             <div class="row m-3">
                                 <div class="col">
-                                    <a href="#" class="btn btn-outline-primary col">Uložiť hodnotenie</a>
+                                    <button type="submit" class="btn btn-outline-primary col">Uložiť hodnotenie</button>
                                 </div>
                             </div>
                         </div>
