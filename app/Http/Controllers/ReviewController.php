@@ -52,7 +52,18 @@ class ReviewController extends Controller
 		]);
 	}
 
-    public function updatePoints(Request $request) {
-        dd($request);
+    public function updatePoints(Exam $exam, Student $student, Request $request) {
+
+    	$answers = $student->answers;
+        
+        foreach ($request->points as $key => $pts) {
+        	$ans = $answers->find($key);
+
+        	$ans->points = $pts;
+
+        	$ans->save();
+        }
+
+        return redirect()->route('teacher.exams_reviews.show_exam', $exam);
     }
 }

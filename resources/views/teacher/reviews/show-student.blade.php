@@ -16,13 +16,19 @@
                             @foreach ($questions as $question)
                                 <div class="questions__section">
                                     <div class="question__text">
-                                        {{json_decode($question->question)->question}}
+                                        {{$question->questionDecoded->question}}
                                     </div>
                                     <div class="question__answer-title">
                                         Odpoved:
                                     </div>
                                     <div class="points__section">
-                                        <input id="{{"points-" . $question->id}}" name="points[{{$question->answer->id}}]" class="form-control" max="{{$question->points}}" min="0" type="number" value="{{$question->answer->points}}">
+                                        <input id="{{"points-" . $question->id}}" name="points[{{$question->answer->id}}]"
+                                            class="form-control"
+                                            {{-- max="{{$question->points}}" --}}
+                                            min="0"
+                                            step="0.01"
+                                            type="number" value="{{$question->answer->points}}"
+                                        >
                                         <label for="{{"points-" . $question->id}}">{{"/" . $question->points}}</label>
                                     </div>
                                     <div class="question__answer">
@@ -37,11 +43,11 @@
                                                 @break
                                             @case("pair_answer")
                                                 <div class="pair__answers">
-                                                    @foreach (json_decode($question->question)->options->right as $rightKey => $right)
+                                                    @foreach ($question->questionDecoded->options->right as $rightKey => $right)
                                                         <div class="answer">
                                                             <span>{{$rightKey}}</span>
                                                             {{-- {{dd($question->question)}} --}}
-                                                            @foreach (json_decode($question->answer->answer) as $leftKey => $option)
+                                                            @foreach ($question->answer->answerDecoded as $leftKey => $option)
                                                                 @if($option->rightKey == $rightKey)
                                                                     <input class="form-control form__input pair__input" placeholder="{{$leftKey}}" disabled type="number">
                                                                 @endif
@@ -51,12 +57,12 @@
                                                 </div>
                                                 <div class="pair__options">
                                                     <ul class="first__group">
-                                                        @foreach (json_decode($question->question)->options->right as $rightOption )
+                                                        @foreach ($question->questionDecoded->options->right as $rightOption )
                                                             <li>{{$rightOption}}</li>
                                                         @endforeach
                                                     </ul>
                                                     <ul class="second__group">
-                                                        @foreach (json_decode($question->question)->options->left as $left)
+                                                        @foreach ($question->questionDecoded->options->left as $left)
                                                             <li>{{$left}}</li>
                                                         @endforeach
                                                     </ul>
@@ -64,13 +70,13 @@
                                                 @break
                                             @case("select_answer")
                                                 <div class="text-center question__select">
-                                                    @foreach (json_decode($question->question)->options as $optionKey => $option)
+                                                    @foreach ($question->questionDecoded->options as $optionKey => $option)
                                                         <input
                                                             disabled
                                                             class="checkbox__question"
                                                             type="checkbox"
                                                             id="{{"select" . $question->id . "-" . $optionKey}}"
-                                                            {{isset(json_decode($question->answer->answer)->$optionKey) ? 'checked disabled' : 'disabled' }}"
+                                                            {{isset($question->answer->answerDecoded->$optionKey) ? 'checked disabled' : 'disabled' }}
                                                         >
                                                         <label for="{{"select" . $question->id . "-" . $optionKey}}">{{$option}}</label>
                                                     @endforeach
