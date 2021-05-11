@@ -6,61 +6,6 @@
 
 @section ('content')
 
-	{{-- <div class="container">
-
-		@foreach ($questions as $question)
-            <div class="answer__review">
-                <div>
-                    @if (gettype(json_decode($question->question)) == "object")
-                        {{json_decode($question->question)->question}}
-                    @endif
-                </div>
-                <div>
-                    <p><b>Zadana odpoved:</b></p>
-                    @if($question->type == "draw_answer")
-                        <div>Draw</div>
-                        <img src="https://www.example.com/images/dinosaur.jpg" alt="student's image">
-                    @endif
-                    @if($question->type == "math_answer")
-                        <div class="math__container">
-                            <div id="{{"mathLive" . $question->id}}"></div>
-                        </div>
-                    @endif
-                    @if($question->type == "select_answer")
-                        <p>Select</p>
-                        <div class="text-center question__select">
-                            @foreach ($question->question->options as $optionKey => $option)
-                                <input type="hidden" name="answers[select][{{$question->id}}][{{$optionKey}}]" value="">
-                                <input
-                                    class="checkbox__question"
-                                    type="checkbox"
-                                    id="{{"select" . $question->id . "-" . $optionKey}}"
-                                    name="answers[select][{{$question->id}}][{{$optionKey}}]"
-                                    value="{{$option}}"
-                                >
-                                <label for="{{"select" . $question->id . "-" . $optionKey}}">{{$option}}</label>
-                            @endforeach
-                        </div>
-                    @endif
-                    @if($question->type == "pair_answer")
-                        <div>Pair</div>
-                    @endif
-                    @if($question->type == "short_answer")
-                        <textarea class="form-control" value="Short answer"></textarea>
-                    @endif
-                </div>
-                <div class="points__section">
-                    <input id="{{"points-" . $question->id}}" class="form-control" max="{{$question->points}}" min="0" type="number" value="2">
-                    <label for="{{"points-" . $question->id}}">{{"/" . $question->points}}</label>
-                </div>
-            </div>
-
-
-
-		@endforeach
-
-	</div> --}}
-
     <section class="questions">
         <div class="container">
             <form action="" method="POST" id="examForm">
@@ -95,7 +40,8 @@
                                                     @foreach (json_decode($question->question)->options->right as $rightKey => $right)
                                                         <div class="answer">
                                                             <span>{{$rightKey}}</span>
-                                                            <input class="form-control form__input" disabled type="number">
+                                                            {{dd(json_decode($question->answer->answer)->$rightKey)}}
+                                                            <input class="form-control form__input" placeholder="" disabled type="number">
                                                         </div>
                                                     @endforeach
                                                 </div>
