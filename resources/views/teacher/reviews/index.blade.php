@@ -20,6 +20,7 @@
 									<th>Kód</th>
 									<th>Začiatok</th>
 									<th>Koniec</th>
+									<th>Export</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -29,6 +30,11 @@
 									<td><code>{{ $exam->code }}</code></td>
 									<td>{{ $exam->start }}</td>
 									<td>{{ $exam->end }}</td>
+                                    <td>
+                                        <a href="#">
+                                            <span class="badge badge-info">CSV</span>
+                                        </a>
+                                    </td>
 								</tr>
 								@empty
 									<td colspan="5">Ešte ste nevytvorili žiadne testy.</td>

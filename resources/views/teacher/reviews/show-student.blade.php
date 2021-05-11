@@ -40,7 +40,6 @@
                                                     @foreach (json_decode($question->question)->options->right as $rightKey => $right)
                                                         <div class="answer">
                                                             <span>{{$rightKey}}</span>
-                                                            {{dd(json_decode($question->answer->answer)->$rightKey)}}
                                                             <input class="form-control form__input" placeholder="" disabled type="number">
                                                         </div>
                                                     @endforeach
@@ -81,6 +80,11 @@
                                 </div>
                                 <hr class="question__delimeter">
                             @endforeach
+                            <div class="row m-3">
+                                <div class="col">
+                                    <a href="#" class="btn btn-outline-primary col">Uložiť hodnotenie</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
