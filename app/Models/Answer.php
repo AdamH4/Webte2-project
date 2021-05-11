@@ -16,6 +16,11 @@ class Answer extends Model
         'points',
     ];
 
+    public function getAnswerDecodedAttribute()
+    {
+        return json_decode($this->answer);
+    }
+
     public function getAnswerHumanAttribute()
     {
         $ans = json_decode($this->answer);

@@ -27,8 +27,8 @@
 								<tr>
 									<td><a href="{{ route('teacher.exams_active.show', $exam) }}">{{ $exam->title }}</a></td>
 									<td><code>{{ $exam->code }}</code></td>
-									<td>{{ $exam->start->format('j.n.Y H:i') }}</td>
-									<td>{{ $exam->end->format('j.n.Y H:i') }}</td>
+									<td>{{ $exam->start_human }}</td>
+									<td>{{ $exam->end_human }}</td>
 								</tr>
 								@empty
 									<td colspan="5">Ešte ste nevytvorili žiadne testy.</td>

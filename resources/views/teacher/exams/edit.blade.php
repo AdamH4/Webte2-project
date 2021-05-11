@@ -21,12 +21,12 @@
 
   			<div class="form-group">
     			<label for="start">Začiatok testu</label>
-    			<input type="datetime-local" class="form-control" name="start" required  value="{{ $exam->start->format('Y-m-d\TH:i') }}">
+    			<input type="datetime-local" class="form-control" name="start" required  value="{{ $exam->start_carbon->format('Y-m-d\TH:i') }}">
   			</div>
 
   			<div class="form-group">
     			<label for="end">Koniec testu</label>
-    			<input type="datetime-local" class="form-control" name="end" required  value="{{ $exam->end->format('Y-m-d\TH:i') }}">
+    			<input type="datetime-local" class="form-control" name="end" required  value="{{ $exam->end_carbon->format('Y-m-d\TH:i') }}">
   			</div>
 
   			<button type="submit" class="btn btn-primary">Uložiť</button>

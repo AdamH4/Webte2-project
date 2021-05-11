@@ -69,4 +69,10 @@ class CreateAnswer extends Component
 
         //dd($this->freeRights, $this->formLefts, $this->allRights, $this->allLefts);
     }
+
+    public function removeFormLeft($key)
+    {
+        $this->formLefts[$key] = null;
+        $this->checkFrees();
+    }
 }
