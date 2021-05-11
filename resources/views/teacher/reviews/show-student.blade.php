@@ -68,7 +68,6 @@
                 <div class="row">
                     <div class="col-12 col-lg-10 mb-5">
                         <div class="questions__card">
-                        {{-- {{dd($questions)}} --}}
                             @foreach ($questions as $question)
                                 <div class="questions__section">
                                     <div class="question__text">
@@ -78,14 +77,13 @@
                                         Odpoved:
                                     </div>
                                     <div class="points__section">
-                                        <input id="{{"points-" . $question->id}}" class="form-control" max="{{$question->points}}" min="0" type="number" value="2">
+                                        <input id="{{"points-" . $question->id}}" class="form-control" max="{{$question->points}}" min="0" type="number" value="{{$question->answer->points}}">
                                         <label for="{{"points-" . $question->id}}">{{"/" . $question->points}}</label>
                                     </div>
                                     <div class="question__answer">
                                         @switch($question->type)
                                             @case("draw_answer")
-                                                <div>Draw</div>
-                                                <img width="500" height="400" src="{{$question->answer->answer}}" alt="student's image">
+                                                <img style="width:100%" src="{{$question->answer->answer}}" alt="student's image">
                                                 @break
                                             @case("math_answer")
                                                 <div class="math__container">
@@ -93,7 +91,6 @@
                                                 </div>
                                                 @break
                                             @case("pair_answer")
-                                                <p>Pair</p>
                                                 <div class="pair__answers">
                                                     @foreach (json_decode($question->question)->options->right as $rightKey => $right)
                                                         <div class="answer">
@@ -116,7 +113,6 @@
                                                 </div>
                                                 @break
                                             @case("select_answer")
-                                                <p>Select</p>
                                                 <div class="text-center question__select">
                                                     @foreach (json_decode($question->question)->options as $optionKey => $option)
                                                         <input
@@ -173,7 +169,7 @@
         const mathField = new window.MathLive.MathfieldElement({
             readOnly: true
         })
-        mathField.value = "f(x) = y^2"
+        mathField.value = question.answer.answer
         document.getElementById(`mathLive${question.id}`).appendChild(mathField)
     })
 
