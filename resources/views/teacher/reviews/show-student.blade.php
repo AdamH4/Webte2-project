@@ -68,10 +68,11 @@
                 <div class="row">
                     <div class="col-12 col-lg-10 mb-5">
                         <div class="questions__card">
+                        {{-- {{dd($questions)}} --}}
                             @foreach ($questions as $question)
                                 <div class="questions__section">
                                     <div class="question__text">
-                                        {{$question->question}}
+                                        {{json_decode($question->question)->question}}
                                     </div>
                                     <div class="question__answer-title">
                                         Odpoved:
@@ -84,7 +85,7 @@
                                         @switch($question->type)
                                             @case("draw_answer")
                                                 <div>Draw</div>
-                                                <img src="http://www.how-to-draw-funny-cartoons.com/image-files/sketching-people-4.jpg" alt="student's image">
+                                                <img width="500" height="400" src="{{$question->answer->answer}}" alt="student's image">
                                                 @break
                                             @case("math_answer")
                                                 <div class="math__container">
@@ -94,21 +95,21 @@
                                             @case("pair_answer")
                                                 <p>Pair</p>
                                                 <div class="pair__answers">
-                                                    @foreach ($question->question->options->right as $rightKey => $right)
+                                                    @foreach (json_decode($question->question)->options->right as $rightKey => $right)
                                                         <div class="answer">
                                                             <span>{{$rightKey}}</span>
-                                                            <input class="form-control form__input" placeholder="Hnuuj" type="number">
+                                                            <input class="form-control form__input" disabled type="number">
                                                         </div>
                                                     @endforeach
                                                 </div>
                                                 <div class="pair__options">
                                                     <ul class="first__group">
-                                                        @foreach ($question->question->options->right as $rightOption )
+                                                        @foreach (json_decode($question->question)->options->right as $rightOption )
                                                             <li>{{$rightOption}}</li>
                                                         @endforeach
                                                     </ul>
                                                     <ul class="second__group">
-                                                        @foreach ($question->question->options->left as $left)
+                                                        @foreach (json_decode($question->question)->options->left as $left)
                                                             <li>{{$left}}</li>
                                                         @endforeach
                                                     </ul>
@@ -117,21 +118,20 @@
                                             @case("select_answer")
                                                 <p>Select</p>
                                                 <div class="text-center question__select">
-                                                    @foreach ($question->question->options as $optionKey => $option)
-                                                        <input type="hidden" name="answers[select][{{$question->id}}][{{$optionKey}}]" value="">
+                                                    @foreach (json_decode($question->question)->options as $optionKey => $option)
                                                         <input
+                                                            disabled
                                                             class="checkbox__question"
                                                             type="checkbox"
                                                             id="{{"select" . $question->id . "-" . $optionKey}}"
-                                                            name="answers[select][{{$question->id}}][{{$optionKey}}]"
-                                                            value="{{$option}}"
+                                                            {{isset(json_decode($question->answer->answer)->$optionKey) ? 'checked disabled' : 'disabled' }}"
                                                         >
                                                         <label for="{{"select" . $question->id . "-" . $optionKey}}">{{$option}}</label>
                                                     @endforeach
                                                 </div>
                                                 @break
                                             @case("short_answer")
-                                                <textarea class="form-control form__input" placeholder="Necoooo" disabled ></textarea>
+                                                <textarea class="form-control form__input" placeholder="{{$question->answer->answer}}" disabled ></textarea>
                                                 @break
                                             @default
                                         @endswitch
