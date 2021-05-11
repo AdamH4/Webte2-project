@@ -40,7 +40,12 @@
                                                     @foreach (json_decode($question->question)->options->right as $rightKey => $right)
                                                         <div class="answer">
                                                             <span>{{$rightKey}}</span>
-                                                            <input class="form-control form__input" placeholder="" disabled type="number">
+                                                            {{-- {{dd($question->question)}} --}}
+                                                            @foreach (json_decode($question->answer->answer) as $leftKey => $option)
+                                                                @if($option->rightKey == $rightKey)
+                                                                    <input class="form-control form__input pair__input" placeholder="{{$leftKey}}" disabled type="number">
+                                                                @endif
+                                                            @endforeach
                                                         </div>
                                                     @endforeach
                                                 </div>

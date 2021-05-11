@@ -10075,6 +10075,18 @@ h3 {
   border-right: 0px !important;
 }
 
+.pair__input::-moz-placeholder {
+  color: #06d6a0;
+}
+
+.pair__input:-ms-input-placeholder {
+  color: #06d6a0;
+}
+
+.pair__input::placeholder {
+  color: #06d6a0;
+}
+
 .btn-register {
   background: transparent !important;
   border: 1px solid #073b4c;
