@@ -24,7 +24,7 @@ class QuestionFactory extends Factory
     public function definition()
     {
         $types = [
-            ['id' => Question::SELECT_ANSWER, 'question' => '{"question":"sup","options":["1": "ay", "2": "eh"]}'],
+            ['id' => Question::SELECT_ANSWER, 'question' => '{"question":"sup","options":{"1":"ay","2":"eh"}}'],
             ['id' => Question::MATH_ANSWER, 'question' => '{"question":"napis teoriu mnozin"}'],
             ['id' => Question::SHORT_ANSWER, 'question' => '{"question":"napis teoriu mnozin"}'],
             ['id' => Question::PAIR_ANSWER, 'question' => '{"question":"tretia moznost pairu","options":{"left":{"1":"iba jedna"},"right":{"A":"acko","B":"becko","C":"cecko","D":"decko"}}}'],
