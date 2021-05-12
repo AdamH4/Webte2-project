@@ -10406,6 +10406,7 @@ footer.footer {
 }
 .points__section > label {
   font-size: 1.7rem;
+  margin-left: 10px;
 }
 
 .badge-left {
@@ -10419,4 +10420,8 @@ footer.footer {
 .badge-done {
   background: #00b309;
   color: #fff;
+}
+
+.c-app {
+  background: #ebedef !important;
 }

@@ -71,7 +71,9 @@
     const examFormElement = document.getElementById("examForm")
     const examFormButton = document.getElementById("examFormButton")
     const exam = @json($exam);
-    let testDuration = Math.round(Math.abs(((new Date(exam.end)).getTime() / 1e3) - ((new Date()).getTime() / 1e3)))
+    const now = new Date('{{ now() }}')
+    console.log(now);
+    let testDuration = Math.round(Math.abs(((new Date(exam.end)).getTime() / 1e3) - ((now).getTime() / 1e3)))
 
     const numberToStringWithTwoChars= (number) => {
         return ("0" + number).slice(-2)
@@ -114,7 +116,7 @@
           clearInterval(interval)
           console.log("TIME IS UP!")
           // TODO: Production odosli formular cas vyprsal
-          //examFormElement.submit();
+          examFormElement.submit();
       }
     }, 1000);
 
@@ -134,7 +136,7 @@
     })
 }
 
-if(filteredQuestions.draw_answer != undefined) {
+if(filteredQuestions.math_answer != undefined) {
     filteredQuestions.math_answer.forEach(question => {
         const mathLiveInput = document.getElementById(`mathLiveInput${question.id}`)
         const mathField = new window.MathLive.MathfieldElement({

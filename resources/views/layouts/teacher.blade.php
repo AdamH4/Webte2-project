@@ -16,16 +16,14 @@
  <body class="c-app">
     <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
       <div class="c-sidebar-brand d-lg-down-none">
-       <img src="{{ asset('img/logo-white.svg') }}" class="logo" width="100px">
+       <img src="{{ asset('frontend/img/logo-white.svg') }}" class="logo" width="100px">
       </div>
       <ul class="c-sidebar-nav">
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="index.html">
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link @if(isset($active) && $active == 'dashboard') c-active @endif" href="{{ route('teacher.dashboard') }}">Rozdelenie úloh</a></li>
         {{-- <li class="c-sidebar-nav-title">Theme</li> --}}
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('teacher.exams') }}">Testy plánované</a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('teacher.exams_active') }}">Testy aktívne</a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('teacher.exams_reviews') }}">Testy ukončené</a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="colors.html"> Colors</a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="typography.html">Typography</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link @if(isset($active) && $active == 'exams') c-active @endif" href="{{ route('teacher.exams') }}">Testy plánované</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link @if(isset($active) && $active == 'exams-active') c-active @endif" href="{{ route('teacher.exams_active') }}">Testy aktívne</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link @if(isset($active) && $active == 'exams-reviews') c-active @endif" href="{{ route('teacher.exams_reviews') }}">Testy ukončené</a></li>
       </ul>
       <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
     </div>

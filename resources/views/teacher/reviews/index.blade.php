@@ -1,4 +1,4 @@
-@extends ('layouts.teacher')
+@extends ('layouts.teacher', ['active' => 'exams-reviews'])
 
 @section ('head')
 <title>Zoznam testov - Examio</title>
@@ -8,7 +8,13 @@
 
 	<div class="container">
 
-		<div class="row m-3">
+		<div class="row">
+			<div class="col-12">
+				<h2>Ukončené testy</h2>
+			</div>
+		</div>
+
+		<div class="row mt-3">
 			<div class="col-lg-12">
 				<div class="card">
 					<div class="card-header"><i class="fa fa-align-justify"></i>Vaše testy</div>

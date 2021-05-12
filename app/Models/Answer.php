@@ -18,7 +18,8 @@ class Answer extends Model
 
     public function getAnswerDecodedAttribute()
     {
-        return json_decode($this->answer);
+        $answer = json_decode($this->answer);
+        return (gettype($answer) == 'array') ? $answer : [];
     }
 
     public function getAnswerHumanAttribute()
@@ -49,7 +50,7 @@ class Answer extends Model
 
     public function question()
     {
-    	return $this->belongsTo(Question::class);
+        return $this->belongsTo(Question::class);
     }
 
     public function author()

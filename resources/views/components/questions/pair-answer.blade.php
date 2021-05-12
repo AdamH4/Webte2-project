@@ -4,7 +4,6 @@
             <div class="answer">
                 <span>{{$rightKey}}</span>
                 <input class="form-control form__input" name="answers[pair][{{$question->id}}][{{$rightKey}}]" type="number">
-                <div>sadk masd maskd</div>
             </div>
         @endforeach
     </div>

@@ -25,10 +25,6 @@ Route::get('/', function () {
 
 //----------------------------------------- Student Routes -----------------------------------------------------------------
 
-Route::get('/questions', function () { // ROUTE JUST FOR TESTING PURPOSES
-	return view('student.exam');
-})->name('questions');
-
 Route::post('/exam/login', [StudentController::class, 'loginToExam'])->name('exam.login');
 Route::post('/exam/left/{exam}', [StudentController::class, 'leftExam'])->name('exam.left');
 Route::post('/exam/done/{exam}', [StudentController::class, 'doneExam'])->name('exam.done');
@@ -53,13 +49,13 @@ Route::get('/teacher/exams-reviews', [ReviewController::class, 'index'])->name('
 Route::get('/teacher/exams-reviews/{exam}', [ReviewController::class, 'showExam'])->name('teacher.exams_reviews.show_exam')
 	->middleware('auth');
 Route::get('/teacher/exams-reviews/{exam}/export', [ReviewController::class, 'exportExamResultsCSV'])->name('teacher.exams_reviews.export_exam_results')
-    ->middleware('auth');
+	->middleware('auth');
 Route::get('/teacher/exams-reviews/{exam}/{student}', [ReviewController::class, 'showStudent'])->name('teacher.exams_reviews.show_student')
 	->middleware('auth');
 Route::post('/teacher/exams-reviews/{exam}/{student}', [ReviewController::class, 'updatePoints'])
 	->name('teacher.exams_reviews.update_points')->middleware('auth');
 Route::get('/teacher/exams-reviews/{exam}/{student}/export', [ReviewController::class, 'exportPDF'])->name('teacher.exams_reviews.export_submitted_exam')
-    ->middleware('auth');
+	->middleware('auth');
 
 Route::get('/teacher/exams/{exam}/questions/create', [QuestionController::class, 'create'])
 	->name('teacher.questions.create')->middleware('auth');

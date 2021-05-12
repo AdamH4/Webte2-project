@@ -24,7 +24,7 @@
                 <div style="margin-top: 20px; margin-bottom: 20px;">
                     <b>Odpoved:</b>
                     @if(! empty($answers[$id]))
-                        <img src="http://latex.codecogs.com/gif.latex?{{$answers[$id]}}" style="margin-top: 3px; margin-left: 8px;" alt=""/>
+                        <img src="http://latex.codecogs.com/gif.latex?{{$answers[$id]}}" style="margin-top: 3px; margin-left: 8px;border:1px solid #000;" alt=""/>
                     @endif
                 </div>
                 @break

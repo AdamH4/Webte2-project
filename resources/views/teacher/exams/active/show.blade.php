@@ -1,4 +1,4 @@
-@extends ('layouts.teacher')
+@extends ('layouts.teacher', ['active' => 'exams-active'])
 
 @section ('head')
 <title>{{ $exam->title }} - Examio</title>
@@ -7,9 +7,12 @@
 @section ('content')
 
 	<div class="container">
-
-		<h4>Test - {{ $exam->title }}</h4>
-		<div class="row m-3">
+		<div class="row">
+			<div class="col-12">
+				<h2>Test - {{ $exam->title }}</h2>
+			</div>
+		</div>
+		<div class="row mt-3">
 			<div class="col-lg-12">
 				<div class="card">
 					<div class="card-header"><i class="fa fa-align-justify"></i>Prítomní študenti v teste</div>
@@ -60,7 +63,7 @@ function renderStudents(students) {
 				${student.full_name}
 			</td>
 			<td>
-				${student.ais_id}
+				<code>${student.ais_id}</code>
 			</td>
 			<td>
 				<span class="badge badge-${student.is_active}">

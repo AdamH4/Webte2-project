@@ -55,7 +55,7 @@ class StudentController extends Controller
         $questions = $exam->questions;
 
         // decode all questions before passing to FE
-        foreach($questions as $question) {
+        foreach ($questions as $question) {
             $question->question = json_decode($question->question);
         }
 
@@ -78,7 +78,6 @@ class StudentController extends Controller
 
     public function doneExam(Request $request, Exam $exam)
     {
-
         $this->changeExamStatus(Student::DONE);
 
         $submittedAnswers = $request->request->all()['answers'];
@@ -108,17 +107,5 @@ class StudentController extends Controller
         auth('in-exam')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-    }
-
-    public function submitExam(Request $request) {
-        $examCode = '3769170905450';
-        $submittedAnswers = $request->request->all();
-
-//        $studentInExam = Student::byExamCode($examCode)->byAis($request['ais_id'])->first();
-
-//        dd(auth()->guard('in-exam'));
-
-//        $ans->question()->associate($qt);
-//        $ans->author()->associate();
     }
 }

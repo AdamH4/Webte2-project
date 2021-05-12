@@ -8,7 +8,7 @@
 
 	<div class="container">
 
-    <h4>Úprava testu</h4>
+    <h2 class="mb-5">Úprava testu</h2>
 		
 		<form action="{{ route('teacher.exams.edit', $exam) }}" method="POST">
 			@csrf

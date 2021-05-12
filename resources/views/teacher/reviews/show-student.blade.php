@@ -5,13 +5,19 @@
 @endsection
 
 @section ('content')
-
+    <section>
+        <div class="row">
+            <div class="col-12">
+                <h2>Test - Vyhodnotenie študenta - {{ $student->fullname }}</h2>
+            </div>
+        </div>
+    </section>
     <section class="questions">
-        <div class="container">
+        <div class="container-fluid">
             <form action="{{ route("teacher.exams_reviews.update_points", [$exam->id, $student->id])}}" method="POST" id="examForm">
                 @csrf
                 <div class="row justify-content-center">
-                    <div class="col-12 col-lg-10 mb-5">
+                    <div class="col-12 col-lg-12 mb-5">
                         <div class="questions__card">
                             @foreach ($questions as $question)
                                 <div class="questions__section">
@@ -19,14 +25,14 @@
                                         {{$question->questionDecoded->question}}
                                     </div>
                                     <div class="question__answer-title">
-                                        Odpoved:
+                                        Odpoveď:
                                     </div>
                                     <div class="points__section">
                                         <input id="{{"points-" . $question->id}}" name="points[{{$question->answer->id}}]"
                                             class="form-control"
                                             {{-- max="{{$question->points}}" --}}
                                             min="0"
-                                            step="0.01"
+                                            step="0.5"
                                             type="number" value="{{$question->answer->points}}"
                                         >
                                         <label for="{{"points-" . $question->id}}">{{"/" . $question->points}}</label>
@@ -34,7 +40,7 @@
                                     <div class="question__answer">
                                         @switch($question->type)
                                             @case("draw_answer")
-                                                <img style="width:100%" src="{{$question->answer->answer}}" alt="student's image">
+                                                <img style="width:100%;border:1px solid" src="{{$question->answer->answer}}" alt="student's image">
                                                 @break
                                             @case("math_answer")
                                                 <div class="math__container">
@@ -43,17 +49,21 @@
                                                 @break
                                             @case("pair_answer")
                                                 <div class="pair__answers">
-                                                    @foreach ($question->questionDecoded->options->right as $rightKey => $right)
+                                                    @forelse ($question->questionDecoded->options->right as $rightKey => $right)
                                                         <div class="answer">
                                                             <span>{{$rightKey}}</span>
                                                             {{-- {{dd($question->question)}} --}}
-                                                            @foreach ($question->answer->answerDecoded as $leftKey => $option)
+                                                            @forelse ($question->answer->answerDecoded as $leftKey => $option)
                                                                 @if($option->rightKey == $rightKey)
                                                                     <input class="form-control form__input pair__input" placeholder="{{$leftKey}}" disabled type="number">
                                                                 @endif
-                                                            @endforeach
+                                                                @empty 
+                                                                <input class="form-control form__input pair__input" placeholder="" disabled type="number">
+                                                            @endforelse
                                                         </div>
-                                                    @endforeach
+                                                        @empty
+                                                        
+                                                    @endforelse
                                                 </div>
                                                 <div class="pair__options">
                                                     <ul class="first__group">

@@ -24,6 +24,7 @@
 
     & > label {
         font-size: 1.7rem;
+        margin-left: 10px;
     }
 }
 .badge {
@@ -41,4 +42,8 @@
         background: rgb(0, 179, 9);
         color: #fff;
     }
+}
+
+.c-app {
+    background: #ebedef !important;
 }
