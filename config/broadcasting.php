@@ -38,7 +38,7 @@ return [
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
                 'encrypted' => true,
-                'host' => 'wt110.fei.stuba.sk',
+                'host' => '127.0.0.1',
                 'port' => 6001,
                 'scheme' => 'http'
             ],

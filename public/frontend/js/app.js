@@ -1958,6 +1958,7 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_3__.default({
   wsHost: "0.0.0.0",
   wsPort: 6001,
   disableStats: true,
+  forceTLS: false,
   enabledTransports: ["ws", "wss"]
 });
 console.log(window.Echo);
