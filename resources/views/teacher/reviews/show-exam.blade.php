@@ -34,7 +34,7 @@
                                     @endif
                                     <td><a href="{{ route('teacher.exams_reviews.show_student', [$exam, $student]) }}">Odpovede</a></td>
                                     <td>
-                                        <a href="#">
+                                        <a href="{{ route('teacher.exams_reviews.export_submitted_exam', [$exam, $student]) }}">
                                             <span class="badge badge-info">PDF</span>
                                         </a>
                                     </td>
