@@ -18,11 +18,9 @@ window.Pusher = require("pusher-js");
 window.Echo = new Echo({
     broadcaster: "pusher",
     key: "059867058",
-    wsHost: "0.0.0.0",
+    wsHost: window.location.host,
     wsPort: 6001,
     disableStats: true,
     forceTLS: false,
     enabledTransports: ["ws", "wss"],
 });
-
-console.log(window.Echo);
