@@ -22,7 +22,8 @@
                 @break
                 @case("math_answer")
                 <div style="margin-top: 20px; margin-bottom: 20px;">
-                    <b>Odpoved:</b> {{$answers[$id]}}
+                    <b>Odpoved:</b>
+                    <img src="http://latex.codecogs.com/gif.latex?{{$answers[$id]}}" style="margin-top: 3px; margin-left: 8px;" alt=""/>
                 </div>
                 @break
                 @case("pair_answer")
