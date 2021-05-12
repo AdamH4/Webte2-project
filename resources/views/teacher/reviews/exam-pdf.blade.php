@@ -23,7 +23,9 @@
                 @case("math_answer")
                 <div style="margin-top: 20px; margin-bottom: 20px;">
                     <b>Odpoved:</b>
-                    <img src="http://latex.codecogs.com/gif.latex?{{$answers[$id]}}" style="margin-top: 3px; margin-left: 8px;" alt=""/>
+                    @if(! empty($answers[$id]))
+                        <img src="http://latex.codecogs.com/gif.latex?{{$answers[$id]}}" style="margin-top: 3px; margin-left: 8px;" alt=""/>
+                    @endif
                 </div>
                 @break
                 @case("pair_answer")
@@ -35,9 +37,11 @@
                 @endforeach
                 <div style="margin-top: 20px; margin-bottom: 20px;">
                     <b>Odpoved:</b>
-                    @foreach ($answers[$id] as $numberKey => $data)
-                        <div style="margin-left: 20px;">{{$data['rightKey']}}. {{$data['right']}} => {{$numberKey}}. {{$data['left']}}</div>
-                    @endforeach
+                    @if(! empty($answers[$id]))
+                        @foreach ($answers[$id] as $numberKey => $data)
+                            <div style="margin-left: 20px;">{{$data['rightKey']}}. {{$data['right']}} => {{$numberKey}}. {{$data['left']}}</div>
+                        @endforeach
+                    @endif
                 </div>
                 @break
                 @case("select_answer")
@@ -47,14 +51,19 @@
                 @endforeach
                 <div style="margin-top: 20px; margin-bottom: 20px;">
                     <b>Odpoved:</b>
-                    @foreach ($answers[$id] as $position => $value)
-                        <div style="margin-left: 20px;">{{$position}}. {{$value}}</div>
-                    @endforeach
+                    @if(! empty($answers[$id]))
+                        @foreach ($answers[$id] as $position => $value)
+                            <div style="margin-left: 20px;">{{$position}}. {{$value}}</div>
+                        @endforeach
+                    @endif
                 </div>
                 @break
                 @case("short_answer")
                 <div  style="margin-top: 20px; margin-bottom: 20px;">
-                    <b>Odpoved:</b> {{$answers[$id]}}
+                    <b>Odpoved:</b>
+                    @if(! empty($answers[$id]))
+                        {{$answers[$id]}}
+                    @endif
                 </div>
                 @break
                 @default
