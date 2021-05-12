@@ -49,7 +49,9 @@ class QuestionController extends Controller
         if ($request->short_ans_opts) {
 
             foreach ($request->short_ans_opts as $key => $opt) {
-                $sao[$key + 1] = $opt;
+                if ($opt != null && $opt != '') {
+                    $sao[$key + 1] = $opt;
+                }
             }
             
             $question->put('options', $sao);

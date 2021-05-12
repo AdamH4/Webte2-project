@@ -35,13 +35,35 @@ class ReviewController extends Controller
 		$questions = $exam->questions;
 		$answers = $student->answers;
 
-		// dd($questions, $answers);
+		foreach ($questions as $key => $question) {
+			$theAns = $answers->firstWhere('question_id', $question->id);
+			$question->answer = $theAns;
+
+			if ($theAns) {
+				// $answers->forget($theAns->key);
+			}
+		}
 
 		return view('teacher.reviews.show-student', [
 			'exam' => $exam,
 			'student' => $student,
 			'questions' => $questions,
-			'answers' => $answers,
+			// 'answers' => $answers,
 		]);
 	}
+
+    public function updatePoints(Exam $exam, Student $student, Request $request) {
+
+    	$answers = $student->answers;
+        
+        foreach ($request->points as $key => $pts) {
+        	$ans = $answers->find($key);
+
+        	$ans->points = $pts;
+
+        	$ans->save();
+        }
+
+        return redirect()->route('teacher.exams_reviews.show_exam', $exam);
+    }
 }

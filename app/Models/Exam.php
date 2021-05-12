@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Question;
+use Carbon\Carbon;
 
 class Exam extends Model
 {
@@ -25,10 +26,28 @@ class Exam extends Model
     //     'end' => 'datetime:j.n.Y H:i',
     // ];
 
-    protected $dates = [
-        'start',
-        'end'
-    ];
+
+    protected $appends = ['start_human', 'end_human'];
+
+    public function getStartHumanAttribute()
+    {
+        return Carbon::create($this->start)->format('j.n.Y H:i');
+    }
+
+    public function getEndHumanAttribute()
+    {
+        return Carbon::create($this->end)->format('j.n.Y H:i');
+    }
+
+    public function getStartCarbonAttribute()
+    {
+        return Carbon::create($this->start);
+    }
+
+    public function getEndCarbonAttribute()
+    {
+        return Carbon::create($this->end);
+    }
 
     //------------------------------------------- Scopes --------------------------------------------
 

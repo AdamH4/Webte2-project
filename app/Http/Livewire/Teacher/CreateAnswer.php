@@ -23,14 +23,18 @@ class CreateAnswer extends Component
     {
         $this->exam = $exam;
         $this->qt = $qt;
-        // $this->qtTypes = Question::types;
-        $this->freeRights = (array) $qt->questionDecoded->options->right;
-        $this->allRights = (array) $qt->questionDecoded->options->right;
-        $this->allLefts = (array) $qt->questionDecoded->options->left;
-        $this->formLefts = (array) $qt->questionDecoded->options->left;
 
-        foreach ($this->formLefts as $key => $fl) {
-            $this->formLefts[$key] = null;
+        // $this->qtTypes = Question::types;
+
+        if ($qt->type == 'pair_answer') {
+            $this->freeRights = (array) $qt->questionDecoded->options->right;
+            $this->allRights = (array) $qt->questionDecoded->options->right;
+            $this->allLefts = (array) $qt->questionDecoded->options->left;
+            $this->formLefts = (array) $qt->questionDecoded->options->left;
+
+            foreach ($this->formLefts as $key => $fl) {
+                $this->formLefts[$key] = null;
+            }
         }
     }
 
@@ -68,5 +72,11 @@ class CreateAnswer extends Component
         }
 
         //dd($this->freeRights, $this->formLefts, $this->allRights, $this->allLefts);
+    }
+
+    public function removeFormLeft($key)
+    {
+        $this->formLefts[$key] = null;
+        $this->checkFrees();
     }
 }

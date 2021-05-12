@@ -10075,6 +10075,18 @@ h3 {
   border-right: 0px !important;
 }
 
+.pair__input::-moz-placeholder {
+  color: #06d6a0;
+}
+
+.pair__input:-ms-input-placeholder {
+  color: #06d6a0;
+}
+
+.pair__input::placeholder {
+  color: #06d6a0;
+}
+
 .btn-register {
   background: transparent !important;
   border: 1px solid #073b4c;
@@ -10285,10 +10297,10 @@ footer.footer {
   border-radius: 10px;
 }
 
-#mathLive {
-  width: 100%;
-  border: 7px solid #efefef;
-  border-radius: 10px;
+.math__container {
+  border: 1px solid #cfd4da;
+  border-radius: 5px;
+  background-color: #fafafa;
 }
 
 .pair__answers {
@@ -10374,6 +10386,26 @@ footer.footer {
 .c-sidebar .c-sidebar-nav-link:hover {
   color: #fff;
   background: #ef476f !important;
+}
+
+.answer__review {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-gap: 2rem;
+}
+.answer__review > * {
+  padding: 2rem 0;
+}
+
+.points__section {
+  display: flex;
+  align-items: stretch;
+}
+.points__section > input {
+  width: 4rem;
+}
+.points__section > label {
+  font-size: 1.7rem;
 }
 
 .badge-left {

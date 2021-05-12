@@ -49,3 +49,7 @@
         border-right: 0px !important;
     }
 }
+
+.pair__input::placeholder {
+    color: $loginBtn;
+}

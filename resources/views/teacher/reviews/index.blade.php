@@ -20,6 +20,7 @@
 									<th>Kód</th>
 									<th>Začiatok</th>
 									<th>Koniec</th>
+									<th>Export</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -27,22 +28,19 @@
 								<tr>
 									<td><a href="{{ route('teacher.exams_reviews.show_exam', $exam) }}">{{ $exam->title }}</a></td>
 									<td><code>{{ $exam->code }}</code></td>
-									<td>{{ $exam->start->format('j.n.Y H:i') }}</td>
-									<td>{{ $exam->end->format('j.n.Y H:i') }}</td>
+									<td>{{ $exam->start }}</td>
+									<td>{{ $exam->end }}</td>
+                                    <td>
+                                        <a href="#">
+                                            <span class="badge badge-info">CSV</span>
+                                        </a>
+                                    </td>
 								</tr>
 								@empty
 									<td colspan="5">Ešte ste nevytvorili žiadne testy.</td>
 								@endforelse
 							</tbody>
 						</table>
-						<ul class="pagination">
-							<li class="page-item"><a class="page-link" href="#">Prev</a></li>
-							<li class="page-item active"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">4</a></li>
-							<li class="page-item"><a class="page-link" href="#">Next</a></li>
-						</ul>
 					</div>
 				</div>
 			</div>
