@@ -124,7 +124,7 @@ class ExamController extends Controller
 				echo 'data: ' . json_encode($exam) . "\n\n";
 				ob_flush();
 				flush();
-				usleep(200000);
+				usleep(1);
 			}
 		});
 		$response->headers->set('Content-Type', 'text/event-stream');
