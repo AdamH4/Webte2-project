@@ -4,7 +4,20 @@
 <div class="container">
     <div class="row">
         <div class="col-12 mb-3">
-            <h1>Vitaj</h1>
+            <h1>Vitajte v Examio administrácií</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 mb-3">
+            <h5>Websockety</h5>
+            <p>
+                Websockety na serveri nám nechceli fungovať. Nevedeli sme sa napojiť cez JS na vytvorený socket server pomocou package-u (https://beyondco.de/docs/laravel-websockets/getting-started/introduction), 
+                pričom na localhoste nám to bez problémov išlo. Z toho dôvodu sme implementovali alternatívne riešenie na zisťovanie stavu testu študenta v pohľade učiteľa.
+                Riešenie spočíva v tom, že sa dopytujeme na server každé 2 sekundy a získavame údaje o vykonávanom teste.
+            </p>
+            <span class="alert alert-info d-block"><b>!!!</b> V prípade, ak by ste potrebovali otestovať websockety, tak si treba odkomentovať riadky v určitých súboroch, ktoré sa dajú nájsť pod hashtagom #websocket cez vyhľadávač IDE.
+            Následne stačí spustiť websocket server pomocou príkazu <code>php artisan websockets:serve</code> alebo v prípade dockera <code>vendor/bin/sail artisan websockets:serve</code>.
+            </span>
         </div>
     </div>
 </div>

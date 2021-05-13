@@ -43,7 +43,7 @@
 //-----------------------------Constants--------------------------------------------
 const studentTableElement = document.getElementById("studentsTable");
 const exam = @json($exam);
-const getStatusOfExamInterval = 2 * 1000;
+const getStatusOfExamInterval = 2 * 1000; // 2 * 1000 milsec
 
 //----------------------------Init--------------------------------------------------
 renderStudents(exam.students);
@@ -53,24 +53,16 @@ window.Echo.private(`Exam.${exam.code}`).listen(".Exam", (data) => {
     this.renderStudents(data.exam.students);
 });
 
-//----------------------------Websocket alternative SSE---------------------------------------------
-
-// let es = new EventSource('{{ route('teacher.exams_active.sse', $exam->id) }}');
-// es.addEventListener('message', event => {
-//             let data = JSON.parse(event.data);
+//-------Websocket alternative setInterval (#websocket -> cely blok nižšie zakomentovať)------
+// setInterval(function() {
+//     	fetch('{{ route('teacher.exams_active.sse', $exam->id) }}')
+//         .then(function(response) {
+// 			return response.json();
+//         })
+//         .then(function(data) {
 //             this.renderStudents(data.students);
-// }, false);
-
-//----------------------------Websocket alternative setInterval------------------------------------
-setInterval(function() {
-    	fetch('{{ route('teacher.exams_active.sse', $exam->id) }}')
-        .then(function(response) {
-			return response.json();
-        })
-        .then(function(data) {
-            this.renderStudents(data.students);
-        });
-}, getStatusOfExamInterval); // 60 * 1000 milsec
+//         });
+// }, getStatusOfExamInterval);
 
 //----------------------------Functions---------------------------------------------
 function renderStudents(students) {

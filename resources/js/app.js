@@ -19,7 +19,7 @@ window.Echo = new Echo({
     broadcaster: "pusher",
     key: "059867058",
     wsHost: "0.0.0.0",
-    wsPort: 6001,
+    wsPort: 9001,
     disableStats: true,
     forceTLS: false,
     enabledTransports: ["ws", "wss"],

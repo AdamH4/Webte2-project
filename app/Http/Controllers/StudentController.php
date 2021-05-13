@@ -99,7 +99,7 @@ class StudentController extends Controller
 
         $exam = Exam::with('students')->byExamCode($student->exam_code)->firstOrFail();
 
-        //ExamEvent::dispatch($exam);
+        //ExamEvent::dispatch($exam);  // #websocket
     }
 
     private function logoutFromExam($request)
