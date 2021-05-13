@@ -53,7 +53,7 @@ class QuestionController extends Controller
                     $sao[$key + 1] = $opt;
                 }
             }
-            
+
             $question->put('options', $sao);
             $qt->question = $question->toJson();
         }
@@ -89,10 +89,10 @@ class QuestionController extends Controller
 
     public function edit(Exam $exam, Question $qt)
     {
-
     	return view('teacher.questions.edit', [
     		'exam' => $exam,
     		'qt' => $qt,
+    		'options' => ($qt->type == Question::SELECT_ANSWER or $qt->type == Question::PAIR_ANSWER) ? json_decode($qt->question, true)['options'] : "",
     		'types' => Question::types,
     	]);
     }
@@ -106,7 +106,18 @@ class QuestionController extends Controller
     	]);
 
     	$qt->type = $request->type;
-    	$qt->question = $request->question;
+
+        switch ($qt->type) {
+            case Question::SELECT_ANSWER:
+                $qt->question = json_encode(array("question" => $request->question,"options" => $request->select));
+                break;
+            case Question::PAIR_ANSWER:
+                $qt->question = json_encode(array("question" => $request->question,"options" => $request->pair));
+                break;
+            default:
+                $qt->question = json_encode(array("question" => $request->question));
+                break;
+        }
 
     	$qt->save();
 
