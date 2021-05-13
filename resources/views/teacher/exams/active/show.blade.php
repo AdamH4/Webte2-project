@@ -52,6 +52,14 @@ window.Echo.private(`Exam.${exam.code}`).listen(".Exam", (data) => {
     this.renderStudents(data.exam.students);
 });
 
+//----------------------------Websocket alternative---------------------------------------------
+
+let es = new EventSource('{{ route('teacher.exams_active.sse', $exam->id) }}');
+es.addEventListener('message', event => {
+            let data = JSON.parse(event.data);
+            this.renderStudents(data.students);
+}, false);
+
 //----------------------------Functions---------------------------------------------
 function renderStudents(students) {
 	let content = '';
