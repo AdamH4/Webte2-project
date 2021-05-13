@@ -119,17 +119,6 @@ class ExamController extends Controller
 	public function sse(Exam $exam)
 	{
 		$exam->load('students');
-		$response = new StreamedResponse(function () use ($exam) {
-			while (true) {
-				echo 'data: ' . json_encode($exam) . "\n\n";
-				ob_flush();
-				flush();
-				usleep(1);
-			}
-		});
-		$response->headers->set('Content-Type', 'text/event-stream');
-		$response->headers->set('X-Accel-Buffering', 'no');
-		$response->headers->set('Cach-Control', 'no-cache');
-		return $response;
+		return response($exam, 200);
 	}
 }
