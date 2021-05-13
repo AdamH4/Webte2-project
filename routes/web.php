@@ -43,6 +43,7 @@ Route::put('/teacher/exams/{exam}/edit', [ExamController::class, 'update'])->mid
 Route::delete('/teacher/exams/{exam}', [ExamController::class, 'destroy'])->middleware('auth');
 
 Route::get('/teacher/exams-active', [ExamController::class, 'indexActive'])->name('teacher.exams_active')->middleware('auth');
+Route::get('/teacher/exams-active/sse/{exam}', [ExamController::class, 'sse'])->name('teacher.exams_active.sse')->middleware('auth');
 Route::get('/teacher/exams-active/{exam}', [ExamController::class, 'showActive'])->name('teacher.exams_active.show')->middleware('auth');
 
 Route::get('/teacher/exams-reviews', [ReviewController::class, 'index'])->name('teacher.exams_reviews')->middleware('auth');
