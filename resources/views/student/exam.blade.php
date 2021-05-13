@@ -10,7 +10,7 @@
             <img src="{{ asset('frontend/img/clock.svg')}}" alt="Clock">
             <b id="timer">00:00:00</b>
         </div>
-        <button type="submit" class="btn btn-login" id="examFormButton">Odoslať test</button>
+        <button type="submit" class="btn btn-login mt-4" id="examFormButton">Odoslať test</button>
     </div>
 @endsection
 
@@ -71,9 +71,10 @@
     const examFormElement = document.getElementById("examForm")
     const examFormButton = document.getElementById("examFormButton")
     const exam = @json($exam);
-    const now = new Date('{{ now() }}')
-    console.log(now);
-    let testDuration = Math.round(Math.abs(((new Date(exam.end)).getTime() / 1e3) - ((now).getTime() / 1e3)))
+    const now = moment('{{ now() }}')
+    const endExam = moment(exam.end);
+   
+    let testDuration = Math.round(Math.abs(((endExam / 1e3) - (now / 1e3))))
 
     const numberToStringWithTwoChars= (number) => {
         return ("0" + number).slice(-2)

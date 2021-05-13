@@ -12,6 +12,7 @@ import Echo from "laravel-echo";
 window.pageInit = new Landing();
 window.Painterro = Painterro;
 window.MathLive = MathLive;
+window.moment = require("moment");
 
 //------------------------ Websockets ------------------------------------------------------
 window.Pusher = require("pusher-js");
@@ -24,5 +25,3 @@ window.Echo = new Echo({
     forceTLS: false,
     enabledTransports: ["ws", "wss"],
 });
-
-console.log(window.Echo);
