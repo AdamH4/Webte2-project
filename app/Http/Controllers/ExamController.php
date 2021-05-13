@@ -23,6 +23,7 @@ class ExamController extends Controller
 
 	public function show(Exam $exam)
 	{
+		if (!$this->isTheCreatorOfTheExam($exam)) abort(403);
 
 		return view('teacher.exams.show', [
 			'exam' => $exam,
@@ -66,6 +67,7 @@ class ExamController extends Controller
 
 	public function edit(Exam $exam)
 	{
+		if (!$this->isTheCreatorOfTheExam($exam)) abort(403);
 
 		return view('teacher.exams.edit', [
 			'exam' => $exam
@@ -74,6 +76,8 @@ class ExamController extends Controller
 
 	public function update(Request $request, Exam $exam)
 	{
+		if (!$this->isTheCreatorOfTheExam($exam)) abort(403);
+
 		$val = $request->validate([
 			'title' => 'required',
 			'start' => 'required|date',
@@ -91,7 +95,7 @@ class ExamController extends Controller
 
 	public function destroy(Request $request, Exam $exam)
 	{
-		if ($exam->creator_id == auth()->user()->id) {
+		if ($this->isTheCreatorOfExam($exam)) {
 			$exam->delete();
 		}
 
@@ -120,5 +124,10 @@ class ExamController extends Controller
 	{
 		$exam->load('students');
 		return response($exam, 200);
+	}
+
+	private function isTheCreatorOfTheExam($exam)
+	{
+		return $exam->creator_id == auth()->user()->id;
 	}
 }
