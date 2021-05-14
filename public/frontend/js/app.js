@@ -1957,7 +1957,7 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_3__.default({
   broadcaster: "pusher",
   key: "059867058",
   wsHost: window.location.hostname,
-  wsPort: 6001,
+  wsPort: 9001,
   disableStats: true,
   forceTLS: false,
   enabledTransports: ["ws", "wss"]
