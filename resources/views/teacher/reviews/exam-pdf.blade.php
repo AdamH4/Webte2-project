@@ -58,7 +58,7 @@ body {
                     <div style="margin-left: 20px;">{{$position}}. {{$value}}<br></div>
                 @endforeach
                 <div style="margin-top: 20px; margin-bottom: 20px;">
-                    <b>Odpoved:</b>
+                    <b>Odpoveď:</b>
                     @if(! empty($answers[$id]))
                         @foreach ($answers[$id] as $position => $value)
                             <div style="margin-left: 20px;">{{$position}}. {{$value}}</div>
