@@ -1856,11 +1856,11 @@ var Landing = /*#__PURE__*/function () {
     _classCallCheck(this, Landing);
 
     this.studentTab = document.getElementById("student-tab");
-    this.studentIcon = document.getElementById("student-icon");
-    this.studentIconHover = document.getElementById("student-icon-hover");
+    this.studentIconHover = document.getElementById("student-icon");
+    this.studentIcon = document.getElementById("student-icon-hover");
     this.teacherTab = document.getElementById("teacher-tab");
-    this.teacherIcon = document.getElementById("teacher-icon");
-    this.teacherIconHover = document.getElementById("teacher-icon-hover");
+    this.teacherIconHover = document.getElementById("teacher-icon");
+    this.teacherIcon = document.getElementById("teacher-icon-hover");
 
     if (this.studentTab) {
       this.initHideTabImages();
@@ -1957,7 +1957,7 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_3__.default({
   broadcaster: "pusher",
   key: "059867058",
   wsHost: window.location.hostname,
-  wsPort: 9001,
+  wsPort: 6001,
   disableStats: true,
   forceTLS: false,
   enabledTransports: ["ws", "wss"]
