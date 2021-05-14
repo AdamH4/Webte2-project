@@ -80,7 +80,7 @@ class StudentController extends Controller
     {
         $this->changeExamStatus(Student::DONE);
 
-        $submittedAnswers = $request->request->all()['answers'];
+        $submittedAnswers = $request->all()['answers'];
 
         (new ExamSubmissionService())->storeAnswers($submittedAnswers);
 

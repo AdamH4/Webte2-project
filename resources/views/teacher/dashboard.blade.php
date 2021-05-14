@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12 mb-3">
-            <h1>Vitajte v Examio administrácii</h1>
+            <h1>Vitajte v <code>Examio</code> administrácii</h1>
         </div>
     </div>
 </div>

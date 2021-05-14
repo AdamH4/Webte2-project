@@ -14,6 +14,7 @@ class Answer extends Model
         'answer',
         'question_id',
         'points',
+        'is_uploaded_file'
     ];
 
     public function getAnswerDecodedAttribute()

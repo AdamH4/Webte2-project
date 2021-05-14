@@ -17,7 +17,7 @@
 @section('content')
     <section class="questions">
         <div class="container">
-            <form action="{{ route('exam.done', $exam->id) }}" method="POST" id="examForm">
+            <form action="{{ route('exam.done', $exam->id) }}" method="POST" id="examForm" enctype="multipart/form-data">
                 @csrf
                 <div class="row justify-content-center">
                     <div class="col-12 col-lg-10 mb-5">
@@ -28,7 +28,7 @@
                                         {{$question->question->question}}
                                     </div>
                                     <div class="question__answer-title">
-                                        Odpoved:
+                                        Odpoveď:
                                     </div>
                                     <div class="question__points">
                                         ({{$question->points}}B)
@@ -73,6 +73,10 @@
     const exam = @json($exam);
     const now = moment('{{ now() }}')
     const endExam = moment(exam.end);
+    const drawCancelUploadButton = document.getElementById("clearDrawUpload")
+    const mathCancelUploadButton = document.getElementById("clearMathUpload")
+    const drawUpload = document.getElementById("drawUpload")
+    const mathUpload = document.getElementById("mathUpload")
    
     let testDuration = Math.round(Math.abs(((endExam / 1e3) - (now / 1e3))))
 
@@ -152,11 +156,20 @@ if(filteredQuestions.math_answer != undefined) {
 }
 
 
-
      // -------------------------- Listeners -----------------------------------------
      examFormButton.addEventListener('click', () => { 
         examFormElement.submit() 
-        console.log('lol') });
+     });
+    
+     drawCancelUploadButton.addEventListener('click', (e) => {
+         e.preventDefault();
+         drawUpload.value = "";
+     })
+
+     mathCancelUploadButton.addEventListener('click', (e) => {
+         e.preventDefault();
+         mathUpload.value = "";
+     })
 
     //-------------------------------- Leave tab, page is not visible -------------------------
     document.addEventListener('visibilitychange', onVisibilityChange);

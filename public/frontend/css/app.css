@@ -10004,16 +10004,16 @@ h3 {
 }
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #073b4c !important;
+  color: #073b4c;
+  background-color: #fff !important;
   border-radius: 0px;
   border-top-left-radius: 15px;
 }
 
 .nav-pills .nav-link.second.active,
 .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #073b4c !important;
+  color: #073b4c;
+  background-color: #fff !important;
   border-radius: 0px;
   border-top-right-radius: 15px;
 }
@@ -10024,8 +10024,8 @@ h3 {
 
 .nav-pills .nav-link {
   padding: 20px 0px;
-  background: #fff;
-  color: #073b4c;
+  background: #073b4c;
+  color: #fff;
   border-top-left-radius: 15px;
 }
 .nav-pills .nav-link.second {

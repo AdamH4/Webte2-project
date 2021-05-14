@@ -12,57 +12,58 @@ use App\Models\Answer;
 class ReviewController extends Controller
 {
     public function index()
-	{
-		$exams = auth()->user()->examsFinished;
-		//set status? ci netreba?
+    {
+        $exams = auth()->user()->examsFinished;
+        //set status? ci netreba?
 
-		return view('teacher.reviews.index', [
-			'exams' => $exams
-		]);
-	}
+        return view('teacher.reviews.index', [
+            'exams' => $exams
+        ]);
+    }
 
-	public function showExam(Exam $exam)
-	{
-		$students = Student::where('exam_code', $exam->code)->orderBy('surname')->orderBy('name')->get();
+    public function showExam(Exam $exam)
+    {
+        $students = Student::where('exam_code', $exam->code)->orderBy('surname')->orderBy('name')->get();
 
-		return view('teacher.reviews.show-exam', [
-			'exam' => $exam,
-			'students' => $students
-		]);
-	}
+        return view('teacher.reviews.show-exam', [
+            'exam' => $exam,
+            'students' => $students
+        ]);
+    }
 
-	public function showStudent(Exam $exam, Student $student)
-	{
-		$questions = $exam->questions;
-		$answers = $student->answers;
+    public function showStudent(Exam $exam, Student $student)
+    {
+        $questions = $exam->questions;
+        $answers = $student->answers;
 
-		foreach ($questions as $key => $question) {
-			$theAns = $answers->firstWhere('question_id', $question->id);
-			$question->answer = $theAns;
+        foreach ($questions as $key => $question) {
+            $theAns = $answers->firstWhere('question_id', $question->id);
+            $question->answer = $theAns;
 
-			if ($theAns) {
-				// $answers->forget($theAns->key);
-			}
-		}
+            if ($theAns) {
+                // $answers->forget($theAns->key);
+            }
+        }
 
-		return view('teacher.reviews.show-student', [
-			'exam' => $exam,
-			'student' => $student,
-			'questions' => $questions,
-			// 'answers' => $answers,
-		]);
-	}
+        return view('teacher.reviews.show-student', [
+            'exam' => $exam,
+            'student' => $student,
+            'questions' => $questions,
+            // 'answers' => $answers,
+        ]);
+    }
 
-    public function updatePoints(Exam $exam, Student $student, Request $request) {
+    public function updatePoints(Exam $exam, Student $student, Request $request)
+    {
 
-    	$answers = $student->answers;
+        $answers = $student->answers;
 
         foreach ($request->points as $key => $pts) {
-        	$ans = $answers->find($key);
+            $ans = $answers->find($key);
 
-        	$ans->points = $pts;
+            $ans->points = $pts;
 
-        	$ans->save();
+            $ans->save();
         }
 
         return redirect()->route('teacher.exams_reviews.show_exam', $exam);
@@ -85,7 +86,7 @@ class ReviewController extends Controller
 
         $columns = array('id', 'meno', 'priezvisko', 'hodnotenie');
 
-        $callback = function() use($students, $columns, $questions) {
+        $callback = function () use ($students, $columns, $questions) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columns);
 
@@ -142,17 +143,17 @@ class ReviewController extends Controller
             }
 
             array_push($questions, array(
-                    'question' => json_decode($question->question, true)['question'],
-                    'type' => $question->type)
-            );
+                'question' => json_decode($question->question, true)['question'],
+                'type' => $question->type,
+                'answer_is_uploaded_file' => $answer->is_uploaded_file
+            ));
             array_push($questionPoints, $question->points);
             array_push($answerPoints, $answer->points);
 
             $decodedQuestion = json_decode($question->question, true);
             array_push($allQuestionOptions, key_exists('options', $decodedQuestion)
                 ? $decodedQuestion['options']
-                : null
-            );
+                : null);
         }
 
         $data = [

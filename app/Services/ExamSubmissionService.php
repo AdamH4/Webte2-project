@@ -42,7 +42,7 @@ class ExamSubmissionService
                         $this->storeAnswerForQuestionTypeMath($questionId, $submittedAnswer);
                     }
                     break;
-           }
+            }
         }
     }
 
@@ -68,7 +68,7 @@ class ExamSubmissionService
             $isFoundKey = array_search($selectedOption, $allOptions);
 
             // array search returns false if not successful
-            if (! $isFoundKey) {
+            if (!$isFoundKey) {
                 continue;
             }
 
@@ -86,11 +86,11 @@ class ExamSubmissionService
     {
         $answer = $this->createAnswer($questionId);
 
-        if ($this->handlesEmptyAnswer($answer, $submittedAnswer)) {
+        if ($this->handlesUploadedFileMathAndDrawAnswer($answer, $submittedAnswer)) {
             return;
         }
 
-        $answer->answer = $submittedAnswer;
+        $answer->answer = $submittedAnswer['editor'];
         $answer->save();
     }
 
@@ -98,11 +98,11 @@ class ExamSubmissionService
     {
         $answer = $this->createAnswer($questionId);
 
-        if ($this->handlesEmptyAnswer($answer, $submittedAnswer)) {
+        if ($this->handlesUploadedFileMathAndDrawAnswer($answer, $submittedAnswer)) {
             return;
         }
 
-        $answer->answer = $submittedAnswer;
+        $answer->answer = $submittedAnswer['editor'];
         $answer->save();
     }
 
@@ -168,6 +168,24 @@ class ExamSubmissionService
         return $answer;
     }
 
+    private function handlesUploadedFileMathAndDrawAnswer($answer, $submittedAnswer)
+    {
+        // If we have uploaded file from exam
+        if (isset($submittedAnswer['upload']) && $submittedAnswer['upload']) {
+
+            $imageMimeType = $submittedAnswer['upload']->getMimeType();
+            $convertedImageToBase64 = base64_encode(file_get_contents($submittedAnswer['upload']));
+            $src = 'data:' . $imageMimeType . ';base64,' . $convertedImageToBase64;
+            $answer->answer = $src;
+            $answer->is_uploaded_file = true;
+            $answer->save();
+
+            return true;
+        }
+
+        return false;
+    }
+
     private function handlesEmptyAnswer($answer, $submittedAnswer)
     {
         if (is_null($submittedAnswer)) {
@@ -198,12 +216,11 @@ class ExamSubmissionService
         $countOfNullOptions = 0;
 
         foreach ($submittedAnswer as $letterKey => $numberKey) {
-            if(is_null($numberKey)) {
+            if (is_null($numberKey)) {
                 $countOfNullOptions++;
             }
         }
 
         return $countOfNullOptions;
     }
-
 }

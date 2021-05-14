@@ -43,9 +43,13 @@
                                                 <img style="width:100%;border:1px solid" src="{{$question->answer->answer}}" alt="student's image">
                                                 @break
                                             @case("math_answer")
+                                                @if($question->answer->is_uploaded_file)
+                                                <img style="width:100%;border:1px solid" src="{{$question->answer->answer}}" alt="student's image">
+                                                @else 
                                                 <div class="math__container">
                                                     <div id="{{"mathLive" . $question->id}}"></div>
                                                 </div>
+                                                @endif
                                                 @break
                                             @case("pair_answer")
                                                 <div class="pair__answers">

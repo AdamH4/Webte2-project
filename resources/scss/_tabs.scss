@@ -1,15 +1,15 @@
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
-    color: #fff;
-    background-color: $border !important;
+    color: $border;
+    background-color: $white !important;
     border-radius: 0px;
     border-top-left-radius: 15px;
 }
 
 .nav-pills .nav-link.second.active,
 .nav-pills .show > .nav-link {
-    color: #fff;
-    background-color: $border !important;
+    color: $border;
+    background-color: $white !important;
     border-radius: 0px;
     border-top-right-radius: 15px;
 }
@@ -20,8 +20,8 @@
 
 .nav-pills .nav-link {
     padding: 20px 0px;
-    background: $white;
-    color: $primary;
+    background: $border;
+    color: $white;
     border-top-left-radius: 15px;
 
     &.second {

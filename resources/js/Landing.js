@@ -1,11 +1,11 @@
 export default class Landing {
     constructor() {
         this.studentTab = document.getElementById("student-tab");
-        this.studentIcon = document.getElementById("student-icon");
-        this.studentIconHover = document.getElementById("student-icon-hover");
+        this.studentIconHover = document.getElementById("student-icon");
+        this.studentIcon = document.getElementById("student-icon-hover");
         this.teacherTab = document.getElementById("teacher-tab");
-        this.teacherIcon = document.getElementById("teacher-icon");
-        this.teacherIconHover = document.getElementById("teacher-icon-hover");
+        this.teacherIconHover = document.getElementById("teacher-icon");
+        this.teacherIcon = document.getElementById("teacher-icon-hover");
 
         if (this.studentTab) {
             this.initHideTabImages();
