@@ -20,7 +20,7 @@ class Answer extends Model
     public function getAnswerDecodedAttribute()
     {
         $answer = json_decode($this->answer);
-        return (gettype($answer) == 'array') ? $answer : [];
+        return (gettype($answer) == 'array' || gettype($answer) == 'object') ? $answer : [];
     }
 
     public function getAnswerHumanAttribute()
