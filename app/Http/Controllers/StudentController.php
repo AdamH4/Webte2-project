@@ -16,7 +16,7 @@ class StudentController extends Controller
     {
         $request = $request->getValidatedData();
 
-        $exam = Exam::byExamCode($request['exam_code'])->firstOrFail();
+        $exam = Exam::byExamCode($request['exam_code'])->inProgress()->firstOrFail();
         $studentInExam = Student::byExamCode($request['exam_code'])->byAis($request['ais_id'])->first();
 
         //Ak neexistuje student v teste, tak ho vytvorime

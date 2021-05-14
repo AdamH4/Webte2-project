@@ -62,6 +62,17 @@ class Exam extends Model
         return $query->where('code', $examCode);
     }
 
+    /**
+     * Scope a query to only include Exam Code.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeInProgress($query)
+    {
+        return $query->where('start', '<=', now())->where('end', '>=', now());
+    }
+
     //------------------------------------------- Realtionships --------------------------------------------
 
     public function creator()

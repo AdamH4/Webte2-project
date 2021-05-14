@@ -90,7 +90,7 @@
                                                             class="checkbox__question"
                                                             type="checkbox"
                                                             id="{{"select" . $question->id . "-" . $optionKey}}"
-                                                            {{isset($question->answer->answerDecoded->$optionKey) ? 'checked disabled' : 'disabled' }}
+                                                            {{ isset(collect(json_decode($question->answer->answer))[$optionKey]) ? 'checked disabled' : 'disabled' }}
                                                         >
                                                         <label for="{{"select" . $question->id . "-" . $optionKey}}">{{$option}}</label>
                                                     @endforeach
